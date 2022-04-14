@@ -1,0 +1,34 @@
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule,routingComponents } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterServiceService } from './register-service.service';
+import { ShowmedicalhistoryComponent } from './showmedicalhistory/showmedicalhistory.component';
+import { CreatemedicalhistoryComponent } from './createmedicalhistory/createmedicalhistory.component';
+import { HomeComponent } from './home/home.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    routingComponents,
+    LoginComponent,
+    routingComponents,
+    ShowmedicalhistoryComponent,
+    CreatemedicalhistoryComponent,
+    HomeComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,FormsModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [RegisterServiceService,HttpClient],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
