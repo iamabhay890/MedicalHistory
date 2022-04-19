@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RegisterServiceService } from '../register-service.service';
 import {User } from '../User';
 @Component({
@@ -9,7 +10,7 @@ import {User } from '../User';
 export class LoginComponent implements OnInit {
  user:User =new User();
  isSucess=false;
- constructor(@Inject(RegisterServiceService) private registerService: RegisterServiceService) { 
+ constructor(@Inject(RegisterServiceService) private registerService: RegisterServiceService,private router: Router) { 
     
 }
 
@@ -37,9 +38,13 @@ export class LoginComponent implements OnInit {
        userLogin(){
         console.log(this.user);
         this.registerService.login(this.user.email,this.user.password).subscribe(data=>{
-          this.isSucess=true;
+          this.gotoList();
          alert("Successfully User is Login?")
-        },error=>location.replace("../home")
+        },error=>console.log(error)
         );
+      }
+      gotoList() {
+        this.router.navigate(['/home']);
+        
       }
     }

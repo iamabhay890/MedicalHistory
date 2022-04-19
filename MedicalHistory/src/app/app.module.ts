@@ -10,6 +10,7 @@ import { RegisterServiceService } from './register-service.service';
 import { ShowmedicalhistoryComponent } from './showmedicalhistory/showmedicalhistory.component';
 import { CreatemedicalhistoryComponent } from './createmedicalhistory/createmedicalhistory.component';
 import { HomeComponent } from './home/home.component';
+import { StartUpComponent } from './start-up/start-up.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     routingComponents,
     ShowmedicalhistoryComponent,
     CreatemedicalhistoryComponent,
-    HomeComponent
+    HomeComponent,
+    StartUpComponent
   ],
   imports: [
     BrowserModule,

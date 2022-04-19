@@ -8,8 +8,8 @@ import { User } from './User'
 })
 export class RegisterServiceService {
 
-  baseUrl="";
-  constructor(private httpClient: HttpClient) { }
+  baseUrl="http://localhost:8080/api/users/";
+  constructor(private httpClient: HttpClient) { } 
 
   login(email: string, password: string): Observable<Object> {
     return this.httpClient.post<User>(`${this.baseUrl}`, { email, password })
@@ -21,7 +21,7 @@ export class RegisterServiceService {
         }));*/
 }
 
-  registerUser(user: User): Observable<Object> {
+  registerUser(user: Object): Observable<Object> {
      console.log(user);
      return this.httpClient.post(`${this.baseUrl}`,user);
   }
