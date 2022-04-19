@@ -11,5 +11,8 @@ export class CreatemedicalhistoryComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
+    getFormData(){
+      
+    }
 }

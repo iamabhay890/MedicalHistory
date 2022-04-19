@@ -8,34 +8,70 @@
       src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
       class="profile-img-card"
     />
-      <form (ngSubmit)="userLogin()">
-          <div class="form-group">
-              <label for="exampleFormControlInput1" class="form-label">userame</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="user.email">
-             <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                  <div *ngIf="f.username.errors.required">Username is required</div>
-              </div>-->
+    <form
+      *ngIf="!isSucess"
+      name="form"
+      (ngSubmit)="userLogin(f)"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label">userame</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+          [(ngModel)]="user.email"
+          required
+          email
+          #email="ngModel"
+        />        
+        <div class="alert-danger" *ngIf="email.errors && f.submitted">
+          <div *ngIf="email.errors['required']">Email is required</div>
+          <div *ngIf="email.errors['email']">
+            Email must be a valid email address
           </div>
-          <div class="form-group">
-              <label for="exampleFormControlInput1" class="form-label">Password</label>
-              <input type="password" name="password" class="form-control" placeholder="Enter password" [(ngModel)]="user.password">
-              <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">Password is required</div>
-              </div>-->
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Password</label
+        >
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          placeholder="Enter password"
+          [(ngModel)]="user.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div class="alert-danger" *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors['required']">Password is required</div>
+          <div *ngIf="password.errors['minlength']">
+            Password must be at least 6 characters
           </div>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <div class="form-group">
-                <button class="btn btn-primary btn-block">Login</button>
-              </div>
-              
-              <button class="btn btn-primary" type="button" routerLink="../login" routerLink="../medicalhistory">Cancel</button>
+        </div>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div class="form-group">
+          <button [disabled]="!f.valid" class="btn btn-primary btn-block">Login</button>
+        </div>
 
-            </div>
-              <p class="or">or</p>
-              <div routerLink="../signup" class="login">signup</div>
-             
-      </form>
-     
-     
+        <button
+          class="btn btn-primary"
+          type="button"
+          routerLink="../login"
+          routerLink="../medicalhistory"
+        >
+          Cancel
+        </button>
+      </div>
+      <p class="or">or</p>
+      <div routerLink="../signup" class="login">signup</div>
+    </form>
   </div>
 </div>

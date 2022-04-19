@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterServiceService } from '../register-service.service';
 import {User } from '../User';
@@ -35,12 +36,14 @@ export class LoginComponent implements OnInit {
         }
 
        // this.loading = true;
-       userLogin(){
+       userLogin(f:NgForm){
         console.log(this.user);
         this.registerService.login(this.user.email,this.user.password).subscribe(data=>{
+          this.isSucess=true
           this.gotoList();
          alert("Successfully User is Login?")
-        },error=>console.log(error)
+        },
+        error=>this.isSucess=false
         );
       }
       gotoList() {

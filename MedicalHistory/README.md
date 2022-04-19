@@ -2,6 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
 
+Adding Signup, login functionality
+
+Adding Forgot password functionality
+
+Adding Edit profile functionality
+
+Adding Logout functionality
+
+Adding Add Prescription functionality
+
+Adding Show All Prescription functionality
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
