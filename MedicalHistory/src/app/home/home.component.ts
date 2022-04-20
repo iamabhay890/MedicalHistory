@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {}
   logout() {
-    alert("you are logging out");
+   this.registerService.loggingout();
+  
   }
 }

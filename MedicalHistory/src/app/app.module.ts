@@ -18,6 +18,8 @@ import { ShowmedicalhistoryComponent } from './showmedicalhistory/showmedicalhis
 import { CreatemedicalhistoryComponent } from './createmedicalhistory/createmedicalhistory.component';
 import { HomeComponent } from './home/home.component';
 import { StartUpComponent } from './start-up/start-up.component';
+import { AuthGuard } from './auth/auth.guard';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { StartUpComponent } from './start-up/start-up.component';
     ShowmedicalhistoryComponent,
     CreatemedicalhistoryComponent,
     HomeComponent,
-    StartUpComponent,
+    StartUpComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -38,9 +41,10 @@ import { StartUpComponent } from './start-up/start-up.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ToastrModule.forRoot(),
   ],
-  providers: [RegisterServiceService, HttpClient],
+  providers: [RegisterServiceService, HttpClient,AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

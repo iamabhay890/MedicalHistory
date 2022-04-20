@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import {  ToastrService } from 'ngx-toastr';
 import { RegisterServiceService } from '../register-service.service';
 import {User } from '../User';
 @Component({
@@ -11,7 +12,9 @@ import {User } from '../User';
 export class LoginComponent implements OnInit {
  user:User =new User();
  isSucess=false;
- constructor(@Inject(RegisterServiceService) private registerService: RegisterServiceService,private router: Router) { 
+ constructor(@Inject(RegisterServiceService) private registerService: RegisterServiceService,
+                                 private router: Router,
+                                 private toast:ToastrService) { 
     
 }
 
@@ -38,13 +41,16 @@ export class LoginComponent implements OnInit {
        // this.loading = true;
        userLogin(f:NgForm){
         console.log(this.user);
-        this.registerService.login(this.user.email,this.user.password).subscribe(data=>{
+        this.registerService.login(this.user.email,this.user.password).subscribe((data:any)=>{
+          localStorage.setItem('userToken',data.access_token);
           this.isSucess=true
           this.gotoList();
-         alert("Successfully User is Login?")
+          this.toast.success("Logged in sucessfully");
         },
-        error=>this.isSucess=false
-        );
+        (error)=>this.toast.error("Something went wrong please try again"));
+        
+        //this.isSucess=false);
+        
       }
       gotoList() {
         this.router.navigate(['/home']);

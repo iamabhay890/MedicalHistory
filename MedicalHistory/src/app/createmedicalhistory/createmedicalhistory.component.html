@@ -1,62 +1,200 @@
-<!--<div class="col-md-12">
-    <div class="card card-container">
-      <div class="title">
-        <h2>Enter details to medicalhistory</h2>
-      </div>
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-    <form (ngSubmit)="getFormData()">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" [(ngModel)]="user.name">
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">age</label>
-        <input type="text" class="form-control" id="age" name="age" placeholder="Enter age" [(ngModel)]="user.age" >
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="user.email" >
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Phone</label>
-        <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number" [(ngModel)]="user.phone">
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" [(ngModel)]="user.password">
-      
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Conform Password</label>
-        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="conform password" [(ngModel)]="user.cpassword" >
-      </div>
-    
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Gender</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gender" id="male" value="male" [(ngModel)]="user.gender">
-          <label class="form-check-label" for="exampleRadios1">
-            Male
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gender" id="femail" value="femail" [(ngModel)]="user.gender">
-          <label class="form-check-label" for="exampleRadios2">
-          Female
-          </label>
-        </div>
-        </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <div class="form-group">
-            <button class="btn btn-primary btn-block">Sign Up</button>
+<h1 class="title">medicalhistory</h1>
+<div class="col-md-12">
+  <div class="card card-container">
+    <div class="titles">
+      <h2>Enter details to medicalhistory</h2>
+    </div>
+    <img
+      id="profile-img"
+      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      class="profile-img-card"
+    />
+
+    <form
+      *ngIf="!isSucess"
+      name="form"
+      (ngSubmit)="getFormData(f)"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Doctor Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="doctorname"
+          name="doctorname"
+          placeholder="Enter doctor name"
+          [(ngModel)]="medicalform.doctorname"
+          required
+          minlength="3"
+          maxlength="35"
+          #doctorname="ngModel"
+        />
+        <div class="alert-danger" *ngIf="doctorname.errors && f.submitted">
+          <div *ngIf="doctorname.errors['required']">name is required</div>
+          <div *ngIf="doctorname.errors['minlength']">
+            doctorname must be at least 3 characters
           </div>
-          <button class="btn btn-primary" type="button" routerLink="../signup" routerLink="../medicalhistory">Cancel</button>
+          <div *ngIf="doctorname.errors['maxlength']">
+            doctorname must be at most 35 characters
+          </div>
         </div>
-          <p class="or">or</p>
-          <div routerLink="../login" class="login">Login</div>  
-        </form>
-    </div>-->
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Hospital Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="hospitalname"
+          name="hospitalname"
+          placeholder="Enter hospitalname"
+          [(ngModel)]="medicalform.hospitalname"
+          required
+          hospitalname
+          maxlength="40"
+          #hospitalname="ngModel"
+        />
+        <div class="alert-danger" *ngIf="hospitalname.errors && f.submitted">
+          <div *ngIf="hospitalname.errors['required']">
+            hospitalname is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Patient Age</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="patientage"
+          name="patientage"
+          placeholder="Enter Patientage"
+          [(ngModel)]="medicalform.patientage"
+          required
+          patientage
+          #patientage="ngModel"
+        />
+        <div class="alert-danger" *ngIf="patientage.errors && f.submitted">
+          <div *ngIf="patientage.errors['required']">
+            Patientage is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Type of Diseases</label>
+        <div class="form-pick" title="TypeofDiseases">
+          <select
+            type="form-pick"
+            class="form-control"
+            id="typeofdisease"
+            name="typeofdisease"
+            [(ngModel)]="medicalform.typeofdisease"
+            class="form-select"
+            aria-label="Disabled select example"
+          >
+            <option selected>Non of the below</option>
+            <option value="Lungs">Lungs</option>
+            <option value="Heart">Heart</option>
+            <option value="Kidney">Kidney</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Description</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          name="description"
+          placeholder="Enter description"
+          [(ngModel)]="medicalform.description"
+          required
+          description
+          #description="ngModel"
+        />
+        <div class="alert-danger" *ngIf="description.errors && f.submitted">
+          <div *ngIf="description.errors['required']">
+            description is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Treament Date</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          id="treamentdate"
+          name="treamentdate"
+          placeholder="Enter treamentdate"
+          [(ngModel)]="medicalform.treamentdate"
+          required
+          #treamentdate="ngModel"
+        />
+        <div class="alert-danger" *ngIf="treamentdate.errors && f.submitted">
+          <div *ngIf="treamentdate.errors['required']">
+            Password is required
+          </div>
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Next Appointment</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          id="nextappointment"
+          name="nextappointment"
+          placeholder="conform nextappointment"
+          [(ngModel)]="medicalform.nextappointment"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Medicine Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="medicinename"
+          name="medicinename"
+          placeholder="Enter medicinename"
+          [(ngModel)]="medicalform.medicinename"
+          required
+          medicinename
+          #medicinename="ngModel"
+        />
+        <div class="alert-danger" *ngIf="medicinename.errors && f.submitted">
+          <div *ngIf="medicinename.errors['required']">
+            medicinename is required
+          </div>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div class="form-group">
+          <button [disabled]="!f.valid" class="btn btn-primary btn-block">
+            Add Prescription
+          </button>
+        </div>
+        <button class="btn btn-primary" type="button" routerLink="../home">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

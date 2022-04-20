@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, map, Observable, Observer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from './User'
@@ -11,33 +12,30 @@ import { User } from './User'
 export class RegisterServiceService {
   //private userSubject: BehaviorSubject<User>;
    // public user: Observable<User>;
+   USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
+
   baseUrl=" http://localhost:8080/api/users/";
-  constructor(private httpClient: HttpClient, private router: Router) { 
-    //this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
-    //this.user = this.userSubject.asObservable();
+  constructor(private httpClient: HttpClient, 
+                            private router: Router) { 
+    
   } 
 
- /* public get userValue(): User {
-    return this.userSubject.value;
-}*/
-
   login(email: string, password: string): Observable<Object> {
-    return this.httpClient.post<User>(`${this.baseUrl}`, { email, password })
-      /*  .pipe(map(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
-            this.userSubject.next(user);
-            return user;
-        }));*/
+     var data="email="+email+"&password="+password+"&grand_type=password";
+     console.log(data);
+     var reqHeader=new HttpHeaders({'Content-Type':'application/x-www.urlencoded'});
+    return this.httpClient.post<User>(`${this.baseUrl}/token`, data,{ headers:reqHeader })
+    
 }
-
-/*loggingout(){
-  localStorage.removeItem('user');
-  this.userSubject.next(null);
-  this.router.navigate(['/account/login']);
-}*/
-
-
+loggingout() {
+    localStorage.removeItem('userToken');
+    this.router.navigate(['/medicalhistory']);
+  }
+  getLoggedInUserName() {
+    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME)
+    if (user === null) return ''
+    return user
+  }
   registerUser(user: Object): Observable<Object> {
      console.log(user);
      return this.httpClient.post(`${this.baseUrl}`,user);
@@ -77,4 +75,6 @@ getById(id: string) {
             return x;
         }));
 }*/
+
+
 }

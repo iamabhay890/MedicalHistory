@@ -4,6 +4,7 @@ import { User } from '../User';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -17,7 +18,8 @@ export class RegistrationComponent implements OnInit {
   constructor(
     @Inject(RegisterServiceService)
     private registerService: RegisterServiceService,
-    private router: Router
+    private router: Router,
+    private toast:ToastrService
   ) {}
 
   ngOnInit(): void {}
@@ -27,9 +29,9 @@ export class RegistrationComponent implements OnInit {
       (data) => {
         this.isSucess=true;
         this.gotoList();
-        alert('Successfully User is register?');
+        this.toast.success('Successfully User is register');
       },
-      (error) => this.isSucess=false
+      (error) => this.toast.error('Something went wrong please try again')
     );
     //this.gotoList();
   }
