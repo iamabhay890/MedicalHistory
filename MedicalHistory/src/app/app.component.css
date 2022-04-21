@@ -1,0 +1,11 @@
+.title {
+    text-align: center;
+    background-color: rgb(209, 185, 185);
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    position: relative;
+  }
+  .head-title{
+    text-align: center;
+    font-size: x-large;
+  }
