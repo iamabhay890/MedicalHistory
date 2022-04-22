@@ -1,0 +1,179 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <div class="title">
+      <h2>Sign up to medicalhistory</h2>
+    </div>
+    <img
+      id="profile-img"
+      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      class="profile-img-card"
+    />
+   
+    <form  *ngIf="!isSucess"
+    name="form"
+    (ngSubmit)="userRegister(f)"
+    #f="ngForm"
+    novalidate>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Enter name"
+          [(ngModel)]="user.name"
+          required
+          minlength="3"
+          maxlength="20"
+          #name="ngModel"
+        />
+        <div class="alert-danger" *ngIf="name.errors && f.submitted">
+          <div *ngIf="name.errors['required']">name is required</div>
+          <div *ngIf="name.errors['minlength']">
+            name must be at least 3 characters
+          </div>
+          <div *ngIf="name.errors['maxlength']">
+            name must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label">age</label>
+        <input
+          type="text"
+          class="form-control"
+          id="age"
+          name="age"
+          placeholder="Enter age"
+          [(ngModel)]="user.age"
+          required
+          age
+          #age="ngModel"
+        />
+        <div class="alert-danger" *ngIf="age.errors && f.submitted">
+          <div *ngIf="age.errors['required']">age is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+          [(ngModel)]="user.email"
+          required
+          email
+          #email="ngModel"
+        />
+        <div class="alert-danger" *ngIf="email.errors && f.submitted">
+          <div *ngIf="email.errors['required']">Email is required</div>
+          <div *ngIf="email.errors['email']">
+            Email must be a valid email address
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label">Phone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          name="phone"
+          placeholder="Enter phone number"
+          [(ngModel)]="user.phone"
+          required
+          phone
+          #phone="ngModel"
+        />
+        <div class="alert-danger" *ngIf="phone.errors && f.submitted">
+          <div *ngIf="phone.errors['required']">phone is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Password</label
+        >
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+          [(ngModel)]="user.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div class="alert-danger" *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors['required']">Password is required</div>
+          <div *ngIf="password.errors['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Conform Password</label
+        >
+        <input
+          type="password"
+          class="form-control"
+          id="cpassword"
+          name="cpassword"
+          placeholder="conform password"
+          [(ngModel)]="user.cpassword"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label">Gender</label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="male"
+            value="male"
+            [(ngModel)]="user.gender"
+            required
+            gender
+            #gender="ngModel"
+          />
+          <label class="form-check-label" for="exampleRadios1"> Male </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="femail"
+            value="femail"
+            [(ngModel)]="user.gender"
+          />
+          <label class="form-check-label" for="exampleRadios2"> Female </label>
+        </div>
+        <div class="alert-danger" *ngIf="gender.errors && f.submitted">
+          <div *ngIf="gender.errors['required']">gender is required</div>
+        </div>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div class="form-group">
+          <button [disabled]="!f.valid" class="btn btn-primary btn-block">Sign Up</button>
+        </div>
+        <button
+          class="btn btn-danger"
+          type="button"
+          routerLink="../signup"
+          routerLink="../medicalhistory"
+        >
+          Cancel
+        </button>
+      </div>
+      <p class="or">or</p>
+      <div routerLink="../login" class="login">Login</div>
+    </form>
+  </div>
+</div>
