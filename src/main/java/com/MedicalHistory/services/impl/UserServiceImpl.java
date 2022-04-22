@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
         user.setName(userDto.getName());
         user.setPhone(userDto.getPhone());
-        user.setAddress(userDto.getAddress());
+       // user.setAddress(userDto.getAddress());
         user.setGender(userDto.getGender());
         user.setPassword(userDto.getPassword());
 
@@ -66,6 +66,10 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+
+
+
     public User dtoToUser(UserDto userDto){
 
         User user=new User();
@@ -74,7 +78,7 @@ public class UserServiceImpl implements UserService {
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
-        user.setAddress(userDto.getAddress());
+        //user.setAddress(userDto.getAddress());
         user.setGender(userDto.getGender());
         user.setAge(userDto.getAge());
 
@@ -89,7 +93,7 @@ public class UserServiceImpl implements UserService {
         userDto.setPhone(user.getPhone());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
-        userDto.setAddress(user.getAddress());
+        //userDto.setAddress(user.getAddress());
         userDto.setGender(user.getGender());
         userDto.setAge(userDto.getAge());
         return userDto;

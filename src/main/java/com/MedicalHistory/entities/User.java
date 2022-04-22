@@ -21,21 +21,23 @@ public class User {
     @Column(name="name", nullable=false,length = 30)
     private String name;
 
-    @Column(name="phone", nullable=false,length = 10)
-    private int phone;
-
-    @Column(name="email", nullable=false,length = 30)
+    @Column(name="email", nullable=false,length = 30,unique = true)
     private String email;
+
+    @Column(name="phone", nullable=false,length = 15)
+    private String phone;
+
+    @Column(name="age",nullable = false,length = 3)
+    private int age;
 
     @Column(name="password", nullable=false,length = 30)
     private String password;
 
-    @Column(name="address", length = 30)
-    private String address;
+   // @Column(name="address", length = 30)
+   // private String address;
 
     @Column(name="gender",nullable=false,length = 10)
     private String gender;
 
-    @Column(name="age",nullable = false,length = 3)
-    private int age;
+
 }

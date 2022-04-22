@@ -1,8 +1,8 @@
 package com.MedicalHistory.controllers;
 
 
-import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.UserDto;
+import com.MedicalHistory.repositories.UserRepo;
 import com.MedicalHistory.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,19 +13,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepo userRepo;
     @PostMapping("/")
     //to create user with POST
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
-        UserDto createUserDto=this.userService.createUser(userDto);
-        return  new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
 
+            UserDto createUserDto = this.userService.createUser(userDto);
+            return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
     }
 
-    //to update the user with PUT
+   //to update the user with PUT
 
     @PutMapping("/{userId}")
     public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable Integer userId){
