@@ -2,6 +2,7 @@ package com.MedicalHistory.services.impl;
 
 import com.MedicalHistory.entities.Patient;
 
+import com.MedicalHistory.exceptions.ResourceNotFoundException;
 import com.MedicalHistory.payloads.PatientDto;
 
 import com.MedicalHistory.repositories.PatientRepo;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -24,6 +26,50 @@ public class PatientServiceImpl implements PatientService {
         Patient savedPatient=this.patientRepo.save(patient);
 
         return this.patientToDto(savedPatient);
+    }
+
+    @Override
+    public PatientDto update(PatientDto patientDto, Integer slipId) {
+
+        Patient patient =this.patientRepo.findById(slipId).orElseThrow(()-> new ResourceNotFoundException("Patient"," slip ",slipId));
+        patient.setHospitalName(patientDto.getHospitalName());
+        patient.setAge(patientDto.getAge());
+        patient.setTreatmentDate(patientDto.getTreatmentDate());
+        patient.setMedicineName(patientDto.getMedicineName());
+        patient.setDescription(patientDto.getDescription());
+        patient.setReport(patientDto.getReport());
+        patient.setDoctorName(patientDto.getDoctorName());
+        patient.setNexAppt(patientDto.getNexAppt());
+        patient.setTypeOfDisease(patientDto.getTypeOfDisease());
+
+
+        Patient updatePatient=this.patientRepo.save(patient);
+        PatientDto patientDto1=this.patientToDto(updatePatient);
+        return patientDto1;
+
+    }
+
+    @Override
+    public PatientDto getSlipById(Integer slipId) {
+        Patient patient =this.patientRepo.findById(slipId).orElseThrow(()-> new ResourceNotFoundException("Patient"," slip ",slipId));
+
+        return this.patientToDto(patient);
+
+    }
+
+    @Override
+    public List<PatientDto> getAllSlips()
+    {
+        List<Patient> patients=this.patientRepo.findAll();
+        List<PatientDto> patientDtos=patients.stream().map(patient -> this.patientToDto(patient)).collect(Collectors.toList());
+        return patientDtos;
+    }
+
+    @Override
+    public void deleteSlip(Integer slipId) {
+        Patient patient =this.patientRepo.findById(slipId).orElseThrow(()-> new ResourceNotFoundException("Patient"," slip ",slipId));
+      this.patientRepo.delete(patient);
+
     }
 
 

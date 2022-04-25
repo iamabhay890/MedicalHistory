@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
@@ -36,7 +35,6 @@ public class Patient {
     @Column(name = "Report",nullable = false)
     private String report;
 
-
     @Column(name="DoctorName",nullable = false)
     private String doctorName;
 
@@ -46,5 +44,4 @@ public class Patient {
 
      @Column(name="TypeOfDisease",nullable = false)
      private String typeOfDisease;
-
 }
