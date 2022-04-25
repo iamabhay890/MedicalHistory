@@ -1,4 +1,6 @@
-<h1 class="title">medicalhistory</h1>
+<h1 class="title">medicalhistory
+  <img style="float: left;" class="images" (click)="home()" [src]="IconImage">
+</h1>
 <div class="col-md-12">
   <div class="card card-container">
     <div class="titles">
@@ -91,7 +93,7 @@
         <label class="form-label">Type of Diseases</label>
         <div class="form-pick" title="TypeofDiseases">
           <select
-            type="form-pick"
+            type="form-pick-"
             class="form-control"
             id="typeofdisease"
             name="typeofdisease"
@@ -135,15 +137,15 @@
         <input
           type="date"
           class="form-control"
-          id="treamentdate"
-          name="treamentdate"
+          id="treatmentdate"
+          name="treatmentdate"
           placeholder="Enter treamentdate"
-          [(ngModel)]="medicalform.treamentdate"
+          [(ngModel)]="medicalform.treatmentdate"
           required
-          #treamentdate="ngModel"
+          #treatmentdate="ngModel"
         />
-        <div class="alert-danger" *ngIf="treamentdate.errors && f.submitted">
-          <div *ngIf="treamentdate.errors['required']">
+        <div class="alert-danger" *ngIf="treatmentdate.errors && f.submitted">
+          <div *ngIf="treatmentdate.errors['required']">
             Password is required
           </div>
           >
@@ -184,7 +186,18 @@
           </div>
         </div>
       </div>
-
+      <div class="form-group">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Upload PDF File</label
+        >
+      <input type="file"
+      class="form-control"
+      id="pdffile"
+      name="pdffile"
+      placeholder="Enter pdffile"
+      [(ngModel)]="medicalform.pdffile"
+       class="file-upload" >
+      </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <div class="form-group">
           <button [disabled]="!f.valid" class="btn btn-primary btn-block">

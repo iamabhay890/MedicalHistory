@@ -1,5 +1,6 @@
 <div > 
   <h1 class="title">medicalhistory 
+    <img style="float: left;" class="images" [src]="IconImage">
     <div class="btn-group"  style="float: right;" dropdown>
       <button id="button-menu-dividers"  dropdownToggle type="button"  class="btn btn-primary dropdown-toggle"
        aria-controls="dropdown-menu-dividers">
@@ -7,8 +8,8 @@
       </button>
       <ul id="dropdown-menu-dividers" *dropdownMenu class="dropdown-menu"
           role="menu" aria-labelledby="button-menu-dividers">
-        <li role="menuitem"><a class="dropdown-item" routerLink="../profile">View Profile</a></li>
-        <li role="menuitem"><a class="dropdown-item"routerLink="..changepassword/">Change Password</a>
+        <li role="menuitem"><a class="dropdown-item" (click)='profile()'>View Profile</a></li>
+        <li role="menuitem"><a class="dropdown-item" (click)='changepassword()'>Change Password</a>
         </li>
         <li role="menuitem"><a class="dropdown-item"  (click)='logout()'>Logout</a></li>
         
@@ -17,7 +18,43 @@
 </h1><br>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">  
         <button class="btn btn-primary me-md-2" type="button" routerLink="../create">Add Prescription </button>
-        <button class="btn btn-primary" type="button" routerLink="..show/">show All Prescription</button>
-      </div>
-      
+        <button class="btn btn-primary" type="button" routerLink="../show">show All Prescription</button>
+      </div><br>
+      <img class="image" [src]="myImage">
+      <br><br>
+
+    </div>
+    <!--<div class="display">
+        <div class="container mt-5">
+          <div class="row">
+            <h2>Latest News</h2>
+          
+        <div *ngFor="let item of topHeadlines" class="col-lg-3 mt-3 mb-3">
+          <div class="box">
+          <img src="{{item.urlToImage}}" width="100%">
+           <h5 class="mt-2 mb-2">{{item.title}}</h5>
+           <p>{{item.content}}</p>
+           <a href="{{item.url}}" class="btn btn-dark btn-sm mt-2">Read more</a>
+        </div>
+           </div>
+          </div>
+        </div>
+      </div>-->
+
+<div class="homebottom"><br>
+  
+    <Address class="addres">
+      <h2>Address:</h2>
+      medicalhistory,<br>
+      infotech park,<br>
+      Lulu building,<br>
+      MG Road,<br>
+      bangalore,<br>
+      karanataka,<br>
+      India,743229.<br>
+
+    </Address>
+  
+
+<p class="inline"> @2022 medicalhistory All Rights Reserved </p>
 </div>

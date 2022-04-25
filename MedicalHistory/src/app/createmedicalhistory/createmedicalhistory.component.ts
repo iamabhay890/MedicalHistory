@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { MedicalForm } from '../medicalform';
+import { MedicalhistoryService } from '../medicalhistory.service';
 import { RegisterServiceService } from '../register-service.service';
 
 @Component({
@@ -12,9 +14,12 @@ import { RegisterServiceService } from '../register-service.service';
 export class CreatemedicalhistoryComponent implements OnInit {
   medicalform:MedicalForm = new MedicalForm;
   isSucess = false;
+  IconImage:string="/assets/Images/Logo.jpg"
   constructor( @Inject(RegisterServiceService)
   private registerService: RegisterServiceService,
-  private router: Router) { }
+  private medical:MedicalhistoryService,
+  private router: Router,
+  private toast:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -33,21 +38,28 @@ export class CreatemedicalhistoryComponent implements OnInit {
 		this.Disease = this.TypeofDiseases.find(con => con.name == count).Disease;
     console.log(this.Disease)
 	}
-
-  
+   
   getFormData(f:NgForm) {
     console.log(f);
-    this.registerService.registerUser(this.medicalform).subscribe(
+    this.medical.submitmedicalform(this.medicalform).subscribe(
       (data) => {
         this.isSucess=true;
         this.gotoList();
-        alert('Successfully form submitted?');
+        this.toast.success('Successfully form submitted!!');
       },
-      (error) => this.isSucess=false
+      (error) =>{
+        this.toast.error('Something went wrong please try again');
+        this.isSucess=false;
+
+      } 
+     
     );
     
   }
   gotoList() {
+    this.router.navigate(['/home']);
+  }
+  home(){
     this.router.navigate(['/home']);
   }
 }
