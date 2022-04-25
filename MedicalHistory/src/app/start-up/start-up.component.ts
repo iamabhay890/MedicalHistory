@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./start-up.component.css']
 })
 export class StartUpComponent implements OnInit {
-
+  IconImage:string="/assets/Images/Logo.jpg"
   constructor(private title: Title) { }
 
   ngOnInit(): void {

@@ -12,14 +12,12 @@ import {User } from '../User';
 export class LoginComponent implements OnInit {
  user:User =new User();
  isSucess=false;
+ IconImage:string="/assets/Images/Logo.jpg"
  constructor(@Inject(RegisterServiceService) private registerService: RegisterServiceService,
                                  private router: Router,
                                  private toast:ToastrService) { 
     
 }
-
-
-
     ngOnInit() {
         
     }
@@ -46,6 +44,7 @@ export class LoginComponent implements OnInit {
           this.isSucess=true
           this.gotoList();
           this.toast.success("Logged in sucessfully");
+          localStorage.setItem('email',this.user.email);
         },
         (error)=>this.toast.error("Something went wrong please try again"));
         

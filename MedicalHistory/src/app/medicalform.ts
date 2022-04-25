@@ -1,7 +1,7 @@
 export class MedicalForm {
     hospitalname!:string;
     disease!:string;
-    treamentdate!:Date;
+    treatmentdate!:Date;
     medicinename!:string;
     patientage!:number;
     description!:string;

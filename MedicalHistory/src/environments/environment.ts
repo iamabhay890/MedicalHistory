@@ -6,7 +6,7 @@ import { TemplateBindingParseResult } from "@angular/compiler";
 
 export const environment = {
   production: false
- 
+   
 };
 
 /*

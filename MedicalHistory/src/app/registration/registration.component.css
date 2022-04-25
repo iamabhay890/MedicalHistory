@@ -7,7 +7,20 @@ label {
   max-width: 550px !important;
   padding: 30px 40px;
 }
-
+.title {
+  text-align: center;
+  background-color: rgb(209, 185, 185);
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  position: relative;
+}
+.titles{
+  text-align: center;
+  background-color: rgb(216, 219, 201);
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  position: relative;
+}
 .card {
   background-color: #a0a73f04;
   padding: 20px 25px 30px;
@@ -131,4 +144,10 @@ label {
   .login {
     padding: 10px 30px;
   }
+}
+.images{
+  max-width: 4%;
+  margin-left: 30px;
+  border-radius: 100%;
+ 
 }

@@ -121,7 +121,26 @@ label {
   -webkit-user-select: none;
   touch-action: manipulation;
 }
-
+.images{
+  max-width: 4%;
+  margin-left: 30px;
+  border-radius: 100%;
+ 
+}
+.title {
+  text-align: center;
+  background-color: rgb(209, 185, 185);
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  position: relative;
+}
+.titles{
+  text-align: center;
+  background-color: rgb(216, 219, 201);
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  position: relative;
+}
 .login:hover {
   box-shadow: rgba(0, 0, 0, 0.15) 0 3px 9px 0;
   transform: translateY(-2px);

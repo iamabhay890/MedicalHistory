@@ -20,6 +20,11 @@ import { HomeComponent } from './home/home.component';
 import { StartUpComponent } from './start-up/start-up.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ToastrModule } from 'ngx-toastr';
+import { MedicalhistoryService } from './medicalhistory.service';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { DataTablesModule } from "angular-datatables";
+import { ViewprofileComponent } from './viewprofile/viewprofile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,11 @@ import { ToastrModule } from 'ngx-toastr';
     ShowmedicalhistoryComponent,
     CreatemedicalhistoryComponent,
     HomeComponent,
-    StartUpComponent
+    StartUpComponent,
+    ForgotpasswordComponent,
+    ChangepasswordComponent,
+    ViewprofileComponent,
+    
    
   ],
   imports: [
@@ -43,8 +52,12 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot(),
+    DataTablesModule,
+    
   ],
-  providers: [RegisterServiceService, HttpClient,AuthGuard],
+  providers: [RegisterServiceService, 
+               HttpClient,AuthGuard,
+               MedicalhistoryService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

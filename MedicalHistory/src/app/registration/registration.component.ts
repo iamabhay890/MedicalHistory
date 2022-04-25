@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegistrationComponent implements OnInit {
   user: User = new User();
-
+  IconImage:string="/assets/Images/Logo.jpg";
   isSucess = false;
   constructor(
     @Inject(RegisterServiceService)
