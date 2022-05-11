@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/patients")
-@CrossOrigin(origins = "*")
 @RequestMapping("/Register")
 //@CrossOrigin(origins = "*")
 public class PatientController {
@@ -57,3 +55,4 @@ public class PatientController {
     public ResponseEntity<List<PatientDto>> getAllSlip(){
         return ResponseEntity.ok(this.patientService.getAllSlips());
     }
+}
