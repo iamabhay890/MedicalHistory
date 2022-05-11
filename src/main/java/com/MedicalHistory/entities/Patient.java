@@ -16,9 +16,11 @@ import java.util.List;
 @Setter
 
 public class Patient {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pId;
+    
     @Column(name="HospitalName",nullable = false)
     private String hospitalName;
 
@@ -28,10 +30,6 @@ public class Patient {
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     @Column(name="TreatmentDate",nullable = false)
     private String treatmentDate;
-
-
-    @Column(name = "MedicineName",nullable = false)
-    private String medicineName;
 
     @OneToMany(targetEntity = PatientMedicine.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "PatientId",referencedColumnName = "pId")
