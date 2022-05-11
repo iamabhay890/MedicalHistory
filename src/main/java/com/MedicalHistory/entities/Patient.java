@@ -8,17 +8,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name="patient")
 @NoArgsConstructor
 @Getter
 @Setter
 
-public class Patient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer slipId;
-@Data
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,13 +55,7 @@ public class Patient {
 
      @Column(name="TypeOfDisease",nullable = false)
      private String typeOfDisease;
-}
 
-    @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
-    @Column(name="NextAppointment")
-    private String nexAppt;
-
-    @Column(name="TypeOfDisease",nullable = false)
-    private String typeOfDisease;
+   
 }
 
