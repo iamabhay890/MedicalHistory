@@ -1,15 +1,25 @@
 package com.MedicalHistory.payloads;
 
+
+import com.MedicalHistory.entities.PatientMedicine;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+
+import java.util.List;
+
 
 @NoArgsConstructor
 @Getter
 @Setter
 public class PatientDto {
 
+
     private Integer slipId;
+
+    private Integer pId;
+
 
     private String hospitalName;
 
@@ -17,7 +27,11 @@ public class PatientDto {
 
     private String treatmentDate;
 
+
     private String medicineName;
+
+    private List<PatientMedicine> medicineName;
+
 
     private String description;
 
@@ -28,4 +42,5 @@ public class PatientDto {
     private String nexAppt;
 
     private String typeOfDisease;
+
 }

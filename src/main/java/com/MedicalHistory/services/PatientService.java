@@ -19,3 +19,4 @@ public interface PatientService {
     void deleteSlip(Integer slipId);
 
 }
+

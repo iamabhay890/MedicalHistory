@@ -13,6 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/patients")
 @CrossOrigin(origins = "*")
+@RequestMapping("/Register")
+//@CrossOrigin(origins = "*")
 public class PatientController {
 
     @Autowired
@@ -22,7 +24,9 @@ public class PatientController {
     private PatientRepo patientRepo;
 
 
-    @PostMapping("/")
+
+    @PostMapping("/patients")
+
     public ResponseEntity<PatientDto> createPatientData(@RequestBody PatientDto patientDto) {
 
         PatientDto createPatientDto = this.patientService.createPatientData(patientDto);
@@ -53,4 +57,3 @@ public class PatientController {
     public ResponseEntity<List<PatientDto>> getAllSlip(){
         return ResponseEntity.ok(this.patientService.getAllSlips());
     }
-}
