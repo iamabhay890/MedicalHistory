@@ -79,7 +79,6 @@ public class PatientServiceImpl implements PatientService {
         Patient patient=new Patient();
 
         patient.setPId(patientDto.getPId());
-
         patient.setHospitalName(patientDto.getHospitalName());
         patient.setAge(patientDto.getAge());
         patient.setTreatmentDate(patientDto.getTreatmentDate());
