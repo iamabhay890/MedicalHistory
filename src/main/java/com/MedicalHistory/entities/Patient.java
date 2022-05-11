@@ -13,12 +13,16 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+
+public class Patient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer slipId;
 @Data
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pId;
-
     @Column(name="HospitalName",nullable = false)
     private String hospitalName;
 
@@ -30,10 +34,14 @@ public class Patient {
     private String treatmentDate;
 
 
+    @Column(name = "MedicineName",nullable = false)
+    private String medicineName;
+
     @OneToMany(targetEntity = PatientMedicine.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "PatientId",referencedColumnName = "pId")
     @Column(name = "MedicineName",nullable = false)
     private List<PatientMedicine> medicineName;
+
 
     @Column(name="Description")
     private String description;
@@ -44,6 +52,15 @@ public class Patient {
     @Column(name="DoctorName",nullable = false)
     private String doctorName;
 
+
+     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
+     @Column(name="NextAppointment")
+     private String nexAppt;
+
+     @Column(name="TypeOfDisease",nullable = false)
+     private String typeOfDisease;
+}
+
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     @Column(name="NextAppointment")
     private String nexAppt;
@@ -51,3 +68,4 @@ public class Patient {
     @Column(name="TypeOfDisease",nullable = false)
     private String typeOfDisease;
 }
+

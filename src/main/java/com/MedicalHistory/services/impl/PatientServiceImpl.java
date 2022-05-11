@@ -68,7 +68,8 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void deleteSlip(Integer slipId) {
         Patient patient =this.patientRepo.findById(slipId).orElseThrow(()-> new ResourceNotFoundException("Patient"," slip ",slipId));
-        this.patientRepo.delete(patient);
+
+      this.patientRepo.delete(patient);
 
     }
 
@@ -78,6 +79,7 @@ public class PatientServiceImpl implements PatientService {
         Patient patient=new Patient();
 
         patient.setPId(patientDto.getPId());
+
         patient.setHospitalName(patientDto.getHospitalName());
         patient.setAge(patientDto.getAge());
         patient.setTreatmentDate(patientDto.getTreatmentDate());
@@ -109,4 +111,6 @@ public class PatientServiceImpl implements PatientService {
         return patientDto;
 
     }
+
 }
+

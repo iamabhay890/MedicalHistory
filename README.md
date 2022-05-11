@@ -11,7 +11,6 @@ Adding Add Prescription functionality
 
 Added all the functionality of the patients 
 Patients can add their medical history into the table.
-
 created reference table master.
 created patient_medicine table
 established a OnetoMany relationship between patient and patient_medicine table
@@ -25,3 +24,4 @@ server runnning on 8080
 using mysql version 5
 database name - medical_history_api
 tables - user, patient,patient_medicine, medicine(master table)
+..

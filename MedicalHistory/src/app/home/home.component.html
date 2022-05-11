@@ -1,0 +1,23 @@
+<div > 
+  <h1 class="title">medicalhistory 
+    <div class="btn-group"  style="float: right;" dropdown>
+      <button id="button-menu-dividers"  dropdownToggle type="button"  class="btn btn-primary dropdown-toggle"
+       aria-controls="dropdown-menu-dividers">
+        Profile <span class="caret"></span>
+      </button>
+      <ul id="dropdown-menu-dividers" *dropdownMenu class="dropdown-menu"
+          role="menu" aria-labelledby="button-menu-dividers">
+        <li role="menuitem"><a class="dropdown-item" routerLink="../profile">View Profile</a></li>
+        <li role="menuitem"><a class="dropdown-item"routerLink="..changepassword/">Change Password</a>
+        </li>
+        <li role="menuitem"><a class="dropdown-item"  (click)='logout()'>Logout</a></li>
+        
+      </ul>
+    </div>
+</h1><br>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">  
+        <button class="btn btn-primary me-md-2" type="button" routerLink="../create">Add Prescription </button>
+        <button class="btn btn-primary" type="button" routerLink="..show/">show All Prescription</button>
+      </div>
+      
+</div>
