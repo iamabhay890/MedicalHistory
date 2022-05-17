@@ -7,15 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/patients")
-@CrossOrigin(origins = "*")
 @RequestMapping("/Register")
 //@CrossOrigin(origins = "*")
 public class PatientController {
+
+    private static final String DIR_TO_UPLOAD = "\\Path\\";
+
 
     @Autowired
     private PatientService patientService;
@@ -24,36 +30,37 @@ public class PatientController {
     private PatientRepo patientRepo;
 
 
-
     @PostMapping("/patients")
 
     public ResponseEntity<PatientDto> createPatientData(@RequestBody PatientDto patientDto) {
 
         PatientDto createPatientDto = this.patientService.createPatientData(patientDto);
+
         return new ResponseEntity<>(createPatientDto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{slipId}")
-    public ResponseEntity<PatientDto> updatePatient(@RequestBody PatientDto patientDto,@PathVariable Integer slipId){
+    @PutMapping("/{pId}")
+    public ResponseEntity<PatientDto> updatePatient(@RequestBody PatientDto patientDto, @PathVariable Integer pId) {
 
-        PatientDto updatePatient = this.patientService.update(patientDto,slipId);
+        PatientDto updatePatient = this.patientService.update(patientDto, pId);
         return ResponseEntity.ok(updatePatient);
 
     }
 
-    @DeleteMapping("/{slipId}")
-    public void deletePatient(@PathVariable Integer slipId){
+    @DeleteMapping("/{pId}")
+    public void deletePatient(@PathVariable Integer pId) {
 
-        this.patientService.deleteSlip(slipId);
+        this.patientService.deleteSlip(pId);
     }
 
-    @GetMapping("/{slipId}")
-    public ResponseEntity<PatientDto> getSingleSlip(@PathVariable Integer slipId){
-        return ResponseEntity.ok(this.patientService.getSlipById(slipId));
+    @GetMapping("/{pId}")
+    public ResponseEntity<PatientDto> getSingleSlip(@PathVariable Integer pId) {
+        return ResponseEntity.ok(this.patientService.getSlipById(pId));
     }
 
 
     @GetMapping("/")
-    public ResponseEntity<List<PatientDto>> getAllSlip(){
+    public ResponseEntity<List<PatientDto>> getAllSlip() {
         return ResponseEntity.ok(this.patientService.getAllSlips());
     }
+}

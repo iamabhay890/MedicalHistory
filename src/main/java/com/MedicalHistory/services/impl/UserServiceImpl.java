@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
         userDto.setPassword(user.getPassword());
         //userDto.setAddress(user.getAddress());
         userDto.setGender(user.getGender());
-        userDto.setAge(userDto.getAge());
+        userDto.setAge(user.getAge());
         return userDto;
     }
 }
