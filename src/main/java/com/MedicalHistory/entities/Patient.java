@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 
 public class Patient {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pId;
@@ -33,7 +33,7 @@ public class Patient {
 
     @OneToMany(targetEntity = PatientMedicine.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "PatientId",referencedColumnName = "pId")
-    @Column(name = "MedicineName",nullable = false)
+    @Column(name = "MedicineName",nullable = false )
     private List<PatientMedicine> medicineName;
 
 
@@ -53,7 +53,6 @@ public class Patient {
 
      @Column(name="TypeOfDisease",nullable = false)
      private String typeOfDisease;
-
-   
 }
+
 

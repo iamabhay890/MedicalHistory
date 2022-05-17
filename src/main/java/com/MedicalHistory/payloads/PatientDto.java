@@ -36,4 +36,7 @@ public class PatientDto {
 
     private String typeOfDisease;
 
+    private byte[] reportFile;
+
 }
+

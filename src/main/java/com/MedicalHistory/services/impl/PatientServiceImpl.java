@@ -43,6 +43,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setTypeOfDisease(patientDto.getTypeOfDisease());
 
 
+
         Patient updatePatient=this.patientRepo.save(patient);
         PatientDto patientDto1=this.patientToDto(updatePatient);
         return patientDto1;
@@ -89,6 +90,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setNexAppt(patientDto.getNexAppt());
         patient.setTypeOfDisease(patientDto.getTypeOfDisease());
 
+
         return patient;
     }
 
@@ -106,6 +108,7 @@ public class PatientServiceImpl implements PatientService {
         patientDto.setDoctorName(patient.getDoctorName());
         patientDto.setNexAppt(patient.getNexAppt());
         patientDto.setTypeOfDisease(patient.getTypeOfDisease());
+
 
         return patientDto;
 

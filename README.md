@@ -24,4 +24,7 @@ server runnning on 8080
 using mysql version 5
 database name - medical_history_api
 tables - user, patient,patient_medicine, medicine(master table)
-..
+....
+Added diseas table
+diseas can accept 3 values diseas name, diseas status and diseas reports file.
+diseas table will have total four columns(d_id,d_Name,active_status,report_file).
