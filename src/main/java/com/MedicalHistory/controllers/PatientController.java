@@ -30,6 +30,7 @@ public class PatientController {
     private PatientRepo patientRepo;
 
 
+
     @PostMapping("/patients")
 
     public ResponseEntity<PatientDto> createPatientData(@RequestBody PatientDto patientDto) {
