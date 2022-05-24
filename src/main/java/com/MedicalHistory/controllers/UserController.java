@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class UserController {
 
@@ -45,7 +45,7 @@ public class UserController {
 
     //to fetch all users
 
-    @GetMapping("/")
+    @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getAllUsers(){
         return ResponseEntity.ok(this.userService.getAllUsers());
 
@@ -58,3 +58,4 @@ public class UserController {
 
     }
 }
+//APIS are tested with postman

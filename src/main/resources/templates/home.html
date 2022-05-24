@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Medical History</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+    </style>
+</head>
+<body>
+<center>
+<div align="right">
+    <div class="navbar">
+        <a href="login.html">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">User
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="UserRegister.html">User Registration</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Paitents
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="PatientRegister.html">Paitents Registration</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Medicine
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="Medicine.html">Medicine Registration</a>
+            </div>
+        </div>
+    </div>
+    <div class="container my-2">
+        <br>
+        <h1 align="left">Medical History's Users List</h1>
+        <table class="table table-striped table-bordered">
+            <thread class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Age</th>
+                    <th>Password</th>
+                    <th>Gender</th>
+                    <th>Action</th>
+                </tr>
+            </thread>
+            <tbody>
+            <tr th:each="user:${listUsers}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.phone}"></td>
+                <td th:text="${user.age}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.gender}"></td>
+                <td> <a th:href="@{/showFormForUpdate/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
+                    <a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<section style="margin:1px 0;">
+    <img style=" height:600px; width:100%;" th:src="@{/images/madd.png}">
+</section>
+<footer style="background-color:#fff; display:flex;  justify-content:space-between; padding:15px;">
+    <span>Copyright 2022</span>
+    <span>Designed by Java Team</span>
+</footer>
+</center>
+</body>
+</html>
