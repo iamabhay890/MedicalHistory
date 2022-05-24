@@ -1,5 +1,6 @@
 package com.MedicalHistory.payloads;
 
+
 import com.MedicalHistory.entities.PatientMedicine;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,3 +39,4 @@ public class PatientDto {
     private byte[] reportFile;
 
 }
+

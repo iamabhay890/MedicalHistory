@@ -20,7 +20,7 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pId;
-
+    
     @Column(name="HospitalName",nullable = false)
     private String hospitalName;
 
@@ -53,7 +53,6 @@ public class Patient {
 
      @Column(name="TypeOfDisease",nullable = false)
      private String typeOfDisease;
-
 }
 
 
