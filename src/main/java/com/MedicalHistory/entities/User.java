@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -16,27 +17,27 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) //primeryKey
-    private int id;
+    private Integer id;
 
-    @Column(name="name", nullable=false,length = 30)
+    @Column(name="name", nullable=false)
     private String name;
 
-    @Column(name="email", nullable=false,length = 30,unique = true)
+    @Column(name="email", nullable=false,unique = true)
     private String email;
 
-    @Column(name="phone", nullable=false,length = 15)
+    @Column(name="phone", nullable=false)
     private String phone;
 
-    @Column(name="age",nullable = false,length = 3)
+    @Column(name="age",nullable = false)
     private int age;
 
-    @Column(name="password", nullable=false,length = 30)
+    @Column(name="password", nullable=false)
     private String password;
 
    // @Column(name="address", length = 30)
    // private String address;
 
-    @Column(name="gender",nullable=false,length = 10)
+    @Column(name="gender",nullable=false)
     private String gender;
 
 

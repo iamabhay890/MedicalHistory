@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
         User user=this.userRepo.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User"," Id ",userId));
 
-        return this.userToDto(user);
+          return this.userToDto(user);
     }
 
     @Override
@@ -82,6 +83,7 @@ public class UserServiceImpl implements UserService {
         user.setGender(userDto.getGender());
         user.setAge(userDto.getAge());
 
+
         return user;
     }
 
@@ -96,6 +98,7 @@ public class UserServiceImpl implements UserService {
         //userDto.setAddress(user.getAddress());
         userDto.setGender(user.getGender());
         userDto.setAge(user.getAge());
+
         return userDto;
     }
 }

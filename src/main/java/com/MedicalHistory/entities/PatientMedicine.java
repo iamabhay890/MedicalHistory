@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "patientMedicine")
-@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor

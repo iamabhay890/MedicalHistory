@@ -1,7 +1,7 @@
 package com.MedicalHistory.payloads;
 
-
 import com.MedicalHistory.entities.PatientMedicine;
+import com.MedicalHistory.entities.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,13 +20,12 @@ public class PatientDto {
 
     private String hospitalName;
 
-    private Integer age;
 
     private String treatmentDate;
 
     private List<PatientMedicine> medicineName;
 
-    private String description;
+
 
     private String report;
 
@@ -38,5 +37,6 @@ public class PatientDto {
 
     private byte[] reportFile;
 
-}
+    private User patientId;
 
+}

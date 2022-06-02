@@ -33,10 +33,8 @@ public class PatientServiceImpl implements PatientService {
 
         Patient patient =this.patientRepo.findById(slipId).orElseThrow(()-> new ResourceNotFoundException("Patient"," slip ",slipId));
         patient.setHospitalName(patientDto.getHospitalName());
-        patient.setAge(patientDto.getAge());
         patient.setTreatmentDate(patientDto.getTreatmentDate());
         patient.setMedicineName(patientDto.getMedicineName());
-        patient.setDescription(patientDto.getDescription());
         patient.setReport(patientDto.getReport());
         patient.setDoctorName(patientDto.getDoctorName());
         patient.setNexAppt(patientDto.getNexAppt());
@@ -81,14 +79,14 @@ public class PatientServiceImpl implements PatientService {
 
         patient.setPId(patientDto.getPId());
         patient.setHospitalName(patientDto.getHospitalName());
-        patient.setAge(patientDto.getAge());
+
         patient.setTreatmentDate(patientDto.getTreatmentDate());
         patient.setMedicineName(patientDto.getMedicineName());
-        patient.setDescription(patientDto.getDescription());
         patient.setReport(patientDto.getReport());
         patient.setDoctorName(patientDto.getDoctorName());
         patient.setNexAppt(patientDto.getNexAppt());
         patient.setTypeOfDisease(patientDto.getTypeOfDisease());
+        patient.setPatientId(patientDto.getPatientId());
 
 
         return patient;
@@ -100,14 +98,13 @@ public class PatientServiceImpl implements PatientService {
 
         patientDto.setPId(patient.getPId());
         patientDto.setHospitalName(patient.getHospitalName());
-        patientDto.setAge(patient.getAge());
         patientDto.setTreatmentDate(patient.getTreatmentDate());
         patientDto.setMedicineName(patient.getMedicineName());
-        patientDto.setDescription(patient.getDescription());
         patientDto.setReport(patient.getReport());
         patientDto.setDoctorName(patient.getDoctorName());
         patientDto.setNexAppt(patient.getNexAppt());
         patientDto.setTypeOfDisease(patient.getTypeOfDisease());
+        patientDto.setPatientId(patient.getPatientId());
 
 
         return patientDto;

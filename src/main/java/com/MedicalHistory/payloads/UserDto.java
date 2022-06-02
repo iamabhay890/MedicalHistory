@@ -1,9 +1,12 @@
 package com.MedicalHistory.payloads;
 
 
+import com.MedicalHistory.entities.Patient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 
 //transfers the data to db
@@ -11,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class UserDto {
-    private int id;
+    private Integer id;
     private String name;
 
     private String email;
@@ -20,4 +23,5 @@ public class UserDto {
     private String password;
    // private String address;
     private String gender;
+
 }
