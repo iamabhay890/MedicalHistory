@@ -22,7 +22,7 @@ server runnning on 8080
 
 #database details
 using mysql version 5
-database name - medical_history_api
+database name - medical_history
 tables - user, patient,patient_medicine, medicine(master table)
 ....
 Added diseas table
