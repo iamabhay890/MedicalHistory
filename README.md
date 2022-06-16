@@ -33,7 +33,8 @@ Used Thymleaf for the Ui tamplates
 now user can login by running the url name localhost:8080/mh/login
 new user can signup on the application by above given url there they will find a sign up button 
 after clicking on signup button you'll get the user registation form.
-after logging on application you can see the full user list of the application and also we can modify that.'
+after logging on application you can see the full user list of the application and also we can modify that.
+Server side validation done on user registration form
 
 ...
 
