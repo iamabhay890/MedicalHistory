@@ -2,60 +2,71 @@ package com.MedicalHistory.controllers;
 
 
 import com.MedicalHistory.payloads.UserDto;
-import com.MedicalHistory.repositories.UserRepo;
 import com.MedicalHistory.services.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api")
-//@CrossOrigin(origins = "*")
+@Controller
+@RequestMapping("/mh/user")
 public class UserController {
+
+    static Logger logger = LogManager.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepo userRepo;
-    @PostMapping("/")
-    //to create user with POST
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
 
-            UserDto createUserDto = this.userService.createUser(userDto);
-            return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
+    //View user Profile
+    @GetMapping("/viewUserProfile/{id}")
+    public String viewuserProfile(@PathVariable(value = "id") Integer id, Model model) {
+        UserDto user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "User/viewUserProfile";
     }
 
-   //to update the user with PUT
 
-    @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable Integer userId){
-        UserDto updatedUser = this.userService.update(userDto,userId);
-        return ResponseEntity.ok(updatedUser);
+    //update a single user through user dashboard
+    @GetMapping("/showFormForUpdate_s/{id}")
+    public String showFormForUpdate_s(@PathVariable(value = "id") Integer id, Model model) {
+        UserDto userDto = userService.getUserById(id);
+        model.addAttribute("userDto", userDto);
+
+        //for header1 fragment
+        model.addAttribute("user", userDto);
+        return "User/updateSingleUser";
     }
 
-    //to delete the user
-    @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable Integer userId){
-        this.userService.deleteUser(userId);
-        System.out.print("Deleted Successfully");
+    @PostMapping("/registerUserSingle")
+    public String registerUser_s(@ModelAttribute("userDto") UserDto userDto) {
+        logger.info("Updating user for: " + userDto.getName());
+
+        System.out.println("Showing id for single user for update " + userDto.getId());
+
+
+        userService.update(userDto, userDto.getId());
+        return "redirect:/mh/user/viewUserProfile/" + userDto.getId();
     }
 
-    //to fetch all users
+    //........Update single user end................
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-        return ResponseEntity.ok(this.userService.getAllUsers());
 
+    //Delete self user through user dashboard
+    @GetMapping("/deleteSingleUser/{id}")
+    public String deleteSingleUser(@PathVariable(value = "id") Integer id) {
+        this.userService.deleteUser(id);
+        return "redirect:/mh/";
     }
 
-     //to get single user
-    @GetMapping("/{userId} ")
-    public ResponseEntity<UserDto> getSingleUser(@PathVariable Integer userId) {
-        return ResponseEntity.ok(this.userService.getUserById(userId));
 
+    //Contact us in navbar
+    @GetMapping("/contactUs/{id}")
+    public String Contactus(Model model, @PathVariable("id") Integer id) {
+        UserDto userDto = userService.getUserById(id);
+        model.addAttribute("user", userDto);
+        return "User/contactUsForUser";
     }
 }
-//APIS are tested with postman
+

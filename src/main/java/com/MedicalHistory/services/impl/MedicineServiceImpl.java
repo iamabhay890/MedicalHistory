@@ -33,14 +33,18 @@ public class MedicineServiceImpl implements MedicineService{
         return medicineDtos;
     }
 
+    @Override
+    public List<Medicine> searchMedicine(String name) {
+        return this.medicineRepo.findByNameContaining(name);
+    }
+
     private MedicineDto medicineToDto(Medicine medicine) {
 
 
         MedicineDto medicineDto=new MedicineDto();
 
         medicineDto.setMId(medicine.getMId());
-        medicineDto.setMedicineName(medicine.getMedicineName());
-        medicineDto.setMedicineType(medicine.getMedicineType());
+        medicineDto.setName(medicine.getName());
         medicineDto.setDuration(medicine.getDuration());
         medicineDto.setDescription(medicine.getDescription());
 
@@ -54,8 +58,7 @@ public class MedicineServiceImpl implements MedicineService{
         Medicine medicine=new Medicine();
 
         medicine.setMId(medicineDto.getMId());
-        medicine.setMedicineName(medicineDto.getMedicineName());
-        medicine.setMedicineType(medicineDto.getMedicineType());
+        medicine.setName(medicineDto.getName());
         medicine.setDuration(medicineDto.getDuration());
         medicine.setDescription(medicineDto.getDescription());
 

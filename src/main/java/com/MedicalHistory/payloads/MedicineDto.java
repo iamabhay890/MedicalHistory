@@ -10,9 +10,7 @@ public class MedicineDto {
 
     private Integer mId;
 
-    private String medicineName;
-
-    private String medicineType;
+    private String name;
 
     private String duration;
 

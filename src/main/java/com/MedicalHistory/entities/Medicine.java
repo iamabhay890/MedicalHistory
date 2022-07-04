@@ -17,16 +17,13 @@ public class Medicine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer mId;
 
-    @Column(name="MedicineName", nullable = false)
-    private String medicineName;
+    @Column(name="medicineName")
+    private String name;
 
-    @Column(name="MedicineType", nullable = false)
-    private String medicineType;
-
-    @Column(name="Duration", nullable = false)
+    @Column(name="Duration")
     private String duration;
 
-    @Column(name="Description", nullable = false)
+    @Column(name="Description")
     private String description;
 
 }

@@ -1,7 +1,7 @@
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<html>
 <head>
-  <title>Registration form Design</title>
-  <style>
+    <title>Login and Registration form Design</title>
+    <style>
 body{
 background-image : linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.6)),url(madd.png);
 heaight:100vh;
@@ -28,6 +28,7 @@ margin: auto;
 }
 
 
+
 .form input  {
     font-family: "Robot", sans-serif;
     outline:1;
@@ -39,6 +40,7 @@ margin: auto;
     box-sizing:boder-box;
     font-size: 14px;
 }
+
 
 .form button{
     font-family: "Roboto", sans-serif;
@@ -53,7 +55,8 @@ margin: auto;
     cursor: pointer;
 }
 
-}
+
+
 .form button:hover, .form button:active{
     background: #43A047;
 }
@@ -65,7 +68,7 @@ margin: auto;
 }
 
 .form .message a{
-   color : #4CAF50;
+    color : #4CAF50;
     text-decoration: none;
 }
 
@@ -73,30 +76,23 @@ margin: auto;
 </style>
 </head>
 <div style="max-width:1260px; margin:0 auto;">
-  <div>
-    <nav style="background-color:#333; display:flex; justify-content:space-between; align-items:center; padding:0 20px;">
-      <ul style="list-style:none; padding:0; margin:0; display:flex; column-gap:20px;">
-        <li><a href="/" th:action="@{/mh/index}" method="post" style="text-decoration:none; color:#fff;">User Panel</a></li>
-      </ul>
-      <span><a href="#"><img th:src="@{/images/icon.png}"  height="50"></a></span>
-    </nav>
+    <div class="login-page">
+        <body>
 
 
-    <div id="errormsg" style="display:none"></div>
-    <div><center>
-      <h1>User Reset Password</h1>
-      <form class="login-form" th:action="@{/mh/changePassword}" th:object="${userDto}" method="post">
-
-      <input id="oldpass" placeholder="Old Password" th:field="*{password}" required/>
-      <input id="pass" placeholder="New Password" th:field="*{password}" type="password" required/>
-
-      <span id="error" style="display:none">Password mismatch</span>
-
-      <button>Reset Password</button>
-      </form>
-    </center>
+        <div class="form">
+            <form class="login-form">
+                <h2 style="color: White">Medicne Register</h2>
+                <input type="text" placeholder="Medicine Name" />
+                <input type="text" placeholder="Medicine Type" />
+                <input type="text" placeholder="Duration" />
+                <input type="text" placeholder="Description" />
+                <button>Create</button>
+            </form>
+        </div>
+        </body>
     </div>
-  </div>
 </div>
-</body>
 </html>
+
+
