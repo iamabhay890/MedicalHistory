@@ -36,5 +36,13 @@ name varchar(40)
 );
 
 insert into role(id,name)
-SELECT * FROM(SELECT -1 as id,'[ROLE_ADMIN]' as name)as temp
-where not exists(select name from role where name='[ROLE_ADMIN]') limit 1;
+SELECT * FROM(SELECT -1 as id,'ROLE_ADMIN' as name)as temp
+where not exists(select name from role where name='ROLE_ADMIN') limit 1;
+
+create table if not exists users_roles(
+user_id int,
+role_id int PRIMARY KEY
+);
+ insert into users_roles(user_id,role_id)
+ SELECT * FROM(select -1 as user_id,-1 as role_id)as temp
+ where not exists(select role_id from users_roles where role_id=-1) limit 1;
