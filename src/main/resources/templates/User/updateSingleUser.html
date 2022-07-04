@@ -1,0 +1,74 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>Update user</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet"/>
+    <!-- Bootstrap CSS -->
+    <link href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://www.markuptag.com/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .img-fluid{
+        height:40px;
+        }
+
+     .btnl a{
+    color : White;
+    font-weight: bold;
+    text-decoration: none;
+     }
+
+        </style>
+</head>
+<header th:replace="User/userBlock::header1"></header>
+
+<body>
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-2 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-right">
+
+                        <form id="login-form" method="post" th:action="@{/mh/user/registerUserSingle}"
+                              th:object="${userDto}">
+
+                            <h3 class="mb-1 "><center>UPDATE</center></h3>
+
+                            <input th:field="*{id}" type="hidden"/>
+                            <div class="form-outline mb-0">
+                                <label class="form-label"> Name</label>
+                                <input class="form-control form-control-lg" th:field="*{name}" type="text"/>
+                            </div>
+
+                            <div class="form-outline mb-0">
+                                <label class="form-label">Phone Number</label>
+                                <input class="form-control form-control-lg" th:field="*{phone}" type="text"/>
+                            </div>
+
+                            <div class="form-outline mb-0">
+                                <label class="form-label">Age</label>
+                                <input class="form-control form-control-lg" required th:field="*{age}" type="text"/>
+                            </div>
+
+                            <div class="form-outline mb-3">
+                                <label class="form-label">Address</label>
+                                <input class="form-control form-control-lg" th:field="*{address}" type="text"/>
+                            </div>
+
+                            <div class="form-outline mb-3">
+                                <label class="form-label">Gender</label>
+                                <input class="form-control form-control-lg" th:field="*{gender}" type="text"/>
+                            </div>
+
+                           <center> <button class="btn btn-success btn-lg btn-block" type="submit">Update</button></center>
+                            <hr class="my-4">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
