@@ -41,6 +41,7 @@ public class UserDto {
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",message = "Invalid Password,Hover on 'i' for full detail")
     private String password;
 
+   private String newPassword;
 
     @NotBlank(message = "Please type your address.")
     private String address;
