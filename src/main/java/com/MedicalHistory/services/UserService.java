@@ -26,4 +26,9 @@ public interface UserService extends UserDetailsService {
     public User findByEmail(String email);
 
 
+    UserDto updatePassword(UserDto userDto);
+
+    UserDto forgotPass(UserDto userDto);
+
+
 }
