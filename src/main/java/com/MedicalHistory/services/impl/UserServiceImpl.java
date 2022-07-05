@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService {
         LocalDateTime createdDate = LocalDateTime.now();
         logger.info("Setting created date and modified date");
         User user = this.dtoToUser(userDto);
+
         String pwd= user.getPassword();
         String encryptedPwd = bCryptPasswordEncoder.encode(pwd);
         user.setPassword(encryptedPwd);
@@ -131,6 +132,7 @@ public class UserServiceImpl implements UserService {
 
         return userDto;
     }
+
 	
 	
 	  @Override
@@ -153,6 +155,7 @@ public class UserServiceImpl implements UserService {
         UserDto userDto1=this.userToDto(updatedUser);
         return userDto1;
     }
+
 
 
     @Override

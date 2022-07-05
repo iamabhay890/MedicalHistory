@@ -43,6 +43,7 @@ public class UserDto {
 
    private String newPassword;
 
+
     @NotBlank(message = "Please type your address.")
     private String address;
 
