@@ -31,10 +31,9 @@ public class Patient {
     @Column(name="TreatmentDate")
     private String treatmentDate;
 
-//    @OneToMany(targetEntity = PatientMedicine.class,cascade = CascadeType.ALL)
-//    @JoinColumn(name = "PatientId",referencedColumnName = "pId")
-//    @Column(name = "MedicineName")
-//    private List<PatientMedicine> medicineName;
+
+    @Column(name = "MedicineName")
+    private String medicineName;
 
     @Column(name = "Report")
     private String report;
