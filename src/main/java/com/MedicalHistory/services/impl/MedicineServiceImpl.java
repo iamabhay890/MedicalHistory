@@ -50,8 +50,6 @@ public class MedicineServiceImpl implements MedicineService{
 
         medicineDto.setMId(medicine.getMId());
         medicineDto.setName(medicine.getName());
-        medicineDto.setDuration(medicine.getDuration());
-        medicineDto.setDescription(medicine.getDescription());
 
         return medicineDto;
 
@@ -64,8 +62,6 @@ public class MedicineServiceImpl implements MedicineService{
 
         medicine.setMId(medicineDto.getMId());
         medicine.setName(medicineDto.getName());
-        medicine.setDuration(medicineDto.getDuration());
-        medicine.setDescription(medicineDto.getDescription());
 
         return medicine;
 
