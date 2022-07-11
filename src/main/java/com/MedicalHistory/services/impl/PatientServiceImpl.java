@@ -33,7 +33,7 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = this.patientRepo.findById(slipId).orElseThrow(() -> new ResourceNotFoundException("Patient", " slip ", slipId));
         patient.setHospitalName(patientDto.getHospitalName());
         patient.setTreatmentDate(patientDto.getTreatmentDate());
-        // patient.setMedicineName(patientDto.getMedicineName());
+        patient.setMedicineName(patientDto.getMedicineName());
         patient.setReport(patientDto.getReport());
         patient.setDoctorName(patientDto.getDoctorName());
         patient.setNexAppt(patientDto.getNexAppt());
@@ -83,7 +83,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setHospitalName(patientDto.getHospitalName());
         patient.setDiseaseName(patientDto.getDiseaseName());
         patient.setTreatmentDate(patientDto.getTreatmentDate());
-        // patient.setMedicineName(patientDto.getMedicineName());
+        patient.setMedicineName(patientDto.getMedicineName());
         patient.setReport(patientDto.getReport());
         patient.setDoctorName(patientDto.getDoctorName());
         patient.setNexAppt(patientDto.getNexAppt());
@@ -102,7 +102,7 @@ public class PatientServiceImpl implements PatientService {
         patientDto.setHospitalName(patient.getHospitalName());
         patientDto.setDiseaseName(patient.getDiseaseName());
         patientDto.setTreatmentDate(patient.getTreatmentDate());
-        // patientDto.setMedicineName(patient.getMedicineName());
+        patientDto.setMedicineName(patient.getMedicineName());
         patientDto.setReport(patient.getReport());
         patientDto.setDoctorName(patient.getDoctorName());
         patientDto.setNexAppt(patient.getNexAppt());

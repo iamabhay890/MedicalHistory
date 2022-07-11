@@ -39,6 +39,7 @@
                 <th>Doctor Name</th>
                 <th>Next Appointment</th>
                 <th>Type Of Disease</th>
+                <th>Medicine Name</th>
 
             </tr>
         </thread>
@@ -52,6 +53,7 @@
             <td th:text="${patients.doctorName}"></td>
             <td th:text="${patients.nexAppt}"></td>
             <td th:text="${patients.typeOfDisease}"></td>
+            <td th:text="${patients.medicineName}"></td>
 <!--            <td>-->
 <!--                <a th:href="@{/mh/records/AddMedicine/{id}(id=${patients.id})}" class="btn btn-primary">Add Medicine</a>-->
 <!--            </td>-->

@@ -38,6 +38,11 @@ public class MedicineServiceImpl implements MedicineService{
         return this.medicineRepo.findByNameContaining(name);
     }
 
+    @Override
+    public List<Medicine> allMedicine() {
+        return this.medicineRepo.findAll();
+    }
+
     private MedicineDto medicineToDto(Medicine medicine) {
 
 
@@ -65,4 +70,5 @@ public class MedicineServiceImpl implements MedicineService{
         return medicine;
 
     }
+     
 }

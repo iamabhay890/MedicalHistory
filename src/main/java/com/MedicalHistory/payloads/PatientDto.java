@@ -27,7 +27,7 @@ public class PatientDto {
 
     private String treatmentDate;
 
-    private List<PatientMedicine> medicineName;
+    private String medicineName;
 
 
     private String report;
