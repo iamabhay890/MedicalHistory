@@ -39,6 +39,10 @@ public class UserServiceImpl implements UserService {
         LocalDateTime createdDate = LocalDateTime.now();
         logger.info("Setting created date and modified date");
         User user = this.dtoToUser(userDto);
+
+        String pwd= user.getPassword();
+        String encryptedPwd = bCryptPasswordEncoder.encode(pwd);
+        user.setPassword(encryptedPwd);
         user.setCreatedDate(createdDate);
         user.setModifiedDate(createdDate);
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
@@ -97,7 +101,7 @@ public class UserServiceImpl implements UserService {
         user.setName(userDto.getName());
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
-        user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        user.setPassword(userDto.getPassword());
         user.setAddress(userDto.getAddress());
         user.setAdharNo(userDto.getAdharNo());
         user.setGender(userDto.getGender());
@@ -117,7 +121,7 @@ public class UserServiceImpl implements UserService {
         userDto.setName(user.getName());
         userDto.setPhone(user.getPhone());
         userDto.setEmail(user.getEmail());
-        userDto.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userDto.setPassword(user.getPassword());
         userDto.setAddress(user.getAddress());
         userDto.setAdharNo(user.getAdharNo());
         userDto.setGender(user.getGender());
@@ -128,6 +132,31 @@ public class UserServiceImpl implements UserService {
 
         return userDto;
     }
+
+	
+	
+	  @Override
+    public UserDto updatePassword(UserDto userDto) {
+
+        User user = this.userRepo.findById(userDto.getId()).orElseThrow(()-> new ResourceNotFoundException("User"," Id ", userDto.getId()));
+        user.setPassword(bCryptPasswordEncoder.encode(userDto.getNewPassword()));
+        System.out.println("User password get by DB " + userDto.getPassword());
+        User updatedUser=this.userRepo.save(user);
+        UserDto userDto1=this.userToDto(updatedUser);
+        return userDto1;
+
+    }
+
+    @Override
+    public UserDto forgotPass(UserDto userDto) {
+        User user = this.userRepo.findByEmail(userDto.getEmail());
+        user.setPassword(bCryptPasswordEncoder.encode(userDto.getNewPassword()));
+        User updatedUser=this.userRepo.save(user);
+        UserDto userDto1=this.userToDto(updatedUser);
+        return userDto1;
+    }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
