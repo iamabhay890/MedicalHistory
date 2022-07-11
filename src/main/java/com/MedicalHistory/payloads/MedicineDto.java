@@ -12,8 +12,4 @@ public class MedicineDto {
 
     private String name;
 
-    private String duration;
-
-    private String description;
-
 }
