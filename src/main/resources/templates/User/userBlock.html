@@ -15,7 +15,13 @@
     font-weight: bold;
     text-decoration: none;
      }
+ .my_profile_picture{
+	width:40px;
+    height:40px;
+	object-fit:cover;
+	border-radius:40%;
 
+}
         </style>
         <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet"/>
         <!-- Bootstrap CSS -->
@@ -52,6 +58,9 @@
                 </ul>
                 <div class="d-flex">
                     <div class="dropdown">
+                        <i class="abc">
+                            <img src="" class="my_profile_picture" th:src="@{'/images/'+${user.image}}" alt="profile photo" />
+                        </i>
                         <button aria-expanded="false" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                                 id="dropdownMenuButton" style="margin-right:8px" th:text="${user.name}"
                                 type="button"></button>
