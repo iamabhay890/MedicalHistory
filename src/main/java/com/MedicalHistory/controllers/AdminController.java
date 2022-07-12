@@ -8,7 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 
 @Controller
@@ -60,6 +66,45 @@ public class AdminController {
         userService.update(userDto, userDto.getId());
         return "redirect:/mh/index";
     }
+
+// Profile pic change for Admin
+    @PostMapping("/ProfilePic")
+    public String PicUpload(@ModelAttribute("userDto") UserDto userDto,
+                            @RequestParam("profileImage") MultipartFile file) throws IOException
+    {
+        UserDto oldDetails = userService.getUserById(userDto.getId());
+        if(userDto.getImage() == null)
+        {
+            userDto.setImage(file.getOriginalFilename());
+            logger.info(" user images by user  " + file.getOriginalFilename());
+            File saveFile = new ClassPathResource("static/images").getFile();
+            Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
+            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+        }
+        else {
+            // file work..
+            // rewrite
+            logger.info("file is empty");
+//				delete old photo
+
+            File deleteFile = new ClassPathResource("static/images").getFile();
+            File file1 = new File(deleteFile, oldDetails.getImage());
+            file1.delete();
+//				update new photo
+            File saveFile = new ClassPathResource("static/images").getFile();
+            Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
+            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            userDto.setImage(file.getOriginalFilename());
+
+        }
+        logger.info("Updating pic process");
+        logger.info("userDto id is " +userDto.getId());
+        userService.updatePic(userDto,userDto.getId());
+        return "redirect:/mh/admin/viewAdminProfile/" +userDto.getId();
+    }
+
+
 
     //Will delete user for super admin
     @GetMapping("/deleteUser/{id}")

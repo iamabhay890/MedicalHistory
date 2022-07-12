@@ -102,6 +102,41 @@
 </header>
 
 
+<header th:fragment="header2">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container" th:object="${user}">
+            <a class="navbar-brand" href="#"><img alt="Logo" class="img-fluid" style="height:40px"
+                                                  th:src="@{/images/icon.png}"/></a>
+            <span style="color:white">Medical History </span>
+            <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                    data-bs-target="#navbarNavDropdown" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active"
+                           th:href="@{/mh/index}">Home</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex">
+
+                    <div class="dropdown">
+                        <ul aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                          
+                        </ul>
+                    </div>
+                    <button class="btnl btn-danger "><a  th:href="@{/logout}">Log Out</a></button>
+
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
 
 
 
