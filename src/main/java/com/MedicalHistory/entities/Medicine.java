@@ -20,10 +20,4 @@ public class Medicine {
     @Column(name="medicineName")
     private String name;
 
-    @Column(name="Duration")
-    private String duration;
-
-    @Column(name="Description")
-    private String description;
-
 }

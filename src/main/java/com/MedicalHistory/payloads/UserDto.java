@@ -45,6 +45,7 @@ public class UserDto {
    
    private String image;
 
+
     @NotBlank(message = "Please type your address.")
     private String address;
 

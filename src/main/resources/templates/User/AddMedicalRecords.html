@@ -18,9 +18,9 @@
     text-decoration: none;
      }
     </style>
-    <script src="https://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <link rel="stylesheet"  th:href="@{/css/tokenStyle.css}">
 </head>
 <body>
 <header th:replace="User/userBlock::header1"></header>
@@ -85,6 +85,20 @@
                         </div>
                     </div>
 
+
+                     <!-- ............ ............Add Medicine.......................-->
+                     <div class="input-group mb-3">
+                        <div class="input-group-prepend" >
+                            <span class="input-group-text" style="padding-right:70px">Medicines</span>
+                        </div>
+                            <input id="search-input"
+                                   class="form-control"
+                                   name="search-input"
+                                   placeholder="Add Medicine"
+                                   type="text"
+                                   th:field="*{medicineName}"/>
+<!--                            <a onclick="addMore()" class="btn btn-success" >+</a>-->
+                        </div>
 
              
                     <!--........................................Report-->
@@ -167,6 +181,33 @@
 
 
 </script>
+<script type="text/javascript" th:src="@{/Js/script.js}"></script>
+<script type="text/javascript" th:src="@{/Js/tokenScript.js}"></script>
+<script>
 
+let medicine=[];
+fetchMedicine();
+function fetchMedicine(){
+    fetch("/searchAll")
+    .then((response)=>response.json())
+    .then((data)=>{
+       medicine=data.map((x)=>x.name);
+            medicine.sort();
+
+             find(medicine);
+    });
+}
+
+ function find(medicine){
+  console.log(medicine);
+    $('#search-input').tokenfield({
+  autocomplete:{
+   source: medicine,
+   delay:100
+  },
+  showAutocompleteOnFocus: true
+ })
+ }
+</script>
 </body>
 </html>

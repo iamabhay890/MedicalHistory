@@ -14,4 +14,6 @@ public interface MedicineService {
     List<MedicineDto> getAllMedicines();
 
     List<Medicine> searchMedicine(String name);
+
+    List<Medicine> allMedicine();
 }
