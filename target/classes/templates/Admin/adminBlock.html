@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<header th:fragment="adminHeader">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container" th:object="${userDto}">
+            <a class="navbar-brand" href="#"><img th:src="@{/images/icon.png}" alt="Logo" class="img-fluid" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/mh/index}">Home</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link"  th:href="@{/mh/admin/contactUs/{id}(id=${userDto.id})}">Contact Us</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" th:href="@{/mh/admin/viewAdminProfile/{id}(id=${userDto.id})}">View Profile</a></li>
+
+                           <li><a class="dropdown-item" th:href="@{/mh/ChangePassword/{id}(id=${userDto.id})}">Change Password</a></li>
+                        </ul>
+                    </div>
+                    <button class="btnl btn-danger ms-3"><a  th:href="@{/logout}">Log Out</a></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+</body>
+</html>
