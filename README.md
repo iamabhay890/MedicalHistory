@@ -66,3 +66,5 @@ the user and admin urls are protected no one can see the protected urls without 
 custom login page has been implimented.
 
 Change password and Forgot password done.
+
+Added the functionality of multiple Autocomplete feature with database data using jquery.
