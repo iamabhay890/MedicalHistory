@@ -51,7 +51,6 @@ public class MedicineServiceImpl implements MedicineService{
         medicineDto.setMId(medicine.getMId());
         medicineDto.setName(medicine.getName());
 
-
         return medicineDto;
 
     }
