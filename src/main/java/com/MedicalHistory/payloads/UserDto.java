@@ -42,6 +42,8 @@ public class UserDto {
     private String password;
 
    private String newPassword;
+   
+   private String image;
 
 
     @NotBlank(message = "Please type your address.")

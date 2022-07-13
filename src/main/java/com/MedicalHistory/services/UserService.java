@@ -30,5 +30,5 @@ public interface UserService extends UserDetailsService {
 
     UserDto forgotPass(UserDto userDto);
 
-
+    UserDto updatePic(UserDto userDto,Integer userId);
 }

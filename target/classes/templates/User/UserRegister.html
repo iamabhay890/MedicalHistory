@@ -54,7 +54,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form class="login-form" method="post" th:action="@{/mh/registerUser}" th:object="${userDto}">
+            <form class="login-form" method="post" th:action="@{/mh/registerUser}" th:object="${userDto}" enctype="multipart/form-data">
                 <h2 align="center">User Registration</h2>
               
 
@@ -211,6 +211,17 @@
                          th:each="e:${#fields.errors('gender')}" th:text="${e}">
                     </div>
                 </div>
+
+
+
+                 <!--........................ Image ...................... -->
+                 <div class="input-group mb-3">
+                    <input type="file" name="profileImage" class="form-control"
+                           accept=".jpg,.jpeg,.png"
+                           onchange="validateFileType()" id="file" />
+                </div>
+
+
                 <!--........................Status...................... -->
                 <input hidden th:field="*{status}" type="text"/>
 
@@ -221,6 +232,20 @@
     </div>
 </div>
 <div th:replace="User/userBlock::script"></div>
+
+<script type="text/javascript">
+    function validateFileType(){
+        var file = document.getElementById("file").value;
+        var idxDot = file.lastIndexOf(".") + 1;
+        var extFile = file.substr(idxDot, file.length).toLowerCase();
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+            //TO DO
+        }else{
+            alert("Only jpg/jpeg and png files are allowed!");
+            document.getElementById("file").value=null;
+        }
+    }
+</script>
 </body>
 </html>
  
