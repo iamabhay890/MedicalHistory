@@ -174,3 +174,10 @@
     padding-left: 0px;
     padding-right: 4px;
   }
+
+    .ui-menu {
+      list-style-type: none;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      background-color:white;
+  }
