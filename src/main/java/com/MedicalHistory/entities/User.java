@@ -51,7 +51,6 @@ public class User {
     @Column(name = "adhar_no")
     private Long adharNo;
 
-
     @Column(name = "gender")
     private String gender;
 

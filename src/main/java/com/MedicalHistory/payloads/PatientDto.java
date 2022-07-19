@@ -29,9 +29,6 @@ public class PatientDto {
 
     private String medicineName;
 
-
-    private String report;
-
     @NotBlank(message = "Doctor Name can't be null")
     private String doctorName;
 
@@ -41,9 +38,12 @@ public class PatientDto {
 
     private String typeOfDisease;
 
-    private byte[] reportFile;
-
+    private String report;
 
     private User user;
+
+    private String reportType;
+
+    private String reportName;
 
 }
