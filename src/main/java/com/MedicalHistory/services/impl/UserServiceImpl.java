@@ -45,6 +45,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encryptedPwd);
         user.setCreatedDate(createdDate);
         user.setModifiedDate(createdDate);
+        String img = user.getImage();
+        user.setImage(img);
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
         User savedUser = this.userRepo.save(user);
 
@@ -105,6 +107,7 @@ public class UserServiceImpl implements UserService {
         user.setAddress(userDto.getAddress());
         user.setAdharNo(userDto.getAdharNo());
         user.setGender(userDto.getGender());
+        user.setImage(userDto.getImage());
         user.setAge(userDto.getAge());
         user.setStatus(userDto.isStatus());
         user.setCreatedDate(userDto.getCreatedDate());
@@ -125,6 +128,7 @@ public class UserServiceImpl implements UserService {
         userDto.setAddress(user.getAddress());
         userDto.setAdharNo(user.getAdharNo());
         userDto.setGender(user.getGender());
+        userDto.setImage(user.getImage());
         userDto.setAge(user.getAge());
         userDto.setStatus(user.isStatus());
         userDto.setCreatedDate(user.getCreatedDate());
@@ -134,6 +138,15 @@ public class UserServiceImpl implements UserService {
     }
 
 	
+     @Override
+    public UserDto updatePic(UserDto userDto,Integer userId) {
+
+        User user = this.userRepo.findById(userDto.getId()).orElseThrow(()-> new ResourceNotFoundException("User"," Id ", userDto.getId()));
+        user.setImage(userDto.getImage());
+        User updatedUser=this.userRepo.save(user);
+        UserDto userDto1=this.userToDto(updatedUser);
+        return userDto1;
+    }
 	
 	  @Override
     public UserDto updatePassword(UserDto userDto) {

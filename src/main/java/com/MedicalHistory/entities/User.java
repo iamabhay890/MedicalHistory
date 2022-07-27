@@ -51,10 +51,11 @@ public class User {
     @Column(name = "adhar_no")
     private Long adharNo;
 
-
     @Column(name = "gender")
     private String gender;
 
+    @Column(name="image")
+    private String image;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Patient> patient;

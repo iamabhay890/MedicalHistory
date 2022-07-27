@@ -35,6 +35,7 @@ public class Patient {
     @Column(name = "MedicineName")
     private String medicineName;
 
+    @Lob
     @Column(name = "Report")
     private String report;
 
@@ -51,6 +52,12 @@ public class Patient {
 
     @ManyToOne
     private User user;
+
+    @Column
+    private String reportName;
+
+    @Column
+    private String reportType;
 
 }
 

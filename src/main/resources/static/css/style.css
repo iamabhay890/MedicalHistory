@@ -90,5 +90,11 @@
 .logo-font{
  background-color:white;
  font-size:30px;
+}
 
+.reportFile{
+        width: 70px;
+    	height: 80px;
+    	object-fit:cover;
+    	border-radius:10%;
 }

@@ -16,4 +16,5 @@ public interface MedicineService {
     List<Medicine> searchMedicine(String name);
 
     List<Medicine> allMedicine();
+
 }
