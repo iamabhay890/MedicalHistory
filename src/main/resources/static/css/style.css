@@ -90,5 +90,20 @@
 .logo-font{
  background-color:white;
  font-size:30px;
-
 }
+
+.reportFile{
+        width: 70px;
+    	height: 80px;
+    	object-fit:cover;
+    	border-radius:10%;
+}
+.btn-light:hover{
+    background-color: #4CAF50;
+  color: white;
+  }
+
+  .nav-link:hover{
+    background-color: #6495ED;
+    color: white;
+  }

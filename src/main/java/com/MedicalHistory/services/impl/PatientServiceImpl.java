@@ -6,9 +6,13 @@ import com.MedicalHistory.exceptions.ResourceNotFoundException;
 import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.repositories.PatientRepo;
 import com.MedicalHistory.services.PatientService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,10 +22,21 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private PatientRepo patientRepo;
 
+    private final Logger logger = LogManager.getLogger(PatientServiceImpl.class);
+
     @Override
-    public PatientDto createPatientData(PatientDto patientDto) {
+    public PatientDto createPatientData(PatientDto patientDto, MultipartFile file) {
 
         Patient patient = this.dtoToPatient(patientDto);
+        try {
+            patient.setReport(Base64.getEncoder().encodeToString(file.getBytes()));
+            patient.setReportName(file.getOriginalFilename());
+            patient.setReportType(file.getContentType());
+        } catch (Exception e) {
+            logger.error("error in setting the file");
+            e.printStackTrace();
+
+        }
         Patient savedPatient = this.patientRepo.save(patient);
 
         return this.patientToDto(savedPatient);
@@ -34,7 +49,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setHospitalName(patientDto.getHospitalName());
         patient.setTreatmentDate(patientDto.getTreatmentDate());
         patient.setMedicineName(patientDto.getMedicineName());
-        patient.setReport(patientDto.getReport());
+        // patient.setReport(patientDto.getReport());
         patient.setDoctorName(patientDto.getDoctorName());
         patient.setNexAppt(patientDto.getNexAppt());
         patient.setTypeOfDisease(patientDto.getTypeOfDisease());
@@ -53,6 +68,12 @@ public class PatientServiceImpl implements PatientService {
         return this.patientToDto(patient);
 
     }
+
+    @Override
+    public Patient getPatinetById(Integer id) {
+        return this.patientRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Patient", " slip ", id));
+    }
+
 
     @Override
     public List<PatientDto> getAllSlips() {
@@ -84,7 +105,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setDiseaseName(patientDto.getDiseaseName());
         patient.setTreatmentDate(patientDto.getTreatmentDate());
         patient.setMedicineName(patientDto.getMedicineName());
-        patient.setReport(patientDto.getReport());
+        //  patient.setReport(patientDto.getReport());
         patient.setDoctorName(patientDto.getDoctorName());
         patient.setNexAppt(patientDto.getNexAppt());
         patient.setTypeOfDisease(patientDto.getTypeOfDisease());
@@ -103,7 +124,7 @@ public class PatientServiceImpl implements PatientService {
         patientDto.setDiseaseName(patient.getDiseaseName());
         patientDto.setTreatmentDate(patient.getTreatmentDate());
         patientDto.setMedicineName(patient.getMedicineName());
-        patientDto.setReport(patient.getReport());
+        //patientDto.setReport(patient.getReport());
         patientDto.setDoctorName(patient.getDoctorName());
         patientDto.setNexAppt(patient.getNexAppt());
         patientDto.setTypeOfDisease(patient.getTypeOfDisease());

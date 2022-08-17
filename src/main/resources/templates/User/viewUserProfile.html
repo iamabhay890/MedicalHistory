@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <title>User Profile</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"/>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet"/>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css"/>
+    <link href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         .img-fluid{
         height:40px;
@@ -17,10 +18,96 @@
     font-weight: bold;
     text-decoration: none;
      }
+        .my_profile_picture{
+	width:40px;
+    height:40px;
+	object-fit:cover;
+	border-radius:40%;
+}
+
+    </style>
+
+    <style>
+    body {font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;}
+    * {box-sizing: border-box;}
+    
+    /* Button used to open the contact form - fixed at the bottom of the page */
+    .open-button {
+      background-color: DodgerBlue;
+      border: none;
+      color: white;
+      padding: 12px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0.8;
+      position: fixed;
+      top: 5px;
+      right: 5px;
+    
+    
+    
+    }
+    
+    /* The popup form - hidden by default */
+    .form-popup {
+      display: none;
+      position: fixed;
+      top: 12%;
+      right: 5px;
+      border: 3px solid #f1f1f1;
+      z-index: 9;
+    }
+    
+    /* Add styles to the form container */
+    .form-containers {
+      max-width: 250px;
+      padding: 10px;
+      background-color: #a1caf1;
+    
+    }
+    
+    /* Full-width input fields */
+    .form-containers input[type=file] {
+      width: 50%;
+      padding: 5px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #4f86f7;
+    }
+    
+    /* When the inputs get focus, do something */
+    .form-containers input[type=file]:focus,{
+      background-color: #4f86f7;
+      outline: none;
+    }
+    
+    /* Set a style for the submit/login button */
+    .form-containers .btn1 {
+      background-color: #04AA6D;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      width: 50%;
+      margin-top:10px;
+      opacity: 0.8;
+    }
+    
+    /* Add a red background color to the cancel button */
+    .form-containers .cancel {
+      background-color: red;
+    }
+    
+    /* Add some hover effects to buttons */
+    .form-containers .btn1:hover, .open-button:hover {
+      opacity: 1;
+    }
+
     </style>
 </head>
 <body>
-    <header th:replace="User/userBlock::header1"></header>
+<header th:replace="User/userBlock::header1"></header>
 <section>
     <div class="container my-2">
         <br>
@@ -46,16 +133,62 @@
                 <td th:text="${user.age}"></td>
                 <td th:text="${user.address}"></td>
                 <td th:text="${user.gender}"></td>
-                <td> <a th:href="@{/mh/user/showFormForUpdate_s/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
-                    <a th:href="@{/mh/user/deleteSingleUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
+                <td><a class="btn btn-primary" th:href="@{/mh/user/showFormForUpdate_s}">Update</a>
+                    <a class="btn btn-danger" th:href="@{/mh/user/deleteSingleUser}">Delete</a></td>
             </tr>
             </tbody>
         </table>
 
     </div>
+    <div>
+        <button class="open-button" onclick="openForm()"><i class="fa fa-camera-retro fa-2x"></i></button>
+        <div class="form-popup" id="myForm">
+            <form class="form-containers"
+                  enctype="multipart/form-data"
+                  method="post" th:action="@{/mh/user/updateUserProfilePicture}"
+                  th:object="${user}">
+                <h6 align="center">Change Profile Picture</h6>
+                <div class="input-group mb-6">
+                    <input th:field="*{id}" type="hidden"/>
+                    <input accept=".jpg,.jpeg,.png" class="form-control" id="file"
+                           name="profileImage"
+                           onchange="validateFileType()" type="file"/>
+                </div>
+                <div>
+                    <button class="btn1" type="submit">Update Image</button>
+                    <button class="btn1 cancel" onclick="closeForm()" style="float:right" type="button">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </section>
 
 <!-- Bootstrap JS -->
 <script src="https://www.markuptag.com/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+<script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    
+    }
+    
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+
+</script>
+<script type="text/javascript">
+        function validateFileType(){
+            var file = document.getElementById("file").value;
+            var idxDot = file.lastIndexOf(".") + 1;
+            var extFile = file.substr(idxDot, file.length).toLowerCase();
+            if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+                //TO DO
+            }else{
+                alert("Only jpg/jpeg and png files are allowed!");
+                document.getElementById("file").value=null;
+            }
+        }
+
+</script>
 </body>
 </html>

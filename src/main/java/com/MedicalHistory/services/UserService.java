@@ -2,16 +2,16 @@ package com.MedicalHistory.services;
 
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.UserDto;
-import com.MedicalHistory.repositories.UserRepo;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
-    UserDto createUser(UserDto user);
+    UserDto createUser(UserDto user, MultipartFile file);
 
-    UserDto update(UserDto user,Integer userId);
+    UserDto update(UserDto user, Integer userId);
 
     UserDto getUserById(Integer userId);
 
@@ -19,16 +19,20 @@ public interface UserService extends UserDetailsService {
 
     void deleteUser(Integer userId);
 
-    public User getAdmin();
+    User getAdmin();
 
-    public List<User> getUsers();
+    List<User> getUsers();
 
-    public User findByEmail(String email);
+    User findByEmail(String email);
 
 
     UserDto updatePassword(UserDto userDto);
 
     UserDto forgotPass(UserDto userDto);
+
+    void updateProfilePicture(MultipartFile file, Integer id);
+
+    void createOAuth2User(String email, String fullName, String OauthEmail,String file);
 
 
 }

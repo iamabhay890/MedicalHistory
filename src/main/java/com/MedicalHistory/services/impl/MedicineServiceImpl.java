@@ -1,4 +1,5 @@
 package com.MedicalHistory.services.impl;
+
 import com.MedicalHistory.entities.Medicine;
 import com.MedicalHistory.payloads.MedicineDto;
 import com.MedicalHistory.repositories.MedicineRepo;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class MedicineServiceImpl implements MedicineService{
+public class MedicineServiceImpl implements MedicineService {
 
     @Autowired
     private MedicineRepo medicineRepo;
@@ -19,7 +20,7 @@ public class MedicineServiceImpl implements MedicineService{
     public MedicineDto createMedicineData(MedicineDto medicineDto) {
 
         Medicine medicine = this.dtoToMedicine(medicineDto);
-        Medicine savedMedicine=this.medicineRepo.save(medicine);
+        Medicine savedMedicine = this.medicineRepo.save(medicine);
         return this.medicineToDto(savedMedicine);
 
     }
@@ -27,8 +28,8 @@ public class MedicineServiceImpl implements MedicineService{
     @Override
     public List<MedicineDto> getAllMedicines() {
 
-        List<Medicine>medicines = this.medicineRepo.findAll();
-        List<MedicineDto>medicineDtos=medicines.stream().map(medicine -> this.medicineToDto(medicine)).collect(Collectors.toList());
+        List<Medicine> medicines = this.medicineRepo.findAll();
+        List<MedicineDto> medicineDtos = medicines.stream().map(medicine -> this.medicineToDto(medicine)).collect(Collectors.toList());
 
         return medicineDtos;
     }
@@ -46,7 +47,7 @@ public class MedicineServiceImpl implements MedicineService{
     private MedicineDto medicineToDto(Medicine medicine) {
 
 
-        MedicineDto medicineDto=new MedicineDto();
+        MedicineDto medicineDto = new MedicineDto();
 
         medicineDto.setMId(medicine.getMId());
         medicineDto.setName(medicine.getName());
@@ -58,7 +59,7 @@ public class MedicineServiceImpl implements MedicineService{
     private Medicine dtoToMedicine(MedicineDto medicineDto) {
 
 
-        Medicine medicine=new Medicine();
+        Medicine medicine = new Medicine();
 
         medicine.setMId(medicineDto.getMId());
         medicine.setName(medicineDto.getName());
@@ -66,5 +67,5 @@ public class MedicineServiceImpl implements MedicineService{
         return medicine;
 
     }
-     
+
 }

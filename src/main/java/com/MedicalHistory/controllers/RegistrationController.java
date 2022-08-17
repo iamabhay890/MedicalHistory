@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -39,26 +37,23 @@ public class RegistrationController {
 
     @PostMapping("/registerUser")
     public String registerUser(@Valid @ModelAttribute("userDto") UserDto userDto, BindingResult result,
-                               Model model, HttpSession session) {
+                               Model model, HttpSession session,
+                               @RequestParam("profileImage") MultipartFile file) {
 
         logger.info("Running registerUser handler");
         logger.info("Error is there or not " + result.hasErrors());
         logger.info("Error is  " + result);
         try {
             if (result.hasErrors()) {
-
-
-                logger.warn("UserRegister form has some user input error");
-                logger.info("Executing if part of registerUser handler");
+                logger.warn("UserRegister form has some user input error and running if part of register handler");
                 model.addAttribute("useDto", userDto);
                 return "User/UserRegister";
-
             } else {
                 logger.info("Executing else part of form validation");
                 User userCheck = userService.findByEmail(userDto.getEmail());
                 if (userCheck == null) {
                     logger.info("EmailId is unique and not registered with us");
-                    userService.createUser(userDto);
+                    userService.createUser(userDto, file);
                     return "redirect:/mh/";
                 } else {
                     logger.warn("This email id is already registered with us");

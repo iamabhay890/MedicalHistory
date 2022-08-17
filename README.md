@@ -63,8 +63,20 @@ Their is special info button for password on user registration form, By hovering
 
 Spring Security implementations done
 the user and admin urls are protected no one can see the protected urls without login.
-custom login page has been implimented.
+custom login page has been implemented.
 
 Change password and Forgot password done.
 
 Added the functionality of multiple Autocomplete feature with database data using jquery.
+
+Added the functionality of Pagination on user dashboard.
+
+Added the Razorpay payment integration with sweet alert on Donate Us button.
+
+Added the functionality of pdf file report generation of full medical records.
+
+Added the functionality of downloading the report in pdf format in a given range.
+
+Added the feature to add the medical report of any file. and also will downloadable on clicking the download button and also can be inlarge.
+
+Added the functionality of adding the profile picture and can be updated on user and admin dashboard. 

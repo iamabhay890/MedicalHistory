@@ -1,7 +1,6 @@
 package com.MedicalHistory.Helper;
 
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

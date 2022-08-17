@@ -18,6 +18,12 @@
     font-weight: bold;
     text-decoration: none;
      }
+        .my_profile_picture{
+	width: 35px;
+	height: 35px;
+	object-fit:cover;
+	border-radius:50%;
+}
     </style>
 </head>
 <body>
@@ -41,7 +47,10 @@
             <tbody>
 
             <tr th:each="user:${listUsers}">
-                <td th:text="${user.name}"></td>
+                <td >
+                    <img class="my_profile_picture" th:src="*{'data:image/jpeg;base64,'+{user.profilePic}}" alt="profile photo" />
+                    <span th:text="${user.name}"></span></td>
+               <!-- <td th:text="${user.name}"></td>-->
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.phone}"></td>
                 <td th:text="${user.age}"></td>

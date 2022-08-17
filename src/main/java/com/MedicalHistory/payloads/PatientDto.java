@@ -1,14 +1,11 @@
 package com.MedicalHistory.payloads;
 
-import com.MedicalHistory.entities.PatientMedicine;
 import com.MedicalHistory.entities.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 
 @NoArgsConstructor
@@ -29,9 +26,6 @@ public class PatientDto {
 
     private String medicineName;
 
-
-    private String report;
-
     @NotBlank(message = "Doctor Name can't be null")
     private String doctorName;
 
@@ -41,9 +35,12 @@ public class PatientDto {
 
     private String typeOfDisease;
 
-    private byte[] reportFile;
-
+    private String report;
 
     private User user;
+
+    private String reportType;
+
+    private String reportName;
 
 }
