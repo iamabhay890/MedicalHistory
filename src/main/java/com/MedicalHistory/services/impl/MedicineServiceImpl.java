@@ -63,7 +63,7 @@ public class MedicineServiceImpl implements MedicineService {
 
         medicine.setMId(medicineDto.getMId());
         medicine.setName(medicineDto.getName());
-
+        
         return medicine;
 
     }

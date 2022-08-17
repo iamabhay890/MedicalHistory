@@ -80,5 +80,3 @@ Added the functionality of downloading the report in pdf format in a given range
 Added the feature to add the medical report of any file. and also will downloadable on clicking the download button and also can be inlarge.
 
 Added the functionality of adding the profile picture and can be updated on user and admin dashboard. 
-
-Added the feature for Oauth2.0 now can be login on the application through Google and Facebook.
