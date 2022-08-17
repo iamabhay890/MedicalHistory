@@ -9,16 +9,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MedicalHistoryApplication {
 
-	static Logger logger = LogManager.getLogger( MedicalHistoryApplication.class);
+    static Logger logger = LogManager.getLogger(MedicalHistoryApplication.class);
 
 
+    public static void main(String[] args) {
 
-	public static void main(String[] args) {
-
-		SpringApplication.run(MedicalHistoryApplication.class, args);
-		System.out.println("Abhay");
-	}
-
+        SpringApplication.run(MedicalHistoryApplication.class, args);
+        System.out.println("Abhay");
+    }
 
 
 }

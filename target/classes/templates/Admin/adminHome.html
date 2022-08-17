@@ -48,7 +48,7 @@
 
             <tr th:each="user:${listUsers}">
                 <td >
-                    <img class="my_profile_picture" th:src="@{'/images/'+${user.image}}" alt="profile photo" />
+                    <img class="my_profile_picture" th:src="*{'data:image/jpeg;base64,'+{user.profilePic}}" alt="profile photo" />
                     <span th:text="${user.name}"></span></td>
                <!-- <td th:text="${user.name}"></td>-->
                 <td th:text="${user.email}"></td>

@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <title>User Profile</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"/>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet"/>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         .img-fluid{
         height:40px;
@@ -24,9 +24,10 @@
 	object-fit:cover;
 	border-radius:40%;
 }
+
     </style>
 
-<style>
+    <style>
     body {font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;}
     * {box-sizing: border-box;}
@@ -102,10 +103,11 @@
     .form-containers .btn1:hover, .open-button:hover {
       opacity: 1;
     }
+
     </style>
 </head>
 <body>
-    <header th:replace="User/userBlock::header1"></header>
+<header th:replace="User/userBlock::header1"></header>
 <section>
     <div class="container my-2">
         <br>
@@ -131,27 +133,30 @@
                 <td th:text="${user.age}"></td>
                 <td th:text="${user.address}"></td>
                 <td th:text="${user.gender}"></td>
-                <td> <a th:href="@{/mh/user/showFormForUpdate_s/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
-                    <a th:href="@{/mh/user/deleteSingleUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
+                <td><a class="btn btn-primary" th:href="@{/mh/user/showFormForUpdate_s}">Update</a>
+                    <a class="btn btn-danger" th:href="@{/mh/user/deleteSingleUser}">Delete</a></td>
             </tr>
             </tbody>
         </table>
 
     </div>
     <div>
-        <button class="open-button" onclick="openForm()" ><i class="fa fa-camera-retro fa-2x"></i></button>
+        <button class="open-button" onclick="openForm()"><i class="fa fa-camera-retro fa-2x"></i></button>
         <div class="form-popup" id="myForm">
-            <form th:action="@{/mh/user/ProfilePic}" method="post"  th:object="${user}" enctype="multipart/form-data" class="form-containers">
-                <h6 align="center">Profile Pic Updated</h6>
+            <form class="form-containers"
+                  enctype="multipart/form-data"
+                  method="post" th:action="@{/mh/user/updateUserProfilePicture}"
+                  th:object="${user}">
+                <h6 align="center">Change Profile Picture</h6>
                 <div class="input-group mb-6">
                     <input th:field="*{id}" type="hidden"/>
-                    <input type="file" name="profileImage" class="form-control"
-                           accept=".jpg,.jpeg,.png"
-                           onchange="validateFileType()" id="file" />
+                    <input accept=".jpg,.jpeg,.png" class="form-control" id="file"
+                           name="profileImage"
+                           onchange="validateFileType()" type="file"/>
                 </div>
                 <div>
-                    <button type="submit" class="btn1">Update Image</button>
-                    <button type="button" class="btn1 cancel" onclick="closeForm()" style="float:right">Close</button>
+                    <button class="btn1" type="submit">Update Image</button>
+                    <button class="btn1 cancel" onclick="closeForm()" style="float:right" type="button">Close</button>
                 </div>
             </form>
         </div>
@@ -169,8 +174,9 @@
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
     }
-    </script>
-        <script type="text/javascript">
+
+</script>
+<script type="text/javascript">
         function validateFileType(){
             var file = document.getElementById("file").value;
             var idxDot = file.lastIndexOf(".") + 1;
@@ -182,6 +188,7 @@
                 document.getElementById("file").value=null;
             }
         }
-    </script>
+
+</script>
 </body>
 </html>

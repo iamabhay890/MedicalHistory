@@ -1,4 +1,5 @@
 package com.MedicalHistory.controllers;
+
 import com.MedicalHistory.Helper.Message;
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.UserDto;
@@ -6,19 +7,14 @@ import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 @Controller
 @RequestMapping("/mh")
@@ -49,23 +45,15 @@ public class RegistrationController {
         logger.info("Error is  " + result);
         try {
             if (result.hasErrors()) {
-
-
-                logger.warn("UserRegister form has some user input error");
-                logger.info("Executing if part of registerUser handler");
+                logger.warn("UserRegister form has some user input error and running if part of register handler");
                 model.addAttribute("useDto", userDto);
                 return "User/UserRegister";
-
             } else {
                 logger.info("Executing else part of form validation");
                 User userCheck = userService.findByEmail(userDto.getEmail());
                 if (userCheck == null) {
                     logger.info("EmailId is unique and not registered with us");
-                            userDto.setImage(file.getOriginalFilename());
-                            File saveFile = new ClassPathResource("static/images").getFile();
-                            Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
-                            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                    userService.createUser(userDto);
+                    userService.createUser(userDto, file);
                     return "redirect:/mh/";
                 } else {
                     logger.warn("This email id is already registered with us");

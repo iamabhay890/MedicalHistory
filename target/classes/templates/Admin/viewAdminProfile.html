@@ -125,7 +125,7 @@
 
             <tr>
                 <td >
-                    <img class="my_profile_picture" th:src="@{'/images/'+${user.image}}" alt="profile photo" />
+                    <img class="my_profile_picture" th:src="*{'data:image/jpeg;base64,'+{user.profilePic}}" alt="profile photo" />
                     <span th:text="${user.name}"></span></td>
                <!-- <td th:text="${user.name}"></td> </td>-->
                 <td th:text="${user.email}"></td>
@@ -143,8 +143,8 @@
     <div>
         <button class="open-button" onclick="openForm()" ><i class="fa fa-camera-retro fa-2x"></i></button>
         <div class="form-popup" id="myForm">
-            <form th:action="@{/mh/admin/ProfilePic}" method="post"  th:object="${userDto}" enctype="multipart/form-data" class="form-containers">
-                <h6 align="center">Profile Pic Updated</h6>
+            <form th:action="@{/mh/admin/updateAdminProfilePicture}" method="post"  th:object="${userDto}" enctype="multipart/form-data" class="form-containers">
+                <h6 align="center">Update Profile Picture</h6>
                 <div class="input-group mb-6">
                     <input th:field="*{id}" type="hidden"/>
                     <input type="file" name="profileImage" class="form-control"

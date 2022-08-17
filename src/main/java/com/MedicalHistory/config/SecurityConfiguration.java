@@ -19,14 +19,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
+
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
 
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userService);
@@ -44,14 +45,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/mh/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/mh/user/**").hasAnyRole("USER")
-                .antMatchers("/mh/**", "mh/user/register","/js/**", "/css/**", "/images/**").permitAll()
+                .antMatchers("/mh/**", "mh/user/register", "/js/**", "/css/**", "/images/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .csrf().disable().cors()
                 .and()
                 .formLogin()
                 .loginPage("/mh/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/mh/index")
+                .defaultSuccessUrl("/mh/index/0")
                 .permitAll()
+                .and()
+                .oauth2Login()
+                .loginPage("/mh/login")
+                .userInfoEndpoint()
+                .and()
+                .defaultSuccessUrl("/mh/auth2")
                 .and()
                 .logout()
                 .invalidateHttpSession(true)

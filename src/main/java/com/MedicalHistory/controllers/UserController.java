@@ -1,22 +1,18 @@
 package com.MedicalHistory.controllers;
+
+import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.UserDto;
 import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/mh/user")
 public class UserController {
@@ -27,91 +23,79 @@ public class UserController {
     private UserService userService;
 
     //View user Profile
-    @GetMapping("/viewUserProfile/{id}")
-    public String viewuserProfile(@PathVariable(value = "id") Integer id, Model model) {
-        UserDto user = userService.getUserById(id);
+    @GetMapping("/viewUserProfile")
+    public String viewuserProfile(Principal principal, Model model) {
+        User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
         return "User/viewUserProfile";
     }
 
 
     //update a single user through user dashboard
-    @GetMapping("/showFormForUpdate_s/{id}")
-    public String showFormForUpdate_s(@PathVariable(value = "id") Integer id, Model model) {
-        UserDto userDto = userService.getUserById(id);
-        model.addAttribute("userDto", userDto);
+    @GetMapping("/showFormForUpdate_s")
+    public String showFormForUpdate_s(Principal principal, Model model) {
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("userDto", user);
 
         //for header1 fragment
-        model.addAttribute("user", userDto);
+        model.addAttribute("user", user);
         return "User/updateSingleUser";
+    }
+
+    @PostMapping("/updateUserProfilePicture")
+    public String updateUserProfilePicture(@ModelAttribute("user") UserDto userDto,
+                                           @RequestParam("profileImage") MultipartFile file) {
+
+        if (file.getOriginalFilename() == null) {
+            logger.info("Please select profile picture first");
+
+        } else {
+            logger.info("Updating profile picture");
+            userService.updateProfilePicture(file, userDto.getId());
+        }
+        return "redirect:/mh/index/0";
     }
 
     @PostMapping("/registerUserSingle")
     public String registerUser_s(@ModelAttribute("userDto") UserDto userDto) {
         logger.info("Updating user for: " + userDto.getName());
-
-        System.out.println("Showing id for single user for update " + userDto.getId());
-
-
         userService.update(userDto, userDto.getId());
-        return "redirect:/mh/user/viewUserProfile/" + userDto.getId();
+        return "redirect:/mh/user/viewUserProfile";
     }
-
-    //update a single user profile pic
-    @PostMapping("/ProfilePic")
-    public String PicUpload(@ModelAttribute("user") UserDto userDto,
-                            @RequestParam("profileImage") MultipartFile file) throws IOException
-    {
-        UserDto oldDetails = userService.getUserById(userDto.getId());
-        if(userDto.getImage() == null)
-        {
-            logger.info("Profile value are null after that profile pic insert process");
-            userDto.setImage(file.getOriginalFilename());
-            logger.info(" user images by user  " + file.getOriginalFilename());
-            File saveFile = new ClassPathResource("static/images").getFile();
-            Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
-            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-        }
-        else {
-            // file work..
-            // rewrite
-            logger.info("Image Updating process");
-//				delete old photo
-
-            File deleteFile = new ClassPathResource("static/images").getFile();
-            File file1 = new File(deleteFile, oldDetails.getImage());
-            file1.delete();
-//				update new photo
-            File saveFile = new ClassPathResource("static/images").getFile();
-            Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
-            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            userDto.setImage(file.getOriginalFilename());
-
-        }
-
-        logger.info("userDto id is " +userDto.getId());
-        userService.updatePic(userDto,userDto.getId());
-        return "redirect:/mh/index/" ;
-    }
-
 
     //........Update single user end................
 
 
     //Delete self user through user dashboard
-    @GetMapping("/deleteSingleUser/{id}")
-    public String deleteSingleUser(@PathVariable(value = "id") Integer id) {
+    @GetMapping("/deleteSingleUser")
+    public String deleteSingleUser(Principal principal) {
+        Integer id = userService.findByEmail(principal.getName()).getId();
         this.userService.deleteUser(id);
         return "redirect:/mh/";
     }
 
-
     //Contact us in navbar
-    @GetMapping("/contactUs/{id}")
-    public String Contactus(Model model, @PathVariable("id") Integer id) {
-        UserDto userDto = userService.getUserById(id);
-        model.addAttribute("user", userDto);
+    @GetMapping("/contactUs")
+    public String Contactus(Model model, Principal principal) {
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("user", user);
         return "User/contactUsForUser";
+    }
+
+    @GetMapping("/showFormattedReportPage")
+    public String showReportPage(Model model, Principal principal) {
+
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("user", user);
+        return "User/formattedReport";
+    }
+
+    @GetMapping("/showPaymentPage")
+    public String showPaymentPage(Principal principal, Model model) {
+
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("user", user);
+        return "User/DonateUs";
     }
 }
 

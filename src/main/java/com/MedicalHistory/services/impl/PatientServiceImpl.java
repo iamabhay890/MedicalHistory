@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,17 +22,17 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private PatientRepo patientRepo;
 
-    private Logger logger= LogManager.getLogger(PatientServiceImpl.class);
+    private final Logger logger = LogManager.getLogger(PatientServiceImpl.class);
 
     @Override
-    public PatientDto createPatientData(PatientDto patientDto,MultipartFile file) {
+    public PatientDto createPatientData(PatientDto patientDto, MultipartFile file) {
 
         Patient patient = this.dtoToPatient(patientDto);
         try {
             patient.setReport(Base64.getEncoder().encodeToString(file.getBytes()));
             patient.setReportName(file.getOriginalFilename());
             patient.setReportType(file.getContentType());
-        }catch(Exception e){
+        } catch (Exception e) {
             logger.error("error in setting the file");
             e.printStackTrace();
 
@@ -50,7 +49,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setHospitalName(patientDto.getHospitalName());
         patient.setTreatmentDate(patientDto.getTreatmentDate());
         patient.setMedicineName(patientDto.getMedicineName());
-       // patient.setReport(patientDto.getReport());
+        // patient.setReport(patientDto.getReport());
         patient.setDoctorName(patientDto.getDoctorName());
         patient.setNexAppt(patientDto.getNexAppt());
         patient.setTypeOfDisease(patientDto.getTypeOfDisease());
@@ -106,7 +105,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setDiseaseName(patientDto.getDiseaseName());
         patient.setTreatmentDate(patientDto.getTreatmentDate());
         patient.setMedicineName(patientDto.getMedicineName());
-      //  patient.setReport(patientDto.getReport());
+        //  patient.setReport(patientDto.getReport());
         patient.setDoctorName(patientDto.getDoctorName());
         patient.setNexAppt(patientDto.getNexAppt());
         patient.setTypeOfDisease(patientDto.getTypeOfDisease());

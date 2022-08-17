@@ -104,19 +104,9 @@
                                    name="search-input"
                                    placeholder="Add Medicine"
                                    type="text"
+                                   style="background-color:white;"
                                    th:field="*{medicineName}"/>
-<!--                            <a onclick="addMore()" class="btn btn-success" >+</a>-->
                         </div>
-
-             
-                    <!--........................................Report-->
-                    <div class="input-group mb-3">
-                        <input class="form-control"
-                               type="file"
-                               name="reportFile"
-                        />
-                    </div>
-
 <!--..............................Type of Disease....................-->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -130,6 +120,15 @@
                         />
                     </div>
 
+                    <!--........................................Report-->
+                    <div class="input-group mb-3">
+                        <input class="form-control"
+                               type="file"
+                               name="reportFile"
+                               style="background-color:white;"
+                        />
+                    </div>
+<!--.................... Treatment Date   -->
                     <div class="input-group mb-3" style="margin-top:10px">
                         <div class="input-group-prepend">
                             <span class="input-group-text" style="padding-right:32px">Treatment Date</span>
@@ -141,7 +140,6 @@
                                type="date"
                         />
                         <span class="validity"></span>
-
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
