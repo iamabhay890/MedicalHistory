@@ -5,7 +5,6 @@ import com.MedicalHistory.repositories.MedicineRepo;
 import com.MedicalHistory.services.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +42,10 @@ public class MedicineServiceImpl implements MedicineService{
         return this.medicineRepo.findAll();
     }
 
-    private MedicineDto medicineToDto(Medicine medicine) {
+
+
+
+    public MedicineDto medicineToDto(Medicine medicine) {
 
 
         MedicineDto medicineDto=new MedicineDto();
@@ -55,14 +57,15 @@ public class MedicineServiceImpl implements MedicineService{
 
     }
 
-    private Medicine dtoToMedicine(MedicineDto medicineDto) {
+
+    public Medicine dtoToMedicine(MedicineDto medicineDto) {
 
 
         Medicine medicine=new Medicine();
 
         medicine.setMId(medicineDto.getMId());
         medicine.setName(medicineDto.getName());
-        
+
         return medicine;
 
     }

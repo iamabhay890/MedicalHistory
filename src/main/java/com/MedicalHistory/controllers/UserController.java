@@ -1,4 +1,5 @@
 package com.MedicalHistory.controllers;
+import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.payloads.UserDto;
 import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -26,7 +27,7 @@ public class UserController {
 
     //View user Profile
     @GetMapping("/viewUserProfile/{id}")
-    public String viewuserProfile(@PathVariable(value = "id") Integer id, Model model) {
+    public String viewUserProfile(@PathVariable(value = "id") Integer id, Model model) {
         UserDto user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "User/viewUserProfile";
@@ -110,6 +111,15 @@ public class UserController {
         UserDto userDto = userService.getUserById(id);
         model.addAttribute("user", userDto);
         return "User/contactUsForUser";
+    }
+
+    @GetMapping("/showFormattedReportPage/{id}")
+    public String showFormattedReportPage(Model model, @PathVariable("id") Integer id) {
+        UserDto userDto = userService.getUserById(id);
+        PatientDto patientDto = new PatientDto();
+        model.addAttribute("user",userDto);
+        model.addAttribute("patientDto",patientDto);
+        return "User/formattedReport";
     }
 }
 

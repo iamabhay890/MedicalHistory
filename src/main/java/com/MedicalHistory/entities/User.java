@@ -1,9 +1,6 @@
 package com.MedicalHistory.entities;
 
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,19 +10,21 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
-
-@Entity
-@Table(name = "users")
+@Builder
 @NoArgsConstructor
+//@Data
+@AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "users")
 public class User {
 
 
     static Logger logger = LogManager.getLogger(User.class);
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) //primeryKey
+    @GeneratedValue(strategy = GenerationType.AUTO) //primaryKey
     private Integer id;
 
     @Column(name = "name")

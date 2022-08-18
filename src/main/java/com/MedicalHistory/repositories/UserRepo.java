@@ -18,5 +18,6 @@ public interface UserRepo extends JpaRepository<User,Integer> {
     @Query(value = "select * from users where id='-1'",nativeQuery = true)
     public User getAdmin();
 
+
 }
 

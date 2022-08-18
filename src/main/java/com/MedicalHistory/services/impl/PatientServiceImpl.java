@@ -6,9 +6,16 @@ import com.MedicalHistory.exceptions.ResourceNotFoundException;
 import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.repositories.PatientRepo;
 import com.MedicalHistory.services.PatientService;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +24,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientRepo patientRepo;
+
 
     @Override
     public PatientDto createPatientData(PatientDto patientDto) {
@@ -38,8 +46,6 @@ public class PatientServiceImpl implements PatientService {
         patient.setDoctorName(patientDto.getDoctorName());
         patient.setNexAppt(patientDto.getNexAppt());
         patient.setTypeOfDisease(patientDto.getTypeOfDisease());
-
-
         Patient updatePatient = this.patientRepo.save(patient);
         PatientDto patientDto1 = this.patientToDto(updatePatient);
         return patientDto1;
@@ -73,7 +79,6 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> getPatients(User user) {
         return this.patientRepo.getPatients(user);
     }
-
 
     public Patient dtoToPatient(PatientDto patientDto) {
 

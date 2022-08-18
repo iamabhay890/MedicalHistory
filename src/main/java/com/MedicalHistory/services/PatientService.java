@@ -6,6 +6,9 @@ import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.payloads.UserDto;
 import org.springframework.data.repository.query.Param;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 

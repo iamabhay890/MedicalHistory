@@ -7,6 +7,7 @@
     <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet"/>
     <!-- Bootstrap CSS -->
     <link href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css" rel="stylesheet"/>
+
     <style>
         .img-fluid{
         height:40px;
@@ -21,6 +22,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <link rel="stylesheet"  th:href="@{/css/tokenStyle.css}">
+    <link rel="stylesheet"  th:href="@{/css/style.css}">
 </head>
 <body>
 <header th:replace="User/userBlock::header1"></header>
@@ -111,6 +113,7 @@
                                th:field="*{report}"
                                th:value="${patientDto.report}"
                                type="text"
+
                         />
                     </div>
 
@@ -124,6 +127,7 @@
                                th:field="*{typeOfDisease}"
                                th:value="${patientDto.typeOfDisease}"
                                type="text"
+
                         />
                     </div>
 
@@ -156,6 +160,13 @@
 
                     <input th:field="*{id}" th:object="${userDto}" type="hidden"/>
 
+<!--
+                    <p id="demo1" th:field="*{temp}"  value="medicine"></p>
+-->
+
+                    <input id="demo"  th:field="*{temp}" hidden />
+
+
                     <button class="btn btn-success" style="margin-top:10px">Create</button>
 
                 </form>
@@ -187,20 +198,26 @@
 
 let medicine=[];
 fetchMedicine();
-function fetchMedicine(){
+function fetchMedicine()
+{
     fetch("/searchAll")
     .then((response)=>response.json())
     .then((data)=>{
        medicine=data.map((x)=>x.name);
-            medicine.sort();
-
+       console.log("All Medicine Name From Database --> "+medicine);
+            document.getElementById("demo").value = medicine;
+             medicine.sort();
              find(medicine);
+             document.getElementById("demo").value = medicine;
+
     });
 }
 
- function find(medicine){
-  console.log(medicine);
-    $('#search-input').tokenfield({
+
+ function find(medicine)
+ {
+    $('#search-input').tokenfield
+    ({
   autocomplete:{
    source: medicine,
    delay:100
@@ -208,6 +225,10 @@ function fetchMedicine(){
   showAutocompleteOnFocus: true
  })
  }
+
 </script>
+
+
+
 </body>
 </html>

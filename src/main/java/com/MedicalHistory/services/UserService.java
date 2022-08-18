@@ -2,9 +2,7 @@ package com.MedicalHistory.services;
 
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.UserDto;
-import com.MedicalHistory.repositories.UserRepo;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
 import java.util.List;
 
 public interface UserService extends UserDetailsService {

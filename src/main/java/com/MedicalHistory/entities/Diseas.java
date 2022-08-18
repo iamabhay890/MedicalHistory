@@ -30,4 +30,5 @@ public class Diseas {
     @Lob
     private byte[] reportFile;
 
+
 }

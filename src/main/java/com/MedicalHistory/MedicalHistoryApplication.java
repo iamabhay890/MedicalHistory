@@ -16,7 +16,7 @@ public class MedicalHistoryApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(MedicalHistoryApplication.class, args);
-		System.out.println("Abhay");
+		System.out.println("Welcome to Medical History");
 	}
 
 

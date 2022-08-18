@@ -200,13 +200,20 @@
                         <span class="input-group-text" style="padding-right:90px">Gender</span>
                     </div>
 
-                    <input class="form-control"
+                   <!-- <input class="form-control"
                            placeholder="gender"
                            th:classappend="${#fields.hasErrors('gender')}?'is-invalid':''"
                            th:field="*{gender}"
                            th:value="${userDto.gender}"
                            type="text"
-                    />
+                    />-->
+                    <select class="form-control" th:field="*{gender}"
+                            th:classappend="${#fields.hasErrors('gender')}?'is-invalid':''"
+                            th:value="${userDto.gender}"
+                    >
+                        <option th:value="'M'" th:text="Male"></option>
+                        <option th:value="'F'" th:text="Female"></option>
+                    </select>
                     <div align="left" class="invalid-feedback"
                          th:each="e:${#fields.errors('gender')}" th:text="${e}">
                     </div>

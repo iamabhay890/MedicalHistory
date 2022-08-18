@@ -2,18 +2,14 @@ package com.MedicalHistory.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-
 import javax.persistence.*;
-import java.util.List;
-
-
-@Entity
-@Table(name="patient")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
-
+@Entity
+@Table(name="patient")
 public class Patient {
 
     @Id
@@ -51,6 +47,7 @@ public class Patient {
 
     @ManyToOne
     private User user;
+
 
 }
 

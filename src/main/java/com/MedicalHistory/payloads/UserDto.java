@@ -69,12 +69,36 @@ public class UserDto {
 
     private String role;
 
+
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name.trim();
+    }
+
+    public UserDto(Integer id, String name, String email, String phone, Integer age,
+                   String password, String newPassword, String image, String address,
+                   Long adharNo, String gender, Set<Patient> patient, boolean status,
+                   LocalDateTime createdDate, LocalDateTime modifiedDate, String role) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.age = age;
+        this.password = password;
+        this.newPassword = newPassword;
+        this.image = image;
+        this.address = address;
+        this.adharNo = adharNo;
+        this.gender = gender;
+        this.patient = patient;
+        this.status = status;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+        this.role = role;
     }
 }
 

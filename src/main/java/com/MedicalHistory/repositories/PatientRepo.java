@@ -15,4 +15,7 @@ public interface PatientRepo extends JpaRepository<Patient,Integer> {
 
     @Query("select p from Patient p WHERE p.user =:n")
     public List<Patient> getPatients(@Param("n") User user);
+
+    List<Patient> findByTreatmentDateBetween(String startDate,String endDate);
+
 }

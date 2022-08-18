@@ -1,6 +1,9 @@
 package com.MedicalHistory.controllers;
 
+import com.MedicalHistory.entities.User;
+import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.payloads.UserDto;
+import com.MedicalHistory.services.PatientService;
 import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +30,9 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PatientService patientService;
 
 
     //.......show users for admin.........admin controllers start
@@ -135,5 +141,16 @@ public class AdminController {
         return "Admin/contactUsForAdmin";
     }
 // ............admin controller end.........
+
+    @GetMapping("/userDetails/{id}")
+    public String userDetails(@PathVariable(value = "id") Integer id, Model model,
+                              @ModelAttribute("userDto") User user) {
+        UserDto userDto = userService.getUserById(id);
+        PatientDto patientDto=new PatientDto();
+        model.addAttribute("patientDto",patientDto);
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("listPatients", patientService.getPatients(user));
+        return "Admin/userDetails";
+    }
 
 }

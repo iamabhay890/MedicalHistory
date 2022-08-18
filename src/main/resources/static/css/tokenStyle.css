@@ -1,4 +1,4 @@
-  .tokenfield {
+ .tokenfield {
     height: auto;
     min-height: 34px;
     padding-bottom: 0px;
@@ -173,4 +173,11 @@
   .tokenfield.rtl .token .token-label {
     padding-left: 0px;
     padding-right: 4px;
+  }
+
+    .ui-menu {
+      list-style-type: none;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      background-color:white;
   }
