@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -35,6 +34,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserServiceImpl(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
 
     @Override
     public UserDto createUser(UserDto userDto, MultipartFile file) {
@@ -119,7 +122,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserById(Integer userId) {
 
-        User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", " Id ", userId));
+        User user = this.userRepo.findById(userId).get(); //.orElseThrow(() -> new ResourceNotFoundException("User", " Id ", userId));
 
         return this.userToDto(user);
     }
@@ -227,12 +230,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByEmail(String email) {
-        return this.userRepo.findByEmail(email);
+        return userRepo.findByEmail(email);
     }
 
     @Override
     public List<User> getUsers() {
-        return this.userRepo.getUsers();
+        List<User> users = userRepo.getUsers();
+        return users;
+        //return users;
     }
 
     @Override

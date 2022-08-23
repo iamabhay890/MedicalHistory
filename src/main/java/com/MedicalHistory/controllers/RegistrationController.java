@@ -1,5 +1,4 @@
 package com.MedicalHistory.controllers;
-
 import com.MedicalHistory.Helper.Message;
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.UserDto;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 

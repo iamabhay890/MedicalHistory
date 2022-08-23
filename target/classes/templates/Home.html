@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>Medical History</title>
+    <style>
+.login-page. register-page{
+width: 360px;
+padding: 10% 0 0;
+margin: auto;
+}
+.form{
+    position: relative;
+    z-index: 1;
+    background: rgba(7, 40,195,0.7);
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+}
+
+
+.form input  {
+    font-family: "Robot", sans-serif;
+    outline:1;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin:0 0 15px;
+    padding:15px;
+    box-sizing:boder-box;
+    font-size: 14px;
+}
+
+
+.form button{
+    font-family: "Roboto", sans-serif;
+    text-transform:uppercase;
+    outline:0;
+    background: #4CAF50;
+    width: 390px;
+    bodrder: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+.form button:hover, .form button:active{
+    background: #43A047;
+}
+
+.form .message{
+    margin : 15px 0 0;
+    color : aliceblue;
+    font-size: 25px;
+}
+
+.form .message a{
+    color : #4CAF50;
+    text-decoration: none;
+}
+
+
+    </style>
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          rel="stylesheet" />
+</head>
+<body style="margin:0; padding:0; background-color:#eee;">
+<header th:replace="User/userBlock::registerUserHeader"></header>
+
+    <section style="margin:1px 0;">
+        <img th:src="@{/images/medical.png}"  style=" height:400px; width:100%;">
+    </section>
+
+
+    <section style="background-color:#fff; padding:10px; display:flex; margin:0px 0; height:340px;">
+        <article>
+            <h2>Medical History</h2>
+            <p>The medical history, case history, or anamnesis of a patient is information gained by a physician by
+                asking specific questions, either of the patient or of other people who know the person and can give
+                suitable information, with the aim of obtaining information useful in formulating a diagnosis and
+                providing medical care to the patient. The medically relevant complaints reported by the patient or
+                others familiar with the patient are referred to as symptoms, in contrast with clinical signs, which are
+                ascertained by direct examination on the part of medical personnel. Most health encounters will result
+                in some form of history being taken. Medical histories vary in their depth and focus. </p>
+            <p><b>For Example</b> An ambulance paramedic would typically limit their history to important details, such
+                as name, history of presenting complaint, allergies, etc. In contrast, a psychiatric history is
+                frequently lengthy and in depth, as many details about the patient's life are relevant to formulating a
+                management plan for a psychiatric illness.
+                The method by which doctors gather information about a patient’s past and present medical condition in
+                order to make informed clinical decisions is called the history and physical . The history requires that
+                a clinician be skilled in asking appropriate and relevant questions that can provide them with some
+                insight as to what the patient may be experiencing. The standardized format for the history starts with
+                the chief concern followed by the history of present illness , the past medical history, the past
+                surgical history, the family history, the social history, their medications, their allergies, and a
+                review of systems. </p>
+        </article>
+
+<!--        <aside style="width:100%;">-->
+<!--            <div class="login-page">-->
+<!--                <div class="form">-->
+<!--                    <form class="login-form" method="post" th:action="@{/mh/userLogin}" th:object="${user}">-->
+
+<!--                        <div th:replace="User/userBlock::Message"></div>-->
+
+<!--                        <input placeholder="user name" th:field="*{email}" type="text"  required/>-->
+<!--                        <input placeholder="password" th:field="*{password}" type="password" required/>-->
+<!--                        <button>Login</button>-->
+<!--                        <br>-->
+<!--                    </form>-->
+<!--                    <br>-->
+<!--                        <a  th:href="@{/mh/register}"><button style="background-color:red">Sign Up</button></a>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </aside>-->
+    </section>
+
+    <footer style="background-color:#fff; display:flex;  justify-content:space-between; padding:15px;">
+        <span>Copyright 2022</span>
+        <span>Designed by Java Team</span>
+    </footer>
+
+</div>
+</body>
+</html>
