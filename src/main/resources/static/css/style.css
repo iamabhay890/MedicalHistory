@@ -90,8 +90,8 @@
 .logo-font{
  background-color:white;
  font-size:30px;
-
 }
+
   .my_profile_picture{
 	width:40px;
     height:40px;
@@ -104,3 +104,12 @@
     	object-fit:cover;
     	border-radius:10%;
 }
+/*.btn-light:hover{
+    background-color: #4CAF50;
+  color: white;
+  }*/
+
+  .nav-link:hover{
+    background-color: #6495ED;
+    color: white;
+  }

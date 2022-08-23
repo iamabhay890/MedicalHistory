@@ -1,10 +1,12 @@
 package com.MedicalHistory.entities;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
 
-@Builder
 @Entity
-@Table(name="medicine")
+@Table(name = "medicine")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -15,7 +17,7 @@ public class Medicine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer mId;
 
-    @Column(name="medicineName")
+    @Column(name = "medicineName")
     private String name;
 
 }

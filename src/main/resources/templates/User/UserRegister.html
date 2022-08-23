@@ -54,7 +54,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form class="login-form" method="post" th:action="@{/mh/registerUser}" th:object="${userDto}" enctype="multipart/form-data">
+            <form class="login-form" method="post" th:action="@{/mh/registerUser}"
+                  th:object="${userDto}" enctype="multipart/form-data">
                 <h2 align="center">User Registration</h2>
               
 
@@ -172,7 +173,7 @@
                            th:classappend="${#fields.hasErrors('adharNo')}?'is-invalid':''"
                            th:field="*{adharNo}"
                            th:value="${userDto.adharNo}"
-                           type="text"
+                           type="text" data-type="adhaar-number" maxLength="16"
                     />
                     <div align="left" class="invalid-feedback"
                          th:each="e:${#fields.errors('adharNo')}" th:text="${e}">
@@ -200,19 +201,13 @@
                         <span class="input-group-text" style="padding-right:90px">Gender</span>
                     </div>
 
-                   <!-- <input class="form-control"
-                           placeholder="gender"
-                           th:classappend="${#fields.hasErrors('gender')}?'is-invalid':''"
-                           th:field="*{gender}"
-                           th:value="${userDto.gender}"
-                           type="text"
-                    />-->
                     <select class="form-control" th:field="*{gender}"
                             th:classappend="${#fields.hasErrors('gender')}?'is-invalid':''"
                             th:value="${userDto.gender}"
                     >
-                        <option th:value="'M'" th:text="Male"></option>
-                        <option th:value="'F'" th:text="Female"></option>
+                        <option value="">Select Gender</option>
+                        <option th:value="'Male'" th:text="Male"></option>
+                        <option th:value="'Female'" th:text="Female"></option>
                     </select>
                     <div align="left" class="invalid-feedback"
                          th:each="e:${#fields.errors('gender')}" th:text="${e}">

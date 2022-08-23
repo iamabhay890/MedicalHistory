@@ -1,5 +1,5 @@
 package com.MedicalHistory.controllers;
-import com.MedicalHistory.entities.Medicine;
+import com.MedicalHistory.entities.Patient;
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.MedicineDto;
 import com.MedicalHistory.payloads.PatientDto;
@@ -10,19 +10,25 @@ import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.*;
-
+import java.security.Principal;
+import java.util.Base64;
+import java.util.List;
 @Controller
 @RequestMapping("/mh/user/records")
 public class AddMedicalRecordController {
 
-    static Logger logger= LogManager.getLogger(AddMedicalRecordController.class);
+    static Logger logger = LogManager.getLogger(AddMedicalRecordController.class);
 
     @Autowired
     private PatientService patientService;
@@ -34,28 +40,25 @@ public class AddMedicalRecordController {
     private MedicineService medicineService;
 
     @ModelAttribute("patientDto")
-    public PatientDto patientDto(){
+    public PatientDto patientDto() {
 
         return new PatientDto();
     }
 
-    @GetMapping("/addMedicalRecords/{id}")
-    public String addMedicalRecords(@PathVariable(value = "id") Integer id, Model model) {
+    @GetMapping("/addMedicalRecords")
+    public String addmedicalRecords(Model model, Principal principal) {
+
 
         logger.info("Running Add medical records..");
-
-        PatientDto patientDto=new PatientDto();
-        UserDto userDto= userService.getUserById(id);
-
-        logger.info("User has logged in through this user id "+userDto.getId());
-
-
-        model.addAttribute("patientDto",patientDto);
-        model.addAttribute("userDto",userDto);
-
+        User user = userService.findByEmail(principal.getName());
+        System.out.println("Principal " + principal.getName());
+        PatientDto patientDto = new PatientDto();
+        UserDto userDto = userService.getUserById(user.getId());
+        logger.info("User has logged in through this user id " + userDto.getId());
+        model.addAttribute("patientDto", patientDto);
+        model.addAttribute("userDto", userDto);
         //it was required for header1 fragment of user block
-        model.addAttribute("user",userDto);
-
+        model.addAttribute("user", userDto);
         logger.info("passed controller to 'addUserMedicalRecords' url");
         return "User/AddMedicalRecords";
     }
@@ -64,7 +67,8 @@ public class AddMedicalRecordController {
     public String adduserMedicalRecords(@Valid @ModelAttribute("patientDto") PatientDto patientDto,
                                         BindingResult result,
                                         @ModelAttribute("userDto") User userDto,
-                                        Model model) {
+                                        Model model, HttpSession session,
+                                        @RequestParam("reportFile") MultipartFile file) {
         try {
             logger.info("running 'addUserMedicalRecords'  controller");
 
@@ -73,15 +77,14 @@ public class AddMedicalRecordController {
             //fetching the user by id
             UserDto user = userService.getUserById(userDto.getId());
 
-
-            if(result.hasErrors()){
+            if (result.hasErrors()) {
                 System.out.println(result);
                 logger.info("Add medicine form has some validation error");
 
                 logger.info("Passing User data to show the header content");
                 model.addAttribute("user", user);
 
-                model.addAttribute("patientDto",patientDto);
+                model.addAttribute("patientDto", patientDto);
                 return "User/AddMedicalRecords";
 
 
@@ -102,31 +105,44 @@ public class AddMedicalRecordController {
                         medicineDto.setName(newMedicine.get(i));
                         medicineService.createMedicineData(medicineDto);
                     }
-
-                //Master Medicine insert medicine process
-              /*  System.out.println("medicine Name "+patientDto.getMedicineName());
-                String medicines[]=patientDto.getMedicineName().split(",");
-                for(String medicine : medicines) {
-                    medicine = medicine.replaceAll("\\s", "");
-                    List<Medicine> medicineList = medicineService.searchMedicine(medicine);
-                    if (medicineList.size() == 0) {
-                        MedicineDto medicineDto = new MedicineDto();
-                        medicineDto.setName(medicine);
-                        medicineService.createMedicineData(medicineDto);
-                    }
-                }*/
-                //end master medicine insert process*/
-                patientService.createPatientData(patientDto);
+                }
+                patientService.createPatientData(patientDto, file);
                 logger.info("Data Has Been Saved");
                 logger.info("Passing User data to show the header content");
                 model.addAttribute("user", user);
                 model.addAttribute("listPatients", patientService.getPatients(userDto));
-                return "redirect:/mh/index";
-            }
+
+                //return "redirect:/mh/index";
+                return "redirect:/mh/index/0";
 
         } catch (Exception e) {
             e.printStackTrace();
             return "User/userHome";
         }
+    }
+
+
+    //Download File from database using link.
+    @GetMapping("/downloadFile/{id}")
+    public ResponseEntity<byte[]> downloadFile(@PathVariable Integer id) {
+
+        Patient patientDto = patientService.getPatinetById(id);
+        logger.info("Requested image name is  " + patientDto.getReportName());
+
+        byte[] temp = Base64.getDecoder().decode(patientDto.getReport());
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(patientDto.getReportType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + patientDto.getReportName() + "\"")
+                .body(temp);
+    }
+
+    //InLarge File
+    @GetMapping("/inLargeFile/{id}")
+    public ResponseEntity<byte[]> inLargeFile(@PathVariable Integer id) {
+
+        Patient patientDto = patientService.getPatinetById(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType((patientDto.getReportType())))
+                .body(Base64.getDecoder().decode(patientDto.getReport()));
     }
 }

@@ -2,11 +2,10 @@ package com.MedicalHistory.payloads;
 
 
 import com.MedicalHistory.entities.Patient;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -14,36 +13,38 @@ import java.util.Set;
 
 //transfers the data to db
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 public class UserDto {
     private Integer id;
 
     @NotBlank(message = "Please type the name")
-    @Size(min = 2,max = 20,message = "Your Full Name must be between 2 to 20 char")
+    @Size(min = 2, max = 20, message = "Your Full Name must be between 2 to 20 char")
     private String name;
 
-    @Email(regexp ="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])",message = "Email is not valid !!")
+    @Email(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message = "Email is not valid !!")
     @NotBlank(message = "Please type email first")
     private String email;
 
-    @Pattern(regexp="(^$|[0-9]{10})",message = "Please type valid Phone Number")
+    @Pattern(regexp = "(^$|[0-9]{10})", message = "Please type valid Phone Number")
     @NotBlank(message = "Phone Number cannot be null")
     private String phone;
 
-    @Min(value = 0,message = "Age must be equal or greater than 10")
-    @Max(value = 100,message = "age must be less or equal to 95")
+    @Min(value = 0, message = "Age must be equal or greater than 10")
+    @Max(value = 100, message = "age must be less or equal to 95")
     @NotNull(message = "please type age their")
     private Integer age;
 
 
-
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",message = "Invalid Password,Hover on 'i' for full detail")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = "Invalid Password,Hover on 'i' for full detail")
     private String password;
 
-   private String newPassword;
-   
-   private String image;
+    private String newPassword;
+
+    private String profilePic;
+
+    private String profilePictureName;
 
 
     @NotBlank(message = "Please type your address.")
@@ -69,8 +70,6 @@ public class UserDto {
 
     private String role;
 
-
-
     public String getName() {
         return name;
     }
@@ -79,27 +78,6 @@ public class UserDto {
         this.name = name.trim();
     }
 
-    public UserDto(Integer id, String name, String email, String phone, Integer age,
-                   String password, String newPassword, String image, String address,
-                   Long adharNo, String gender, Set<Patient> patient, boolean status,
-                   LocalDateTime createdDate, LocalDateTime modifiedDate, String role) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.age = age;
-        this.password = password;
-        this.newPassword = newPassword;
-        this.image = image;
-        this.address = address;
-        this.adharNo = adharNo;
-        this.gender = gender;
-        this.patient = patient;
-        this.status = status;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
-        this.role = role;
-    }
 }
 
 

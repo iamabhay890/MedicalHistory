@@ -14,10 +14,10 @@ public class DiseasServiceImpl {
     @Autowired
     private DiseasRepo diseasRepo;
 
-    public Diseas saveDiseas(String dName,String activeStatus,MultipartFile file) throws IOException {
-        Diseas d=new Diseas();
-        Integer dId=d.dId;
-        Diseas diseas=new Diseas(dId,dName,activeStatus,file.getBytes());
+    public Diseas saveDiseas(String dName, String activeStatus, MultipartFile file) throws IOException {
+        Diseas d = new Diseas();
+        Integer dId = d.dId;
+        Diseas diseas = new Diseas(dId, dName, activeStatus, file.getBytes());
         return diseasRepo.save(diseas);
     }
 }

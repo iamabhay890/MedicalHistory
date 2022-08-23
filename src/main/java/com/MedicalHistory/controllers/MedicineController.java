@@ -17,16 +17,15 @@ import java.util.stream.Collectors;
 public class MedicineController
 {
 
+    private final Logger logger = LogManager.getLogger(MedicineController.class);
     @Autowired
     private MedicineService medicineService;
 
-
-    private final Logger logger = LogManager.getLogger(MedicineController.class);
-
     @GetMapping("/searchAll")
-    public ResponseEntity<?> searchAll(){
+    public ResponseEntity<?> searchAll() {
         return ResponseEntity.ok(medicineService.allMedicine());
     }
+
 
     @PostMapping("/saveData/data")
     public void save(@PathVariable("data") String data){

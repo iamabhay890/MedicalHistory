@@ -7,16 +7,18 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 
-public interface UserRepo extends JpaRepository<User,Integer> {
+public interface UserRepo extends JpaRepository<User, Integer> {
 
-    public User findByEmail(String email);
+    User findByEmail(String email);
 
 
-    @Query(value = "select * from users where not id='-1'  and status='0' ",nativeQuery = true)
-    public List<User> getUsers();
+    @Query(value = "select * from users where not id='-1'  and status='0' ", nativeQuery = true)
+    List<User> getUsers();
 
-    @Query(value = "select * from users where id='-1'",nativeQuery = true)
-    public User getAdmin();
+    @Query(value = "select * from users where id='-1'", nativeQuery = true)
+    User getAdmin();
+
+    boolean existsByEmail(String email);
 
 
 }

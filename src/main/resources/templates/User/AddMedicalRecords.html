@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
-    <title>User Profile</title>
+    <title>Add Medical data</title>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet"/>
@@ -18,11 +18,17 @@
     font-weight: bold;
     text-decoration: none;
      }
+      .my_profile_picture{
+	width: 40px;
+	height: 40px;
+	object-fit:cover;
+	border-radius:40%;
+}
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <link rel="stylesheet"  th:href="@{/css/tokenStyle.css}">
-    <link rel="stylesheet"  th:href="@{/css/style.css}">
+
 </head>
 <body>
 <header th:replace="User/userBlock::header1"></header>
@@ -32,7 +38,8 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <form class="mt-2" method="post" th:action="@{/mh/user/records/addUserMedicalRecords}"
-                      th:object="${patientDto}">
+                      th:object="${patientDto}"
+                      enctype="multipart/form-data">
                     <h2 style="color: White">Patient Registration</h2>
 
                     <!--.........................Disease Name................-->
@@ -98,26 +105,13 @@
                                    name="search-input"
                                    placeholder="Add Medicine"
                                    type="text"
+                                   style="background-color:white;"
                                    th:field="*{medicineName}"/>
-<!--                            <a onclick="addMore()" class="btn btn-success" >+</a>-->
                         </div>
 
-             
-                    <!--........................................Report-->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" style="padding-right:93px"> Report</span>
-                        </div>
-                        <input aria-describedby="inputGroup-sizing-default" aria-label="Default" class="form-control"
-                               placeholder="Enter your Report Here"
-                               th:field="*{report}"
-                               th:value="${patientDto.report}"
-                               type="text"
-
-                        />
-                    </div>
 
 
+<!--..............................Type of Disease....................-->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" style="padding-right:32px">Type of Disease</span>
@@ -131,6 +125,15 @@
                         />
                     </div>
 
+                    <!--........................................Report-->
+                    <div class="input-group mb-3">
+                        <input class="form-control"
+                               type="file"
+                               name="reportFile"
+                               style="background-color:white;"
+                        />
+                    </div>
+<!--.................... Treatment Date   -->
                     <div class="input-group mb-3" style="margin-top:10px">
                         <div class="input-group-prepend">
                             <span class="input-group-text" style="padding-right:32px">Treatment Date</span>
@@ -142,7 +145,6 @@
                                type="date"
                         />
                         <span class="validity"></span>
-
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -157,18 +159,9 @@
                         />
                         <span class="validity"></span>
                     </div>
-
                     <input th:field="*{id}" th:object="${userDto}" type="hidden"/>
-
-<!--
-                    <p id="demo1" th:field="*{temp}"  value="medicine"></p>
--->
-
                     <input id="demo"  th:field="*{temp}" hidden />
-
-
                     <button class="btn btn-success" style="margin-top:10px">Create</button>
-
                 </form>
 
             </div>

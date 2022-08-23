@@ -54,6 +54,7 @@ public class ExcelReportController {
     public void ExcelReport(@PathVariable("id") Integer id, @ModelAttribute("patientDto") PatientDto patientDto
                            ,HttpServletResponse response) throws IOException {
 
+        logger.info("Excel Report Generate Process with using date");
         String startDate=patientDto.getStartDate();
         String endDate= patientDto.getEndDate();
         List<Patient> listPatients=patientRepo.findByTreatmentDateBetween(startDate,endDate);

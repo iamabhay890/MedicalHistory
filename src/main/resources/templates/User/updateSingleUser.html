@@ -18,8 +18,12 @@
     font-weight: bold;
     text-decoration: none;
      }
-
-        </style>
+     .my_profile_picture{
+	width: 40px;
+	height: 40px;
+	object-fit:cover;
+	border-radius:40%;
+    </style>
 </head>
 <header th:replace="User/userBlock::header1"></header>
 
@@ -31,10 +35,11 @@
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-right">
 
-                        <form id="login-form" method="post" th:action="@{/mh/user/registerUserSingle}"
-                              th:object="${userDto}">
+                        <form id="login-form" method="post" th:action="@{/mh/user/registerUserSingle}" th:object="${userDto}">
 
-                            <h3 class="mb-1 "><center>UPDATE</center></h3>
+                            <h3 class="mb-1 ">
+                                <center>UPDATE</center>
+                            </h3>
 
                             <input th:field="*{id}" type="hidden"/>
                             <div class="form-outline mb-0">
@@ -57,12 +62,9 @@
                                 <input class="form-control form-control-lg" th:field="*{address}" type="text"/>
                             </div>
 
-                            <div class="form-outline mb-3">
-                                <label class="form-label">Gender</label>
-                                <input class="form-control form-control-lg" th:field="*{gender}" type="text"/>
-                            </div>
-
-                           <center> <button class="btn btn-success btn-lg btn-block" type="submit">Update</button></center>
+                            <center>
+                                <button class="btn btn-success btn-lg btn-block" type="submit">Update</button>
+                            </center>
                             <hr class="my-4">
                         </form>
                     </div>

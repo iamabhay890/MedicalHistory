@@ -3,9 +3,7 @@ package com.MedicalHistory.payloads;
 import com.MedicalHistory.entities.User;
 import lombok.*;
 
-
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 
 
@@ -27,9 +25,6 @@ public class PatientDto {
 
     private String medicineName;
 
-
-    private String report;
-
     @NotBlank(message = "Doctor Name can't be null")
     private String doctorName;
 
@@ -39,16 +34,16 @@ public class PatientDto {
 
     private String typeOfDisease;
 
-    private byte[] reportFile;
+    //private byte[] reportFile;
 
-    private User user;
+    //private User user;
 
     private String[] temp;
 
     private String startDate;
     private String endDate;
 
-    public PatientDto(Integer pId, String diseaseName, String hospitalName, String treatmentDate, String medicineName, String report, String doctorName, String nexAppt, String typeOfDisease, byte[] reportFile, User user, String[] temp, String startDate, String endDate) {
+    public PatientDto(Integer pId, String diseaseName, String hospitalName, String treatmentDate, String medicineName, String report, String doctorName, String nexAppt, String typeOfDisease, String reportType, User user, String[] temp, String startDate, String endDate) {
         this.pId = pId;
         this.diseaseName = diseaseName;
         this.hospitalName = hospitalName;
@@ -58,10 +53,19 @@ public class PatientDto {
         this.doctorName = doctorName;
         this.nexAppt = nexAppt;
         this.typeOfDisease = typeOfDisease;
-        this.reportFile = reportFile;
+        this.reportType = reportType;
         this.user = user;
         this.temp = temp;
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+   private String report;
+
+    private User user;
+
+    private String reportType;
+
+    private String reportName;
+
 }

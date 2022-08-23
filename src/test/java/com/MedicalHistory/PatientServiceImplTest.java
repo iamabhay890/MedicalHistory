@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import com.MedicalHistory.repositories.PatientRepo;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,17 +36,18 @@ public class PatientServiceImplTest {
 
 
    PatientDto patientDto = new PatientDto(1, "COLD", "apolo", null, "paracetamol", "blood", "raj", null, null, null, null, null, null, null);
-   Patient  patient = new Patient(2, "Disease1", "aiims", null, "crocin", "blood", "amit", null, null, null);
+   Patient  patient = new Patient(2, "Disease1", "aiims", null, "crocin", "blood", "amit", null, null, null,null,null);
 
 
 
     @Test
     @DisplayName("Create Patient Data Test ")
     public void createPatientData()
-    {
+    {        MultipartFile file = new MockMultipartFile(patientDto.getReport(),patientDto.getReport().getBytes());
+
         when(patientRepo.save(any())).thenReturn(patientService.dtoToPatient(patientDto));
-        Assert.assertEquals(patientDto.getPId(), patientService.createPatientData(patientDto).getPId());
-        System.out.println("check Create Patients "+ patientService.createPatientData(patientDto).getPId());
+        Assert.assertEquals(patientDto.getPId(), patientService.createPatientData(patientDto,file).getPId());
+        System.out.println("check Create Patients "+ patientService.createPatientData(patientDto,file).getPId());
     }
 
     @Test
@@ -61,7 +65,7 @@ public class PatientServiceImplTest {
     public void getSlipById(){
 
             int pId = 3;
-            Patient  patient1 = new Patient(pId, "Disease1", "aiims", null, "crocin", "blood", "amit", null, null, null);
+            Patient  patient1 = new Patient(pId, "Disease1", "aiims", null, "crocin", "blood", "amit", null, null, null, null, null);
             doReturn(Optional.of(patient1)).when(patientRepo).findById(pId);
             System.out.println("check user id "+ pId);
             patientService.patientToDto(patient1);
@@ -74,15 +78,11 @@ public class PatientServiceImplTest {
     @DisplayName("Delete Slip Test ")
     public void deleteSlip(){
 
-        System.out.println("user Get Id  "+patient.getPId());
-        when(patientRepo.save(any())).thenReturn(patientService.patientToDto(patient));
-        System.out.println("create user  "+ patientService.patientToDto(patient).getPId());
-       // User user =  service.dtoToUser(userDto);
-        //System.out.println("user data "+ user.getId());
-
-        //service.deleteUser(user.getId());
-        // repository.delete(user);
-        //Assertions.assertThat(p.getId()).isNotEqualTo(101);
+        System.out.println("patient Get Id  "+patient.getPId());
+        when(patientRepo.findById(patient.getPId())).thenReturn(Optional.of(patient));
+        System.out.println("test user  "+ patientService.patientToDto(patient).getPId());
+        patientService.deleteSlip(patient.getPId());
+        patientRepo.deleteById(patient.getPId());
         System.out.println("after delete user id "+ patient.getPId());
     }
 
@@ -100,8 +100,8 @@ public class PatientServiceImplTest {
     public void getPatients(){
         User user = new User();
         when(patientRepo.getPatients(user)).thenReturn(Stream
-                .of(new Patient(3, "Disease3", "aiims", null, "crocin", "blood", "amit", null, null, null),
-                        new Patient(4, "Disease4", "aiims2", null, "crocin", "blood", "amit", null, null, null)).collect(Collectors.toList()));
+                .of(new Patient(3, "Disease3", "aiims", null, "crocin", "blood", "amit", null, null, null, null, null),
+                        new Patient(4, "Disease4", "aiims2", null, "crocin", "blood", "amit", null, null, null, null, null)).collect(Collectors.toList()));
         Assert.assertEquals(2, patientService.getPatients(user).size());
         System.out.println("check Get ALl Slips "+ patientService.getPatients(user).size());
     }
@@ -110,8 +110,8 @@ public class PatientServiceImplTest {
     @DisplayName("Get Patients Test ")
     public void getAllSlips(){
         when(patientRepo.findAll()).thenReturn(Stream
-                .of(new Patient(3, "Disease3", "aiims", null, "crocin", "blood", "amit", null, null, null),
-                        new Patient(4, "Disease4", "aiims2", null, "crocin", "blood", "amit", null, null, null)).collect(Collectors.toList()));
+                .of(new Patient(3, "Disease3", "aiims", null, "crocin", "blood", "amit", null, null, null, null, null),
+                        new Patient(4, "Disease4", "aiims2", null, "crocin", "blood", "amit", null, null, null, null, null)).collect(Collectors.toList()));
         Assert.assertEquals(2, patientService.getAllSlips().size());
 
     }

@@ -3,18 +3,13 @@ package com.MedicalHistory.services;
 import com.MedicalHistory.entities.Patient;
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.PatientDto;
-import com.MedicalHistory.payloads.UserDto;
-import org.springframework.data.repository.query.Param;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 
 public interface PatientService {
 
-    PatientDto createPatientData(PatientDto patient);
+    PatientDto createPatientData(PatientDto patient, MultipartFile file);
 
     PatientDto update(PatientDto patient, Integer slipId);
 
@@ -24,7 +19,9 @@ public interface PatientService {
 
     void deleteSlip(Integer slipId);
 
-    public List<Patient> getPatients(User user);
+    List<Patient> getPatients(User user);
+
+    Patient getPatinetById(Integer id);
 
 }
 
