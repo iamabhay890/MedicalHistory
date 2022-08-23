@@ -92,6 +92,14 @@
  font-size:30px;
 }
 
+
+  .my_profile_picture{
+	width:40px;
+    height:40px;
+	object-fit:cover;
+	border-radius:40%;
+}
+
 .reportFile{
         width: 70px;
     	height: 80px;
@@ -106,4 +114,4 @@
   .nav-link:hover{
     background-color: #6495ED;
     color: white;
-  }
+}

@@ -1,5 +1,6 @@
 package com.MedicalHistory.controllers;
 
+import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.UserDto;
 import com.MedicalHistory.services.UserService;
@@ -80,6 +81,15 @@ public class UserController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
         return "User/contactUsForUser";
+    }
+
+    @GetMapping("/showFormattedExcelReportPage/{id}")
+    public String showFormattedReportPage(Model model, @PathVariable("id") Integer id) {
+        UserDto userDto = userService.getUserById(id);
+        PatientDto patientDto = new PatientDto();
+        model.addAttribute("user",userDto);
+        model.addAttribute("patientDto",patientDto);
+        return "User/formattedReportExcel";
     }
 
     @GetMapping("/showFormattedReportPage")

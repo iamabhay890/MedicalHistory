@@ -24,7 +24,7 @@ SELECT * FROM (SELECT -1 as id,
 '$2a$10$3qw7ve3q3bY2O49U92b4U.2R6YeEo0DjbHLxrWe60v2s9R9uYtMVe' as password,
 'Noida' as address,
 '1234567890123456' as adhar_no,
-'male'as gender,
+'Male'as gender,
 0 as status,
 CURRENT_TIMESTAMP() as created_date,
 CURRENT_TIMESTAMP() as modified_date)as temp

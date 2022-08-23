@@ -1,17 +1,21 @@
 package com.MedicalHistory.controllers;
 
 import com.MedicalHistory.entities.User;
+import com.MedicalHistory.entities.Patient;
+import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.payloads.UserDto;
+import com.MedicalHistory.services.PatientService;
 import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,6 +24,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 @Controller
 @RequestMapping("/mh/admin")
@@ -30,6 +35,9 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PatientService patientService;
 
 
     //.......show users for admin.........admin controllers start
@@ -112,5 +120,25 @@ public class AdminController {
         return "Admin/contactUsForAdmin";
     }
 // ............admin controller end.........
+
+    @GetMapping("/userDetails/{id}")
+    public String userDetails(@PathVariable(value = "id") Integer id, Model model,
+                              @ModelAttribute("userDto") User user) {
+        UserDto userDto = userService.getUserById(id);
+        PatientDto patientDto=new PatientDto();
+        model.addAttribute("patientDto",patientDto);
+        model.addAttribute("userDto", userDto);
+        model.addAttribute("listPatients", patientService.getPatients(user));
+        return "Admin/userDetails";
+    }
+
+    @GetMapping("/inLargeFile/{id}")
+    public ResponseEntity<byte[]> inLargeFile(@PathVariable Integer id) {
+
+        Patient patientDto = patientService.getPatinetById(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType((patientDto.getReportType())))
+                .body(Base64.getDecoder().decode(patientDto.getReport()));
+    }
 
 }

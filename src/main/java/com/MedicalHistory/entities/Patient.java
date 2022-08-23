@@ -1,21 +1,17 @@
 package com.MedicalHistory.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
+import lombok.*;
 import javax.persistence.*;
 
 
-@Entity
-@Table(name = "patient")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
-
+@Entity
+@Table(name="patient")
 public class Patient {
 
     @Id
@@ -60,6 +56,7 @@ public class Patient {
 
     @Column
     private String reportType;
+
 
 }
 

@@ -1,13 +1,14 @@
 package com.MedicalHistory.payloads;
 
 import com.MedicalHistory.entities.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
-
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -34,6 +35,11 @@ public class PatientDto {
 
 
     private String typeOfDisease;
+    //private byte[] reportFile;
+    //private User user;
+    private String[] temp;
+    private String startDate;
+    private String endDate;
 
     private String report;
 

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/mh")
 public class PasswordController {
@@ -24,9 +26,10 @@ public class PasswordController {
 
 
     //Change Password Process
-    @GetMapping("/ChangePassword/{id}")
-    public String Change(@PathVariable(value = "id") Integer id, Model model) {
+    @GetMapping("/ChangePassword")
+    public String Change(Principal principal, Model model) {
         logger.info("Running Password Change..");
+        Integer id = userService.findByEmail(principal.getName()).getId();
         UserDto userDto = userService.getUserById(id);
         logger.info("User has logged in through this user id " + userDto.getId());
         model.addAttribute("userDto", userDto);
@@ -47,7 +50,7 @@ public class PasswordController {
                 userDto.setPassword(bCryptPasswordEncoder.encode(newPassword));
                 userService.updatePassword(userDto);
                 logger.info("Successfully Change New Password..");
-                return "redirect:/mh/index";
+                return "redirect:/mh/index/0";
 
             } else {
                 logger.warn("Please Not enter old password");
@@ -79,8 +82,10 @@ public class PasswordController {
         String password = user.getNewPassword();
         logger.info("User Old password in Database -> " + oldPassword + "  | "
                 + " Enter password by user in UI --> " + password);
+            logger.info("Check email id is available in the database");
+        if (phone.equals(userdata.getPhone()))
+        {
 
-        if (phone.equals(userdata.getPhone())) {
             logger.info("Running Update Password Process..");
             if (!bCryptPasswordEncoder.matches(password, oldPassword)) {
                 user.setPassword(bCryptPasswordEncoder.encode(password));
@@ -97,4 +102,3 @@ public class PasswordController {
         }
     }
 }
-

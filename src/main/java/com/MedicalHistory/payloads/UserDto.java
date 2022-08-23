@@ -2,10 +2,10 @@ package com.MedicalHistory.payloads;
 
 
 import com.MedicalHistory.entities.Patient;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -13,6 +13,7 @@ import java.util.Set;
 
 //transfers the data to db
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 public class UserDto {
@@ -76,6 +77,7 @@ public class UserDto {
     public void setName(String name) {
         this.name = name.trim();
     }
+
 }
 
 

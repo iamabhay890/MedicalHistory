@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css"/>
     <script src="https://www.markuptag.com/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet"  th:href="@{/css/style.css}">
     <style>
         .img-fluid{
@@ -25,18 +26,45 @@
 	height: 40px;
 	object-fit:cover;
 	border-radius:40%;
+	border:1px solid #021a40;
+    background-color:#FFFFFF;
 }
-    </style>
+.exl{
+width: 40px;
+	height: 40px;
+	object-fit:cover;
+	border-radius: 10px;
 
+
+}
+
+.btn:hover {
+  opacity: 0.8;
+color: white;
+
+}
+a#btnl {
+  color: Red;
+}
+a#btnl:hover {
+  color: Red;
+}
+
+    </style>
 </head>
 <body>
 <header th:replace="User/userBlock::header1"></header>
-<div class="container my-2">Welcome! <h3 th:text="${user.name}"></h3>
+<section>
+<div class="container my-2 ">Welcome! <h3 th:text="${user.name}"></h3>
 <!--    <img src="" class="my_profile_picture" th:src="*{'data:image/jpeg;base64,'+{user.profilePic}}" alt="profile picture" />-->
-    <br>
     <a th:href="@{/mh/user/records/addMedicalRecords}" class="btn btn-primary">Add Medical Records</a>
+
    <span style="float:right">
-       <a th:href="@{/mh/user/export/pdf}" class="btn btn-success"> Download Full Report </a>
+        <a th:href="@{/downloadExcelFile/{id}(id=${user.id})}">
+        <img class="exl" th:src="@{/images/excel.png}" title="Full Excel Report Download"/></a>
+       <!--<a th:href="@{/mh/user/export/pdf}" class="btn btn-success"> Download Full Report </a>-->
+       <a th:href="@{/mh/user/export/pdf}" title="Full PDF Report Download">
+        <img class="exl" th:src="@{/images/pdf.png}" /></a>
    </span>
     <br>
     <br>
@@ -63,8 +91,8 @@
             <td th:text="${patients.nexAppt}"></td>
             <td th:text="${patients.typeOfDisease}"></td>
             <td th:text="${patients.medicineName}"></td>
-                <td><a th:href="@{'/mh/user/records/inlargeFile/'+${patients.pId}}">
-                    <img class="reportFile" id="fileId" th:src="*{'data:image/jpeg;base64,'+{patients.report}}" onclick="showImage()"/></a>
+                <td><a th:href="@{'/mh/user/records/inLargeFile/'+${patients.pId}}">
+                    <img class="reportFile" id="fileId" th:src="*{'data:image/jpeg;base64,'+{patients.report}}" onclick="showImage()" title="View Full Report"/></a>
                 </td>
             <td><a th:href="@{'/mh/user/records/downloadFile/'+${patients.pId}}">Download</a></td>
 
@@ -93,6 +121,8 @@
     </nav>
 
 </div>
+</div>
+    </section>
 <!--<footer th:replace="User/userBlock::footer1"></footer>-->
 <!-- Bootstrap JS -->
 </body>

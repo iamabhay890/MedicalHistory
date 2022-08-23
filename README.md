@@ -81,4 +81,12 @@ Added the feature to add the medical report of any file. and also will downloada
 
 Added the functionality of adding the profile picture and can be updated on user and admin dashboard. 
 
-Added the feature for Oauth2.0 now can be login on the application through Google and Facebook.
+Added the functionality of New medicine compare to old medicine without hitting the database.
+
+Added the functionality of added the feature in admin corner and now admin able to click full row on user data then view the user medical history.
+
+Added the functionality of Excel file report generation of full Medical Records.
+
+Added the functionality of Downloading to the report in Excel format in a given range.
+
+Unit test implements by junit with mockito for the business classes methods
