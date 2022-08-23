@@ -80,3 +80,15 @@ Added the functionality of downloading the report in pdf format in a given range
 Added the feature to add the medical report of any file. and also will downloadable on clicking the download button and also can be inlarge.
 
 Added the functionality of adding the profile picture and can be updated on user and admin dashboard. 
+
+Added the functionality of New medicine compare to old medicine without hitting the database.
+
+Added the functionality of added the feature in admin corner and now admin able to click full row on user data then view the user medical history.
+
+Added the functionality of Excel file report generation of full Medical Records.
+
+Added the functionality of Downloading to the report in Excel format in a given range.
+
+Unit test implements by junit with mockito for the business classes methods
+
+
