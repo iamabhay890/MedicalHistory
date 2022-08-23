@@ -89,10 +89,8 @@ public class LoginController {
         String OauthEmail = (String) token.getPrincipal().getAttributes().get("email");
         String newEmail = principal.getName();
         String fullName = (String) token.getPrincipal().getAttributes().get("name");
-        System.out.println("oauth user"+token.toString());
-
-        String file= (String) token.getPrincipal().getAttributes().get("picture");
-        userService.createOAuth2User(newEmail, fullName, OauthEmail,file);
+        
+        userService.createOAuth2User(newEmail, fullName, OauthEmail);
         return "redirect:/mh/index/0";
     }
 }

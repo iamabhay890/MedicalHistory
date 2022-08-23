@@ -61,10 +61,10 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void createOAuth2User(String email, String fullName, String OauthEmail,String file) {
+    public void createOAuth2User(String email, String fullName, String OauthEmail) {
 
         if (userRepo.existsByEmail(email)) {
-            logger.info("Running if part of create user from Auth2 and already logged in user");
+            logger.info("Already registered from Auth2 and already logged in user");
         } else {
             logger.info("Unique user and running else part of create user from Auth2");
             LocalDateTime createdDate = LocalDateTime.now();
@@ -72,8 +72,6 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             user.setName(fullName);
             user.setEmail(email);
-            user.setProfilePic(Base64.getEncoder().encodeToString(file.getBytes()));
-            user.setProfilePictureName(file);
             user.setRoles(Arrays.asList(new Role("ROLE_USER")));
             user.setStatus(false);
             user.setModifiedDate(createdDate);

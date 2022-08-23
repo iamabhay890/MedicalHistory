@@ -32,7 +32,7 @@ public interface UserService extends UserDetailsService {
 
     void updateProfilePicture(MultipartFile file, Integer id);
 
-    void createOAuth2User(String email, String fullName, String OauthEmail,String file);
+    void createOAuth2User(String email, String fullName, String OauthEmail);
 
 
 }
