@@ -23,5 +23,4 @@ public interface PatientRepo extends JpaRepository<Patient, Integer> {
 
     @Query("select p from Patient p WHERE p.user =:userId")
     Page<Patient> findPatientsByUser(@Param("userId") User userId, Pageable pageable);
-
 }

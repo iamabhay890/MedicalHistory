@@ -83,7 +83,6 @@ public class UserController {
         return "User/contactUsForUser";
     }
 
-
     @GetMapping("/showFormattedExcelReportPage/{id}")
     public String showFormattedReportPage(Model model, @PathVariable("id") Integer id) {
         UserDto userDto = userService.getUserById(id);

@@ -35,7 +35,7 @@ public class PatientServiceImplTest {
     PatientServiceImpl patientService;
 
 
-   PatientDto patientDto = new PatientDto(1, "COLD", "apolo", null, "paracetamol", "blood", "raj", null, null, null, null, null, null, null);
+   PatientDto patientDto = new PatientDto(1, "COLD", "apolo", null, "paracetamol", "blood", "raj", null, null, null, null, "null", null, null,null);
    Patient  patient = new Patient(2, "Disease1", "aiims", null, "crocin", "blood", "amit", null, null, null,null,null);
 
 
@@ -43,11 +43,13 @@ public class PatientServiceImplTest {
     @Test
     @DisplayName("Create Patient Data Test ")
     public void createPatientData()
-    {        MultipartFile file = new MockMultipartFile(patientDto.getReport(),patientDto.getReport().getBytes());
+    {
+        MultipartFile file = new MockMultipartFile(patientDto.getReport(),patientDto.getReport().getBytes());
 
         when(patientRepo.save(any())).thenReturn(patientService.dtoToPatient(patientDto));
         Assert.assertEquals(patientDto.getPId(), patientService.createPatientData(patientDto,file).getPId());
         System.out.println("check Create Patients "+ patientService.createPatientData(patientDto,file).getPId());
+
     }
 
     @Test

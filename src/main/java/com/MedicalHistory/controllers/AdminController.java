@@ -1,7 +1,7 @@
 package com.MedicalHistory.controllers;
 
-import com.MedicalHistory.entities.Patient;
 import com.MedicalHistory.entities.User;
+import com.MedicalHistory.entities.Patient;
 import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.payloads.UserDto;
 import com.MedicalHistory.services.PatientService;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

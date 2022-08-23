@@ -1,4 +1,7 @@
 package com.MedicalHistory.controllers;
+
+
+import com.MedicalHistory.entities.Medicine;
 import com.MedicalHistory.entities.Patient;
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.MedicineDto;
@@ -20,10 +23,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.Base64;
+import java.util.List;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.*;
 import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
+
 @Controller
 @RequestMapping("/mh/user/records")
 public class AddMedicalRecordController {
@@ -39,6 +48,7 @@ public class AddMedicalRecordController {
     @Autowired
     private MedicineService medicineService;
 
+
     @ModelAttribute("patientDto")
     public PatientDto patientDto() {
 
@@ -46,9 +56,7 @@ public class AddMedicalRecordController {
     }
 
     @GetMapping("/addMedicalRecords")
-    public String addmedicalRecords(Model model, Principal principal) {
-
-
+    public String addMedicalRecords(Model model, Principal principal) {
         logger.info("Running Add medical records..");
         User user = userService.findByEmail(principal.getName());
         System.out.println("Principal " + principal.getName());
@@ -73,6 +81,7 @@ public class AddMedicalRecordController {
             logger.info("running 'addUserMedicalRecords'  controller");
 
             logger.info("Id Number " + userDto.getId() + " adding their medical Records");
+
 
             //fetching the user by id
             UserDto user = userService.getUserById(userDto.getId());
@@ -111,9 +120,9 @@ public class AddMedicalRecordController {
                 logger.info("Passing User data to show the header content");
                 model.addAttribute("user", user);
                 model.addAttribute("listPatients", patientService.getPatients(userDto));
-
-                //return "redirect:/mh/index";
+               //return "redirect:/mh/index";
                 return "redirect:/mh/index/0";
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,10 +145,10 @@ public class AddMedicalRecordController {
                 .body(temp);
     }
 
+
     //InLarge File
     @GetMapping("/inLargeFile/{id}")
     public ResponseEntity<byte[]> inLargeFile(@PathVariable Integer id) {
-
         Patient patientDto = patientService.getPatinetById(id);
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType((patientDto.getReportType())))

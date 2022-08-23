@@ -90,5 +90,3 @@ Added the functionality of Excel file report generation of full Medical Records.
 Added the functionality of Downloading to the report in Excel format in a given range.
 
 Unit test implements by junit with mockito for the business classes methods
-
-

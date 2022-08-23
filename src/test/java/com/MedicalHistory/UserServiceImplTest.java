@@ -138,7 +138,6 @@ public class UserServiceImplTest {
     @DisplayName("Update Pic Test")
     public void getUpdateProfilePictureTest() throws IOException {
 
-        //User user = new User(1,"Raj","raj@gmail.com","98989898898",null,null,null,null,null,"abc.png","a.png",null,false,null,null,null);
         User user = new User();
         user.setId(1);
         user.setProfilePic("bbb.png");

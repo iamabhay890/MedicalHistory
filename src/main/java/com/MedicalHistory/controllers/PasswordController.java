@@ -82,10 +82,10 @@ public class PasswordController {
         String password = user.getNewPassword();
         logger.info("User Old password in Database -> " + oldPassword + "  | "
                 + " Enter password by user in UI --> " + password);
-
             logger.info("Check email id is available in the database");
         if (phone.equals(userdata.getPhone()))
         {
+
             logger.info("Running Update Password Process..");
             if (!bCryptPasswordEncoder.matches(password, oldPassword)) {
                 user.setPassword(bCryptPasswordEncoder.encode(password));
