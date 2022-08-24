@@ -104,11 +104,8 @@ public class AdminController {
     @GetMapping("/softDeleteUser/{id}")
     public String softdeleteUser(@PathVariable(value = "id") Integer id) {
 
-        UserDto userDto = userService.getUserById(id);
-        System.out.println("Boolean False value is " + Boolean.FALSE);
-        userDto.setStatus(Boolean.TRUE);
-        System.out.println("status value is :  " + userDto.isStatus());
-        // userService.createUser(userDto);I have to create a single method of soft delete in business class
+       logger.info("Implementing soft delete for id "+id);
+        userService.softDelete(id);
         return "redirect:/mh/index/0";
     }
 
