@@ -86,6 +86,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void softDelete(Integer id) {
+        User user=this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("user", " Id ",id));
+        user.setStatus(true);
+        this.userRepo.save(user);
+    }
+
+    @Override
     public void updateProfilePicture(MultipartFile file, Integer id) {
         User user = this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", " Id ", id));
         try {
@@ -209,17 +216,11 @@ public class UserServiceImpl implements UserService {
 
         logger.info("Running loadUserByUsername method");
         User user = userRepo.findByEmail(username);
+        if (user == null) {
 
-        if (user.isStatus()) {
-
-            throw new UsernameNotFoundException("Inactivated User");
-        } else {
-            if (user == null) {
-
-                throw new UsernameNotFoundException("Invalid username or password");
-            }
-            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+            throw new UsernameNotFoundException("Invalid username or password");
         }
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

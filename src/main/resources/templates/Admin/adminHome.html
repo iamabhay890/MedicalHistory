@@ -59,7 +59,7 @@ td:hover {background: #2B65EC;}
                 <td th:text="${user.age}"></td>
                 <td th:text="${user.gender}"></td>
                 <td> <a th:href="@{/mh/admin/showFormForUpdate/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
-                    <a  th:href="@{/mh/admin/softDeleteUser/{id}(id=${user.id})}" class="btn btn-danger" onclick="SuccessDelete();" >InActive</a>
+                    <a  th:href="@{/mh/admin/softDeleteUser/{id}(id=${user.id})}" class="btn btn-danger" >InActive</a>
                 </td>
             </tr>
             </tbody>

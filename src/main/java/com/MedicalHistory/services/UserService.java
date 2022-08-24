@@ -34,5 +34,6 @@ public interface UserService extends UserDetailsService {
 
     void createOAuth2User(String email, String fullName, String OauthEmail);
 
+    void softDelete(Integer id);
 
 }

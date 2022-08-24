@@ -1,6 +1,7 @@
 package com.MedicalHistory.controllers;
 
 
+import com.MedicalHistory.Helper.Message;
 import com.MedicalHistory.entities.Patient;
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.UserDto;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 
@@ -52,28 +54,36 @@ public class LoginController {
     }
 
     @RequestMapping("/index/{page}")
-    public String dashboard(@PathVariable("page") Integer page, Model model, Principal principal) {
+    public String dashboard(@PathVariable("page") Integer page, Model model, Principal principal, HttpSession session) {
 
         User user = userService.findByEmail(principal.getName());
         String role = String.valueOf(userService.loadUserByUsername(principal.getName()).getAuthorities());
 
         String temp = "[ROLE_ADMIN]";
 
-        if (role.equals(temp)) {
-            UserDto userDto = userService.getUserById(user.getId());
-            model.addAttribute("listUsers", userService.getUsers());
-            model.addAttribute("userDto", userDto);
-            return "Admin/adminHome";
-        } else {
+        System.out.println("printing status value "+user.isStatus());
+        if (user.isStatus()) {
+            System.out.println("Inactivated User");
+            session.setAttribute("message",
+                    new Message("You are Inactivated, Please contact to admin", "danger"));
+            return "Login";
+        }else {
+            if (role.equals(temp)) {
+                UserDto userDto = userService.getUserById(user.getId());
+                model.addAttribute("listUsers", userService.getUsers());
+                model.addAttribute("userDto", userDto);
+                return "Admin/adminHome";
+            } else {
 
-            Pageable pageable = PageRequest.of(page, 2);
-            Page<Patient> patients = this.patientRepo.findPatientsByUser(user, pageable);
+                Pageable pageable = PageRequest.of(page, 2);
+                Page<Patient> patients = this.patientRepo.findPatientsByUser(user, pageable);
 
-            model.addAttribute("user", user);
-            model.addAttribute("listPatients", patients/*patientService.getPatients(user)*/);
-            model.addAttribute("currentPage", page);
-            model.addAttribute("totalPages", patients.getTotalPages());
-            return "User/userHome";
+                model.addAttribute("user", user);
+                model.addAttribute("listPatients", patients/*patientService.getPatients(user)*/);
+                model.addAttribute("currentPage", page);
+                model.addAttribute("totalPages", patients.getTotalPages());
+                return "User/userHome";
+            }
         }
     }
 
