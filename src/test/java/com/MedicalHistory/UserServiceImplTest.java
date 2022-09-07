@@ -35,13 +35,25 @@ public class UserServiceImplTest {
     @MockBean
     private UserRepo repository;
 
+
+
+
+    UserDto userDto =  new UserDto(1,"Abhi",null,null,"abhi@gmail.com","9797979797",25,"Password","ConfirmPassword",
+            null,null,null,null,null,null,null,false,null,null,null,false);
+
+
+
     @Test
     @DisplayName("Create User Test ")
     public void getCreateUserTest() {
         MockMultipartFile multipartFile = new MockMultipartFile("file", "test.txt",
                 "text/plain", "Spring Framework".getBytes());
 
-        UserDto userDto = new UserDto(101, "rama", "rama@gmail.com", "0909090900", null, "null", "null", null, null, null, null, null, null, false, null, null, null);
+  
+
+        UserDto userDto = new UserDto(101, "rama",null,null, "rama@gmail.com", "0909090900", null, "null", "null", null, null, null, null, null, null, false, null, null, null,null,false);
+
+
         when(repository.save(any())).thenReturn(service.dtoToUser(userDto));
         assertEquals(userDto.getEmail(), service.createUser(userDto, multipartFile).getEmail());
         System.out.println("create user  " + service.dtoToUser(userDto).getId());
@@ -64,7 +76,9 @@ public class UserServiceImplTest {
     @Test
     @DisplayName("Update User Test")
     public void getUpdateUserTest() {
-        User user = new User(100, "Raj", "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null);
+
+        User user = new User(100, "Raj",null,null, "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null);
+
         System.out.println("user Data getName " + user.getName());
         user.setName("rajiv");
         when(repository.save(any())).thenReturn(service.userToDto(user));
@@ -76,7 +90,11 @@ public class UserServiceImplTest {
     @DisplayName("UserById Test ")
     public void getUserByIdTest() {
         int userId = 100;
-        User user = new User(userId, "Raj", "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null);
+
+
+        User user = new User(userId, "Raj",null,null, "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null);
+
+
         doReturn(Optional.of(user)).when(repository).findById(userId);
         System.out.println("check user id " + userId);
         service.userToDto(user);
@@ -88,8 +106,12 @@ public class UserServiceImplTest {
     @DisplayName("Get All Users Test ")
     public void getAllUsersTest() {
         when(repository.findAll()).thenReturn(Stream
-                .of(new User(100, "Raj", "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null),
-                        new User(101, "Rajesh", "rajesh@gmail.com", "767676767", null, null, null, null, null, null, null, null, false, null, null, null)).collect(Collectors.toList()));
+
+
+
+                .of(new User(100, "Raj",null,null, "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null),
+                        new User(101, "Rajesh",null,null, "rajesh@gmail.com", "767676767", null, null, null, null, null, null, null, null, false, null, null, null)).collect(Collectors.toList()));
+
         assertEquals(2, service.getAllUsers().size());
 
     }
@@ -97,8 +119,15 @@ public class UserServiceImplTest {
     @Test
     @DisplayName("Delete User Test ")
     public void getDeleteUserTest() {
-        UserDto userDto = new UserDto(101, "rama", "rama@gmail.com", "0909090900", null, "null", "null", null, null, null, null, null, null, false, null, null, null);
+
+
+
+      
+
+        UserDto userDto = new UserDto(101, "rama",null,null, "rama@gmail.com", "0909090900", null, "null", "null", null, null, null, null, null, null, false, null, null, null,null,false);
         System.out.println("user Get Id  " + userDto.getId());
+
+
         when(repository.save(any())).thenReturn(service.dtoToUser(userDto));
         System.out.println("create user  " + service.dtoToUser(userDto).getId());
         User user = service.dtoToUser(userDto);
@@ -147,7 +176,9 @@ public class UserServiceImplTest {
     @Test
     @DisplayName("Update Password Test")
     public void getUpdatePasswordTest() {
-        User user = new User(100, "Raj", "raj@gmail.com", "98989898898", null, "password", null, null, null, "a.png", null, null, false, null, null, null);
+
+        User user = new User(100, "Raj",null,null, "raj@gmail.com", "98989898898", null, "password", null, null, null, "a.png", null, null, false, null, null, null);
+
         System.out.println("user Data get password " + user.getPassword());
         user.setPassword("pass");
         when(repository.save(any())).thenReturn(service.userToDto(user));
@@ -158,7 +189,7 @@ public class UserServiceImplTest {
     @Test
     @DisplayName("Forgot Password Test")
     public void getForgotPasswordTest() {
-        User user = new User(100, "Raj", "raj@gmail.com", "98989898898", null, "pass12", null, null, null, "a.png", null, null, false, null, null, null);
+        User user = new User(100, "Raj",null,null, "raj@gmail.com", "98989898898", null, "pass12", null, null, null, "a.png", null, null, false, null, null, null);
         System.out.println("user Data get password " + user.getPassword());
         user.setPassword("password23");
         when(repository.save(any())).thenReturn(service.userToDto(user));
@@ -169,7 +200,7 @@ public class UserServiceImplTest {
     @Test
     @DisplayName("find By Email Test ")
     public void getFindByEmail() {
-        User user = new User(100, "Raj", "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null);
+        User user = new User(100, "Raj",null,null, "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null);
         Mockito.doReturn(user).when(repository).findByEmail(user.getEmail());
         System.out.println("check find by email id " + user.getEmail());
         service.findByEmail(user.getEmail());
@@ -182,15 +213,16 @@ public class UserServiceImplTest {
     @DisplayName("Get Users Test ")
     public void getUsersTest() {
         when(repository.getUsers()).thenReturn(Stream
-                .of(new User(100, "Raj", "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null),
-                        new User(101, "Rajesh", "rajesh@gmail.com", "767676767", null, null, null, null, null, null, null, null, false, null, null, null)).collect(Collectors.toList()));
+                .of(new User(100, "Raj",null,null, "raj@gmail.com", "98989898898", null, null, null, null, null, null, null, null, false, null, null, null),
+                        new User(101, "Rajesh",null,null, "rajesh@gmail.com", "767676767", null, null, null, null, null, null, null, null, false, null, null, null)).collect(Collectors.toList()));
+
         assertEquals(2, service.getUsers().size());
     }
 
     @Test
     @DisplayName("Get Admin Test ")
     public void getAdminTest() {
-        when(repository.getAdmin()).thenReturn(new User(100, "Raj", "raj@gmail.com", "98989898898",
+        when(repository.getAdmin()).thenReturn(new User(100, "Raj",null,null, "raj@gmail.com", "98989898898",
                 null, null, null, null, null, null,
                 null, null, false, null, null, null));
         assertEquals("raj@gmail.com", service.getAdmin().getEmail());

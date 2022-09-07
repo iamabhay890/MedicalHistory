@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
 
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         * {
   transition: all .2s ease;
@@ -24,6 +24,7 @@
   position: right;
   top: 0;
   left: 50px;
+  color:red;
 }
 
 .info:hover .extra-info {
@@ -31,21 +32,100 @@
 }
 
 .info {
+  z-index: 0;
+  top:11%;
+  left:101%;
   font-size: 15px;
-  padding-left: 5px;
   width: 20px;
   border-radius: 15px;
+  position: absolute;
+
 }
 
 .info:hover {
   background-color: white;
-  padding: 0 0 0 5px;
+  <!--padding: 0 0 0 5px;-->
   width: 330px;
   height:150px;
-  text-align: left !important;
+  <!--text-align: left !important;-->
+}
+input[type=radio]
+{
+margin: 5px;
+padding-right: 20px;
+}
+
+#choose-file-label{
+  background: #fff;
+  padding: 8px;
+  <!--border: 1px solid #e3e3e3;-->
+  border-radius: 5px;
+ <!-- border: 1px solid #ccc;-->
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  padding-right:194px;
 }
 
     </style>
+    <style>
+
+.optionGroup
+{
+display:none;
+border:1px solid #ddd;
+padding-top: 10px;
+width:8%;
+padding-left: 15px;
+left:28.5%;
+margin-top: -21px;
+}
+.show{
+display:block!important;
+}
+a{
+text-decoration:none;
+}
+a img
+{width:20px;
+}
+img
+{
+width:20px;
+}
+ .fa-angle-down
+{
+  position:absolute;
+  left:90%;
+
+}
+.arrow .fa-angle-down{
+transform: rotate(-180deg);
+}
+
+#dropDown
+{
+position:absolute;
+top:60px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.country_wrap
+{
+display:flex;
+padding:10px;
+}
+.country_wrap box1
+{
+width:50%;
+float:left;
+}
+
+</style>
 </head>
 <body>
 <header th:replace="User/userBlock::registerUserHeader"></header>
@@ -57,24 +137,56 @@
             <form class="login-form" method="post" th:action="@{/mh/registerUser}"
                   th:object="${userDto}" enctype="multipart/form-data">
                 <h2 align="center">User Registration</h2>
-              
 
 
-                <!--.....................................Name  ....................-->
+
+                <!--.....................................First Name  ....................-->
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" style="padding-right:100px">Name</span>
+                        <span class="input-group-text" style="padding-right:65px">First Name</span>
                     </div>
                     <input class="form-control"
-                           id="exampleInputEmail1"
+                           id="nameValidation"
                            placeholder="Name"
                            th:classappend="${#fields.hasErrors('name')}?'is-invalid':''"
                            th:field="*{name}"
                            th:value="${userDto.name}"
-                           type="text"
+                           type="text" onkeypress="onlyLetter(this)"
                     />
                     <div align="left" class="invalid-feedback"
                          th:each="e:${#fields.errors('name')}" th:text="${e}">
+                    </div>
+                </div>
+
+                <!--.....................................Middle Name  ....................-->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="padding-right:45px">Middle Name</span>
+                    </div>
+                    <input class="form-control"
+                           id="nameValidation"
+                           placeholder="Middle Name"
+                           th:field="*{middleName}"
+                           th:value="${userDto.middleName}"
+                           type="text" onkeypress="onlyLetter(this)"
+                    />
+                </div>
+
+                <!--.....................................Last Name  ....................-->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="padding-right:65px">Last Name</span>
+                    </div>
+                    <input class="form-control"
+                           id="nameValidation"
+                           placeholder="Last Name"
+                           th:classappend="${#fields.hasErrors('lastName')}?'is-invalid':''"
+                           th:field="*{lastName}"
+                           th:value="${userDto.lastName}"
+                           type="text" onkeypress="onlyLetter(this)"
+                    />
+                    <div align="left" class="invalid-feedback"
+                         th:each="e:${#fields.errors('lastName')}" th:text="${e}">
                     </div>
                 </div>
 
@@ -83,7 +195,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" style="padding-right:105px">Email</span>
                     </div>
-                    <input class="form-control"
+                    <input class="form-control" id="email"
                            placeholder="Email"
                            th:classappend="${#fields.hasErrors('email')}?'is-invalid':''"
                            th:field="*{email}"
@@ -113,7 +225,6 @@
                     </div>
                 </div>
 
-
                 <!--...................Age..........................-->
 
                 <div class="input-group mb-3">
@@ -124,8 +235,8 @@
                            placeholder="Age"
                            th:classappend="${#fields.hasErrors('age')}?'is-invalid':''"
                            th:field="*{age}"
-                           th:value="${userDto.age}"
-                           type="text"
+                           th:value="${userDto.age}" id="myText"
+                           type="text" maxlength="03" onkeypress="return isNumber(event)"
                     />
                     <div align="left" class="invalid-feedback"
                          th:each="e:${#fields.errors('age')}" th:text="${e}">
@@ -134,8 +245,8 @@
                 <!--.......................Password..................-->
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" style="padding-right:57px">Password
-                            <!--                            Info Button-->
+                        <span class="input-group-text" style="padding-right:77px">Password
+                           <!--.......Info Button......-->
                             <div class="info">
                             <i class="icon-info-sign"></i>
                             <span class="extra-info">
@@ -147,106 +258,126 @@
                             </span>
                             </div>
                         </span>
-
                     </div>
                     <input class="form-control"
-                           placeholder="password"
+                           placeholder="Password"
                            th:classappend="${#fields.hasErrors('password')}?'is-invalid':''"
                            th:field="*{password}"
                            th:value="${userDto.password}"
                            type="password"
                     />
-                    <!--                    Info Button-->
-
                     <div align="left" class="invalid-feedback"
                          th:each="e:${#fields.errors('password')}" th:text="${e}">
                     </div>
                 </div>
 
-                <!--.........................Adhar Number................... -->
+
+                <!--...................Confirm Password..................-->
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" style="padding-right:73px">Adhar No</span>
+                        <span class="input-group-text" style="padding-right:17px">Confirm Password</span>
                     </div>
                     <input class="form-control"
-                           placeholder="Adhar Number"
-                           th:classappend="${#fields.hasErrors('adharNo')}?'is-invalid':''"
-                           th:field="*{adharNo}"
-                           th:value="${userDto.adharNo}"
-                           type="text" data-type="adhaar-number" maxLength="16"
+                           placeholder="confirmPassword"
+                           th:classappend="${#fields.hasErrors('passwordsEqual')}?'is-invalid':''"
+                           th:field="*{confirmPassword}"
+                           th:value="${userDto.confirmPassword}"
+                           type="password"
                     />
                     <div align="left" class="invalid-feedback"
-                         th:each="e:${#fields.errors('adharNo')}" th:text="${e}">
+                         th:each="e:${#fields.errors('passwordsEqual')}" th:text="${e}">
                     </div>
                 </div>
-                <!--   .......... ...........Address......................-->
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" style="padding-right:85px">Address</span>
-                    </div>
-                    <input class="form-control"
-                           placeholder="Address"
-                           th:classappend="${#fields.hasErrors('address')}?'is-invalid':''"
-                           th:field="*{address}"
-                           th:value="${userDto.address}"
-                           type="text"
-                    />
-                    <div align="left" class="invalid-feedback"
-                         th:each="e:${#fields.errors('address')}" th:text="${e}">
-                    </div>
-                </div>
+
+
                 <!--   ....................     Gender .....................-->
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" style="padding-right:90px">Gender</span>
-                    </div>
-
-                    <select class="form-control" th:field="*{gender}"
+                        <label class="input-group-text" style="padding-right:45px">
+                            Gender Select</label></div>
+                       <div class="form-control" th:field="*{gender}"
                             th:classappend="${#fields.hasErrors('gender')}?'is-invalid':''"
-                            th:value="${userDto.gender}"
-                    >
-                        <option value="">Select Gender</option>
-                        <option th:value="'Male'" th:text="Male"></option>
-                        <option th:value="'Female'" th:text="Female"></option>
-                    </select>
+                            th:value="${userDto.gender}">
+                        <input type="radio" name="gender" value="Male" th:text="Male" />
+                        <input type="radio" name="gender" value="Female" th:text="Female" />
+                        <input type="radio" name="gender" value="Other" th:text="Other" />
+                       </div>
+
                     <div align="left" class="invalid-feedback"
                          th:each="e:${#fields.errors('gender')}" th:text="${e}">
                     </div>
                 </div>
 
-
-
-                 <!--........................ Image ...................... -->
-                 <div class="input-group mb-3">
-                    <input type="file" name="profileImage" class="form-control"
-                           accept=".jpg,.jpeg,.png"
-                           onchange="validateFileType()" id="file" />
-                </div>
-
-
+                <!--Image in under input Box -->
+                <div class="input-group mb-3" hidden>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="padding-right:20px">Profile Pic Upload</span>
+                    </div>
+                <label class="form-control" for="choose-file" id="choose-file-label">
+                    Click Here to Upload</label>
+                <input name="profileImage" type="file" id="choose-file"
+                       accept=".jpg,.jpeg,.png" style="display: none;" />
+                    </div>
                 <!--........................Status...................... -->
                 <input hidden th:field="*{status}" type="text"/>
 
-                <button class="btn btn-primary" type="submit">Register</button>
+                <button class="btn btn-primary" name="submit"type="submit">Register</button>
                 <button class="btn btn-warning" style="float:right" type="reset">Reset</button>
             </form>
         </div>
+
     </div>
 </div>
-<div th:replace="User/userBlock::script"></div>
 
-<script type="text/javascript">
-    function validateFileType(){
-        var file = document.getElementById("file").value;
-        var idxDot = file.lastIndexOf(".") + 1;
-        var extFile = file.substr(idxDot, file.length).toLowerCase();
-        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
-            //TO DO
-        }else{
-            alert("Only jpg/jpeg and png files are allowed!");
-            document.getElementById("file").value=null;
-        }
+
+
+<div th:replace="User/userBlock::script"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function () {
+	$('#choose-file').change(function () {
+		var i = $(this).prev('label').clone();
+		var file = $('#choose-file')[0].files[0].name;
+		$(this).prev('label').text(file);
+	});
+ });
+</script>
+<script>
+    function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
     }
+    return true;
+}
+</script>
+<script>
+
+ $(document).ready(function(){
+    $("#nameValidation").keydown(function(event){
+        var inputValue = event.which;
+        // allow letters and whitespaces only.
+        if(!(inputValue >= 65 && inputValue <= 120) && (inputValue != 32 && inputValue != 0) && (inputValue !==8)) {
+            event.preventDefault();
+        }
+    });
+});
+
+</script>
+<script>
+function myFunction() {
+  var x = document.getElementById("myText").maxLength;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
+<script>
+    $(document).ready(function(){
+    $("#email").on('change keyup paste',function(){
+$(this).val($(this).val().toLowerCase());
+ })
+})
 </script>
 </body>
 </html>

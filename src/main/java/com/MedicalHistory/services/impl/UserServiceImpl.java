@@ -1,10 +1,14 @@
 package com.MedicalHistory.services.impl;
 
+import com.MedicalHistory.entities.Address;
 import com.MedicalHistory.entities.Role;
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.exceptions.ResourceNotFoundException;
+import com.MedicalHistory.payloads.AddressDto;
 import com.MedicalHistory.payloads.UserDto;
+import com.MedicalHistory.repositories.AddressRepo;
 import com.MedicalHistory.repositories.UserRepo;
+import com.MedicalHistory.services.AddressService;
 import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,6 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private AddressServiceImpl addressService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -114,8 +121,11 @@ public class UserServiceImpl implements UserService {
         User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", " Id ", userId));
 
         user.setName(userDto.getName());
+        user.setMiddleName(userDto.getMiddleName());
+        user.setLastName(userDto.getLastName());
         user.setPhone(userDto.getPhone());
-        user.setAddress(userDto.getAddress());
+        //user.setAddress(userDto.getAddress());
+        user.setAdharNo(userDto.getAdharNo());
         user.setAge(userDto.getAge());
         user.setModifiedDate(modifiedDate);
         User updatedUser = this.userRepo.save(user);
@@ -153,10 +163,36 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setId(userDto.getId());
         user.setName(userDto.getName());
+        user.setMiddleName(userDto.getMiddleName());
+        user.setLastName(userDto.getLastName());
+
+        /*if(user.getMiddleName()==null){
+            user.setName(userDto.getName()
+                + " " + userDto.getLastName());
+        }
+        else
+        user.setName(userDto.getName()
+                + " " + userDto.getMiddleName()
+                + " "+userDto.getLastName());*/
+
+
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
-        user.setAddress(userDto.getAddress());
+        /*String s = " , ";
+        String s1 = " - ";
+        String newAdd = "H. No-"+userDto.getAddress()
+                +s+userDto.getAddress1()
+                +s+userDto.getAddress2()
+                +s+userDto.getAddress3()
+                +s1+userDto.getAddress4();
+        System.out.println("address "+userDto.getAddress());
+        System.out.println("address 1 "+userDto.getAddress1());
+        System.out.println("address 2 "+userDto.getAddress2());
+        System.out.println("address 3 "+userDto.getAddress3());
+        System.out.println("address 4 "+userDto.getAddress4());*/
+
+        //user.setAddress(userDto.getAddress());
         user.setAdharNo(userDto.getAdharNo());
         user.setGender(userDto.getGender());
         user.setProfilePic(userDto.getProfilePic());
@@ -173,11 +209,23 @@ public class UserServiceImpl implements UserService {
 
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
+
+        /*if(userDto.getMiddleName()==null){
+            userDto.setName(user.getName() + " " + user.getLastName());
+        }
+        else
+        userDto.setName(user.getName()
+                + " " + user.getMiddleName()
+                + " "+user.getLastName());*/
+
+
         userDto.setName(user.getName());
+        userDto.setMiddleName(user.getMiddleName());
+        userDto.setLastName(user.getLastName());
         userDto.setPhone(user.getPhone());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
-        userDto.setAddress(user.getAddress());
+        //userDto.setAddress(user.getAddress());
         userDto.setAdharNo(user.getAdharNo());
         userDto.setGender(user.getGender());
         userDto.setProfilePic(user.getProfilePic());

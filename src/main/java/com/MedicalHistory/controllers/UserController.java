@@ -1,8 +1,10 @@
 package com.MedicalHistory.controllers;
 
+import com.MedicalHistory.payloads.AddressDto;
 import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.UserDto;
+import com.MedicalHistory.services.AddressService;
 import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,11 +25,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AddressService addressService;
+
     //View user Profile
     @GetMapping("/viewUserProfile")
     public String viewuserProfile(Principal principal, Model model) {
         User user = userService.findByEmail(principal.getName());
+        AddressDto addressDto = new AddressDto();
         model.addAttribute("user", user);
+        model.addAttribute("listAddress", addressService.getUser(user));
         return "User/viewUserProfile";
     }
 
@@ -107,5 +114,12 @@ public class UserController {
         model.addAttribute("user", user);
         return "User/DonateUs";
     }
+    @PostMapping("/registerUserSingleAddress")
+    public String registerUserAddress(@ModelAttribute("addressDto") AddressDto addressDto) {
+        logger.info("Updating user for: " + addressDto.getAid());
+        addressService.update(addressDto, addressDto.getAid());
+        return "redirect:/mh/user/viewUserProfile";
+    }
+
 }
 

@@ -5,7 +5,6 @@ email varchar(255),
 phone varchar(20),
 age int(3),
 password varchar(255),
-address varchar(600),
 adhar_no varchar(255),
 gender varchar(20),
 status int(3),
@@ -15,14 +14,13 @@ modified_date varchar(25)
 
 alter table users add unique(email);
 
-insert into users(id,name,email,phone,age,password,address,adhar_no,gender,status,created_date,modified_date)
+insert into users(id,name,email,phone,age,password,adhar_no,gender,status,created_date,modified_date)
 SELECT * FROM (SELECT -1 as id,
 'Administrator' as name,
 'admin' as email,
 '9839112345' as phone,
 35 as age,
 '$2a$10$3qw7ve3q3bY2O49U92b4U.2R6YeEo0DjbHLxrWe60v2s9R9uYtMVe' as password,
-'Noida' as address,
 '1234567890123456' as adhar_no,
 'Male'as gender,
 0 as status,

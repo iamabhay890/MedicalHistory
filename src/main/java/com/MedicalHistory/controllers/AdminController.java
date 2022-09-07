@@ -1,7 +1,7 @@
 package com.MedicalHistory.controllers;
 
-import com.MedicalHistory.entities.User;
 import com.MedicalHistory.entities.Patient;
+import com.MedicalHistory.entities.User;
 import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.payloads.UserDto;
 import com.MedicalHistory.services.PatientService;
@@ -9,19 +9,12 @@ import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Base64;
@@ -102,7 +95,7 @@ public class AdminController {
 
     //----Implementing Soft delete for Admin Dashboard
     @GetMapping("/softDeleteUser/{id}")
-    public String softdeleteUser(@PathVariable(value = "id") Integer id) {
+    public String softDeleteUser(@PathVariable(value = "id") Integer id) {
 
        logger.info("Implementing soft delete for id "+id);
         userService.softDelete(id);

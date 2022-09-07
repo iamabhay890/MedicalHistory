@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -27,6 +28,12 @@ public class User {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "middleName")
+    private String middleName;
+
+    @Column(name = "lastName")
+    private String lastName;
+
     @Column(name = "email")
     private String email;
 
@@ -41,11 +48,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "address")
-    private String address;
+   /* @Column(name = "address")
+    private String address;*/
 
     @Column(name = "adhar_no")
-    private Long adharNo;
+    private String adharNo;
 
     @Column(name = "gender")
     private String gender;
@@ -88,4 +95,7 @@ public class User {
     public void setName(String name) {
         this.name = name.trim();
     }
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    private Address address;
 }

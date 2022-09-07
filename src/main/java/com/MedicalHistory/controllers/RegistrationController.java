@@ -1,7 +1,12 @@
 package com.MedicalHistory.controllers;
 import com.MedicalHistory.Helper.Message;
+import com.MedicalHistory.entities.Address;
 import com.MedicalHistory.entities.User;
+import com.MedicalHistory.payloads.AddressDto;
+import com.MedicalHistory.payloads.MedicineDto;
+import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.payloads.UserDto;
+import com.MedicalHistory.services.AddressService;
 import com.MedicalHistory.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/mh")
@@ -51,8 +60,21 @@ public class RegistrationController {
                 User userCheck = userService.findByEmail(userDto.getEmail());
                 if (userCheck == null) {
                     logger.info("EmailId is unique and not registered with us");
-                    userService.createUser(userDto, file);
-                    return "redirect:/mh/";
+                    System.out.println("Password--> " +userDto.getPassword());
+                    System.out.println("Confirm Password--> "+userDto.getConfirmPassword());
+
+                    if(userDto.getPassword().equals(userDto.getConfirmPassword()))
+                    {
+                        userService.createUser(userDto, file);
+                        return "redirect:/mh/";
+                    }
+                    else{
+                        logger.warn("Please Enter Both Password will be same");
+                        session.setAttribute("message",
+                                new Message("Please Enter Both Password," +
+                                        "please Enter Both Password Will be same", "danger"));
+                        return "User/UserRegister";
+                    }
                 } else {
                     logger.warn("This email id is already registered with us");
                     session.setAttribute("message",
