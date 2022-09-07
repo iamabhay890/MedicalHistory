@@ -48,18 +48,19 @@ a:active {
                                    class="btn btn-lg  btn-block text-uppercase btn-outline">
                                     <img th:src="@{/images/facebook.png}" />
                                 </a>
-
-<!--                                <a th:href="@{/oauth2/authorization/github}"-->
-<!--                                   class="btn btn-lg  btn-block text-uppercase btn-outline">-->
-<!--                                    <img th:src="@{/images/git.png}" />-->
-<!--                                </a>-->
                             </div>
                         </div>
                         <form id="login-form" method="post" th:action="@{/login}">
 
-
                         <center><h3 class="mb-5">Sign in</h3></center>
 <!--                            Error Message-->
+
+                            <div th:if="${session.message}">
+                                <div  th:classappend="${'alert-'+session.message.type}" class="alert text-center" role="alert">
+                                    <span th:text="${session.message.msg}"></span>
+                                </div>
+                            </div>
+
                             <div th:if="${param.error}">
                                 <div class="alert alert-danger">Invalid username or password</div>
                             </div>
@@ -68,8 +69,6 @@ a:active {
                             <div th:if="${param.logout}">
                                 <div class="alert alert-info">You have been logged out</div>
                             </div>
-
-
                         <div class="form-outline mb-4">
                             <label class="form-label" for="username">Email</label>
                             <input type="text" name="username" id="username" class="form-control form-control-lg" />

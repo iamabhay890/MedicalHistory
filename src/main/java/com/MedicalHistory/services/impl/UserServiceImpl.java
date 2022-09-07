@@ -71,10 +71,10 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void createOAuth2User(String email, String fullName, String OauthEmail,String file) {
+    public void createOAuth2User(String email, String fullName, String OauthEmail) {
 
         if (userRepo.existsByEmail(email)) {
-            logger.info("Running if part of create user from Auth2 and already logged in user");
+            logger.info("Already registered from Auth2 and already logged in user");
         } else {
             logger.info("Unique user and running else part of create user from Auth2");
             LocalDateTime createdDate = LocalDateTime.now();
@@ -82,8 +82,6 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             user.setName(fullName);
             user.setEmail(email);
-            user.setProfilePic(Base64.getEncoder().encodeToString(file.getBytes()));
-            user.setProfilePictureName(file);
             user.setRoles(Arrays.asList(new Role("ROLE_USER")));
             user.setStatus(false);
             user.setModifiedDate(createdDate);
@@ -92,6 +90,13 @@ public class UserServiceImpl implements UserService {
             this.userRepo.save(user);
 
         }
+    }
+
+    @Override
+    public void softDelete(Integer id) {
+        User user=this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("user", " Id ",id));
+        user.setStatus(true);
+        this.userRepo.save(user);
     }
 
     @Override
@@ -259,17 +264,11 @@ public class UserServiceImpl implements UserService {
 
         logger.info("Running loadUserByUsername method");
         User user = userRepo.findByEmail(username);
+        if (user == null) {
 
-        if (user.isStatus()) {
-
-            throw new UsernameNotFoundException("Inactivated User");
-        } else {
-            if (user == null) {
-
-                throw new UsernameNotFoundException("Invalid username or password");
-            }
-            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+            throw new UsernameNotFoundException("Invalid username or password");
         }
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
