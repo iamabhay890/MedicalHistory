@@ -1,12 +1,15 @@
 package com.MedicalHistory.controllers;
 
 
+import com.MedicalHistory.entities.Address;
 import com.MedicalHistory.entities.Medicine;
 import com.MedicalHistory.entities.Patient;
 import com.MedicalHistory.entities.User;
+import com.MedicalHistory.payloads.AddressDto;
 import com.MedicalHistory.payloads.MedicineDto;
 import com.MedicalHistory.payloads.PatientDto;
 import com.MedicalHistory.payloads.UserDto;
+import com.MedicalHistory.services.AddressService;
 import com.MedicalHistory.services.MedicineService;
 import com.MedicalHistory.services.PatientService;
 import com.MedicalHistory.services.UserService;
@@ -26,12 +29,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.*;
-import java.security.Principal;
-import java.util.Base64;
-import java.util.List;
 
 @Controller
 @RequestMapping("/mh/user/records")

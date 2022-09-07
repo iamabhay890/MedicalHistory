@@ -21,13 +21,12 @@
     font-weight: bold;
     text-decoration: none;
      }
-       .my_profile_picture{
-	width: 40px;
-	height: 40px;
+  .my_profile_picture{
+	width:40px;
+    height:40px;
 	object-fit:cover;
 	border-radius:40%;
-	border:1px solid #021a40;
-    background-color:#FFFFFF;
+
 }
 .exl{
 width: 40px;
@@ -41,7 +40,6 @@ width: 40px;
 .btn:hover {
   opacity: 0.8;
 color: white;
-
 }
 a#btnl {
   color: Red;
@@ -95,7 +93,6 @@ a#btnl:hover {
                     <img class="reportFile" id="fileId" th:src="*{'data:image/jpeg;base64,'+{patients.report}}" onclick="showImage()" title="View Full Report"/></a>
                 </td>
             <td><a th:href="@{'/mh/user/records/downloadFile/'+${patients.pId}}">Download</a></td>
-
         </tr>
         </tbody>
     </table>

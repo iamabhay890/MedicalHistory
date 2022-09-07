@@ -38,13 +38,17 @@ public class UserServiceImplTest {
     @Mock
     MultipartFile file;
 
+
+    UserDto userDto =  new UserDto(1,"Abhi","abhi@gmail.com","9797979797",25,"Password","ConfirmPassword",
+            null,null,null,null,null,null,null,null,null,null,null,false,null,null,null,false);
+
     @Test
     @DisplayName("Create User Test ")
     public void getCreateUserTest() {
         MockMultipartFile multipartFile = new MockMultipartFile("file", "test.txt",
                 "text/plain", "Spring Framework".getBytes());
 
-        UserDto userDto = new UserDto(101,"rama","rama@gmail.com","0909090900",null,"null","null",null,null,null,null,null,null,false,null,null,null);
+        /*UserDto userDto = new UserDto(101,"rama","rama@gmail.com","0909090900",null,"null","null",null,null,null,null,null,null,false,null,null,null,null,null,null,null,null,null,null,null,null);*/
         when(repository.save(any())).thenReturn(service.dtoToUser(userDto));
         assertEquals(userDto.getEmail(), service.createUser(userDto,multipartFile).getEmail());
         System.out.println("create user  "+ service.dtoToUser(userDto).getId());
@@ -102,7 +106,7 @@ public class UserServiceImplTest {
     @Test
     @DisplayName("Delete User Test ")
     public void getDeleteUserTest() {
-        UserDto userDto = new UserDto(101,"rama","rama@gmail.com","0909090900",null,"null","null",null,null,null,null,null,null,false,null,null,null);
+        /*UserDto userDto = new UserDto(101,"rama","rama@gmail.com","0909090900",null,"null","null",null,null,null,null,null,null,false,null,null,null);*/
         System.out.println("user Get Id  "+userDto.getId());
         when(repository.save(any())).thenReturn(service.dtoToUser(userDto));
         System.out.println("create user  "+ service.dtoToUser(userDto).getId());

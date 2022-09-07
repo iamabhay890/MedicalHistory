@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>Add Address data</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet"/>
+    <!-- Bootstrap CSS -->
+    <link href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <style>
+        .img-fluid{
+        height:40px;
+        }
+
+     .btnl a{
+    color : White;
+    font-weight: bold;
+    text-decoration: none;
+     }
+      .my_profile_picture{
+	width: 40px;
+	height: 40px;
+	object-fit:cover;
+	border-radius:40%;
+}
+    </style>
+
+</head>
+<body>
+<header th:replace="User/userBlock::header1"></header>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form class="mt-2" method="post" th:action="@{/mh/user/records/addUserAddressRecords}"
+                      th:object="${addressDto}">
+                    <h2 style="color: White">Address</h2>
+
+                    <!--............Address 1............-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding-right:40px">Address1</span>
+                        </div>
+                        <input aria-describedby="inputGroup-sizing-default" aria-label="Default"
+                               class="form-control"
+                               placeholder="address1"
+                               th:classappend="${#fields.hasErrors('address1')}?'is-invalid':''"
+                               th:field="*{address1}"
+                               th:value="${addressDto.address1}"
+                               type="text"
+                        />
+                        <div align="left" class="invalid-feedback"
+                             th:each="e:${#fields.errors('address1')}" th:text="${e}">
+                        </div>
+                    </div>
+
+                    <!--............Address 2............-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding-right:40px">Address2</span>
+                        </div>
+                        <input aria-describedby="inputGroup-sizing-default" aria-label="Default"
+                               class="form-control"
+                               placeholder="address2"
+                               th:classappend="${#fields.hasErrors('address2')}?'is-invalid':''"
+                               th:field="*{address2}"
+                               th:value="${addressDto.address2}"
+                               type="text"
+                        />
+                        <div align="left" class="invalid-feedback"
+                             th:each="e:${#fields.errors('address2')}" th:text="${e}">
+                        </div>
+                    </div>
+
+                    <!--............City............-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding-right:85px">city</span>
+                        </div>
+                        <input aria-describedby="inputGroup-sizing-default" aria-label="Default"
+                               class="form-control"
+                               placeholder="city"
+                               th:classappend="${#fields.hasErrors('city')}?'is-invalid':''"
+                               th:field="*{city}"
+                               th:value="${addressDto.city}"
+                               type="text"
+                        />
+                        <div align="left" class="invalid-feedback"
+                             th:each="e:${#fields.errors('city')}" th:text="${e}">
+                        </div>
+                    </div>
+                    <!--............State............-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding-right:75px">state</span>
+                        </div>
+                        <input aria-describedby="inputGroup-sizing-default" aria-label="Default"
+                               class="form-control"
+                               placeholder="state"
+                               th:classappend="${#fields.hasErrors('state')}?'is-invalid':''"
+                               th:field="*{state}"
+                               th:value="${addressDto.state}"
+                               type="text"
+                        />
+                        <div align="left" class="invalid-feedback"
+                             th:each="e:${#fields.errors('state')}" th:text="${e}">
+                        </div>
+                    </div>
+
+                    <!--............State............-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding-right:90px">zip</span>
+                        </div>
+                        <input aria-describedby="inputGroup-sizing-default" aria-label="Default"
+                               class="form-control"
+                               placeholder="zip"
+                               th:classappend="${#fields.hasErrors('zip')}?'is-invalid':''"
+                               th:field="*{zip}"
+                               th:value="${addressDto.zip}"
+                               type="text"
+                        />
+                        <div align="left" class="invalid-feedback"
+                             th:each="e:${#fields.errors('zip')}" th:text="${e}">
+                        </div>
+                    </div>
+
+                    <!--............Country............-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding-right:55px">country</span>
+                        </div>
+                        <input aria-describedby="inputGroup-sizing-default" aria-label="Default"
+                               class="form-control"
+                               placeholder="country"
+                               th:classappend="${#fields.hasErrors('country')}?'is-invalid':''"
+                               th:field="*{country}"
+                               th:value="${addressDto.country}"
+                               type="text"
+                        />
+                        <div align="left" class="invalid-feedback"
+                             th:each="e:${#fields.errors('country')}" th:text="${e}">
+                        </div>
+                    </div>
+
+
+                    <input th:field="*{id}" th:object="${user}" hidden/>
+                    <button class="btn btn-success" style="margin-top:10px">Create</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
